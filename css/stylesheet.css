@@ -57,5 +57,5 @@ ul.nav > li > a:hover{
 .navbar-brand{
     color: #274c96 !important;
     font-size: 22px !important;
-
+    font-weight: bold;
 }

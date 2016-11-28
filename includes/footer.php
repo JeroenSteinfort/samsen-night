@@ -1,5 +1,13 @@
-<footer>
+<div class="container">
 
-    <p>&copy; Samsen Night &ndash; Powered by ICTm1c - SRE01-2</p>
+    <div class="row">
 
-</footer>
+        <div class="col-xs-12 content">
+
+            <p>&copy; Samsen Night &ndash; Powered by ICTm1c - SRE01-2</p>
+
+        </div>
+
+    </div>
+
+</div>

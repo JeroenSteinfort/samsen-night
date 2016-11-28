@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="css/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/header.css">
+
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -21,7 +21,7 @@
 
         ?>
 
-        <div class="container ">
+        <div class="container">
 
             <div class="row">
 

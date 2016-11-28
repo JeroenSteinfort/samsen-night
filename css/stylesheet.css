@@ -37,3 +37,22 @@ nav{
     background-color: white !important;
     border: 0px !important;
 }
+li.active > a{
+    background-color: white !important;
+    color: #274c96 !important;
+    font-weight: bold;
+}
+ul.nav > li > a{
+    color: grey;
+    font-size: 16px;
+}
+ul.nav > li > a:hover{
+    color: #274c96 !important;
+    font-size: 16px;
+}
+.navbar-brand{
+    color: #274c96 !important;
+    font-size: 16px;
+    -webkit-transition:  1s; /* Safari */
+    transition:  1s;
+}

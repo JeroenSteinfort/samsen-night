@@ -21,13 +21,16 @@
 
         ?>
 
-        <div class="container">
+        <div class="container container-custom">
 
             <div class="row">
 
                 <div class="col-xs-12 content">
+                    <div class="img-wrapper">
 
-                    <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive" >
+                        <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
+
+                    </div>
 
                     <h1>Samsen Night</h1>
 

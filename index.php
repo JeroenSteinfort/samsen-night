@@ -9,6 +9,9 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/header.css">
 
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     </head>
     <body>
 
@@ -18,11 +21,13 @@
 
         ?>
 
-        <div class="container">
+        <div class="container ">
 
             <div class="row">
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 content">
+
+                    <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive" >
 
                     <h1>Samsen Night</h1>
 
@@ -39,6 +44,12 @@
             include_once('includes/footer.php');
 
         ?>
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     </body>
 </html>

@@ -7,16 +7,11 @@ body{
 p{
     font-size: 16px;
 }
-.container-custom{
-    width: 1000px;
-    /*border: 1px solid black;*/
+.content{
     background-color: white;
     color: #274c96;
     min-height: 700px;
     font-size: 16px;
-    color: #274c96;
-    width: 1000px;
-    /*border: 1px solid black;*/
     padding: 30px 100px 25px 100px;
     margin: 10px auto 0 auto;
 }
@@ -24,7 +19,6 @@ footer{
     background-color: white;
     font-size: 16px;
     color: #274c96;
-    width: 1000px;
     /*border: 1px solid black;*/
     padding: 30px 100px 25px 100px;
     margin: 10px auto 0 auto;

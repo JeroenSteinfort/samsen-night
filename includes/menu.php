@@ -1,5 +1,3 @@
-<img src="img/rename.png" alt="Mountain View" class="fixed" >
-<body>
 <header>
     <div>  <ul>
         <li><a href="index.php">Startpagina</a></li>

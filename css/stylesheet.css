@@ -33,3 +33,7 @@ footer{
     float: right;
     margin: 0 0 20px 20px;
 }
+nav{
+    background-color: white !important;
+    border: 0px !important;
+}

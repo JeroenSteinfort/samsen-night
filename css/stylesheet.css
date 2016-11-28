@@ -45,14 +45,17 @@ li.active > a{
 ul.nav > li > a{
     color: grey;
     font-size: 16px;
+    -webkit-transition: all 0.25s ease; /* Safari */
+    transition: all 0.25s ease;
 }
 ul.nav > li > a:hover{
     color: #274c96 !important;
     font-size: 16px;
+    -webkit-transition: all 0.25s ease; /* Safari */
+    transition: all 0.25s ease;
 }
 .navbar-brand{
     color: #274c96 !important;
-    font-size: 16px;
-    -webkit-transition:  1s; /* Safari */
-    transition:  1s;
+    font-size: 22px !important;
+
 }

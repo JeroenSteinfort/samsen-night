@@ -1,3 +1,67 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Ethan
+ * Date: 28/11/2016
+ * Time: 11:25
+ */
+session_start();
+$error = "";
+require_once ('includes\password.php');
+
+$user = "root";
+$password = "usbw";
+
+$dbh = new PDO('mysql:host=localhost:3307;dbname=samsen-night',$user,$password);
+if(isset($_POST['submit'])) {
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "
+        #sql
+        SELECT userid, password
+        FROM   user
+        WHERE  username = :username
+        LIMIT 1
+        ";
+
+    $query = $dbh->prepare($query);
+    $query->bindParam(":username", $username);
+    $query->execute();
+    $result = $query->fetch();
+
+    if ($result > 0) {
+
+        //User is found
+        if (password_verify($password, $result['password'])) {
+
+            //Password is correct
+
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $result['userid'];
+            header('Location: admin\cpanel.php');
+            exit;
+
+        } else {
+
+            //Password is incorrect
+            $error = "Username or password is incorrect";
+
+        }
+
+    } else {
+
+        //User is not found
+        $error = "Username or password is incorrect";
+
+    }
+}
+
+//header("Location: beheer.php");
+echo $error;
+?>
+
 <!DOCTYPE html>
 <html>
     <head>

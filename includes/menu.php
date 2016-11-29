@@ -22,6 +22,28 @@
                 <li><a href="#">Contact</a></li>
             </ul>
 
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"> </span> </a>
+                    <ul class="dropdown-menu">
+                        <?php
+                        if(isset($_SESSION['logged_in'])) {
+                        ?>
+                        <li><a href="includes\loguit.php">Log uit</a></li>
+                        <?php } else { ?>
+    <form action="#" method="post">
+
+         <input id="name" name="username" placeholder="username" type="text">
+        <input id="password" name="password" placeholder="**********" type="password">
+        <input name="submit" type="submit" value=" Login ">
+    </form>
+    <?php
+}
+?>
+
+                    </ul>
+                </li>
+            </ul>
         </div>
 
     </div>

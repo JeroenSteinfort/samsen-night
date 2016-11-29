@@ -58,8 +58,7 @@ if(isset($_POST['submit'])) {
     }
 }
 
-//header("Location: beheer.php");
-echo $error;
+
 ?>
 
 <!DOCTYPE html>

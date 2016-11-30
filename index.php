@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ethan
- * Date: 28/11/2016
- * Time: 11:25
- */
+
+$base_path = $_SERVER['DOCUMENT_ROOT'];
+
 session_start();
 $error = "";
-require_once ('includes\password.php');
+require_once ($base_path . '\includes\password.php');
 
 $user = "root";
 $password = "usbw";
@@ -40,7 +37,7 @@ if(isset($_POST['submit'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $result['userid'];
-            header('Location: admin\cpanel.php');
+            header('Location: ' . $base_path . 'admin\cpanel.php');
             exit;
 
         } else {
@@ -68,7 +65,7 @@ if(isset($_POST['submit'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="stylesheet" href="<?= $base_path ?>/css/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
 
@@ -80,7 +77,7 @@ if(isset($_POST['submit'])) {
 
         <?php
 
-            include_once('includes/menu.php');
+            include_once($base_path . '/includes/menu.php');
 
         ?>
 
@@ -91,7 +88,7 @@ if(isset($_POST['submit'])) {
                 <div class="col-xs-12 content">
                     <div class="img-wrapper">
 
-                        <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
+                        <img src="<?= $base_path ?>/img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
 
                     </div>
 
@@ -107,7 +104,7 @@ if(isset($_POST['submit'])) {
 
         <?php
 
-            include_once('includes/footer.php');
+            include_once($base_path . '/includes/footer.php');
 
         ?>
 

@@ -1,4 +1,7 @@
 <?php
+
+$base_path = $_SERVER['DOCUMENT_ROOT'];
+
 $error = "";
 ?>
 <html>
@@ -7,7 +10,7 @@ $error = "";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="<?= $base_path ?>/css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
 

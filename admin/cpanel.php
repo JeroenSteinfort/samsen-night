@@ -20,7 +20,7 @@ $error = "";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <base href="http://localhost:8080/samsen-night/" target="_blank">
+    <base href="http://localhost:8080/samsen-night/" >
 
     <link rel="stylesheet" href="css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">

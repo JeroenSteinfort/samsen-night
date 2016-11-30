@@ -5,9 +5,11 @@ $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 $error = "";
 $error1 = "";
 
+include $base_path . '/includes/dbh.php';
+include $base_path . '/includes/password.php';
+
 if (isset($_POST['submit'])) {
-    include 'includes\dbh.php';
-    include 'includes\password.php';
+
     $username = $_POST['username'];
     $voornaam = $_POST['voornaam'];
     $tussenvoegsel = $_POST['tussenvoegsel'];
@@ -27,28 +29,37 @@ if (isset($_POST['submit'])) {
         $error1 = "Username of Email is al ingebruik.";
     } else {
 
-        if ($username ="" OR $voornaam = ""  OR $achternaam="" OR $password = "" {
-        $error1 = "Je "
+        if ( $username = "" OR $voornaam = ""  OR $achternaam="" OR $password = "") {
+        //$error1 = "Je ";
 
+
+        } else {
+
+            $sql = "#sql
+                    INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email, foto)
+                    VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
+            $sql = $dbh->prepare($sql);
+
+            $sql->bindParam(":username",        $username);
+            $sql->bindParam(":voornaam",        $voornaam);
+            $sql->bindParam(":tussenvoegsel",   $tussenvoegsel);
+            $sql->bindParam(":achternaam",      $achternaam);
+            $sql->bindParam(":password",        $password);
+            $sql->bindParam(":email",           $email);
+            $sql->bindParam(":foto",            $foto);
+            $sql->execute();
+
+            //header("Location: index.php");
+
+            echo "Done";
 
         }
 
-        $sql = "INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, password, email, foto)
-                VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
-        $sql = $dbh->prepare($sql);
-
-        $sql->bindParam(":username", $username);
-        $sql->bindParam(":voornaam", $voornaam);
-        $sql->bindParam(":tussenvoegsel", $tussenvoegsel);
-        $sql->bindParam(":achternaam", $achternaam);
-        $sql->bindParam(":password", $password);
-        $sql->bindParam(":email", $email);
-        $sql->bindParam(":foto", $foto);
-        $sql->execute();
-
-        header("Location: index.php");
     }
 }
+
+echo password_hash("admin", PASSWORD_BCRYPT);
+
 ?>
 
 <html>
@@ -57,7 +68,7 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <base href="http://localhost:8080/samsen-night/" target="_blank">
+    <base href="http://localhost:8080/samsen-night/" >
 
     <link rel="stylesheet" href="css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">

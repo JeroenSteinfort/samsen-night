@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
 
     $query = "
         #sql
-        SELECT userid, password
+        SELECT userid, wachtwoord
         FROM   user
         WHERE  username = :username
         LIMIT 1
@@ -31,7 +31,7 @@ if(isset($_POST['submit'])) {
     if ($result > 0) {
 
         //User is found
-        if (password_verify($password, $result['password'])) {
+        if (password_verify($password, $result['wachtwoord'])) {
 
             //Password is correct
 
@@ -65,7 +65,7 @@ if(isset($_POST['submit'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <base href="http://localhost:8080/samsen-night/" target="_blank">
+        <base href="http://localhost:8080/samsen-night/">
 
         <link rel="stylesheet" href="css/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">

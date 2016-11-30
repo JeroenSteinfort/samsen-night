@@ -1,11 +1,8 @@
 body{
-    background-color: #d0daea !important;
-    /*background: url('../img/background.png'); */
+    /*background-color: #d1d5eb;*/
+    background: url('../img/background.png');
     background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
-}
-html{
-
 }
 p{
     font-size: 16px;

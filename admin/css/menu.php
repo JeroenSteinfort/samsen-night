@@ -16,7 +16,7 @@
 
             <ul class="nav navbar-nav">
 
-                <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="..\index.php">Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Partners</a></li>
                 <li><a href="#">Projecten</a></li>
                 <li><a href="#">Contact</a></li>
@@ -35,8 +35,7 @@
                         <?php
                         if(isset($_SESSION['logged_in'])) {
                         ?>
-                        <li><a href="includes\loguit.php">Log uit</a></li>
-                            <li><a href="admin\cpanel.php">Control Panel</a></li>
+
                         <?php } else { ?>
     <form action="#" method="post">
         <input id="name" name="username" placeholder="username" type="text">

@@ -1,6 +1,6 @@
 <?php
 
-$base_path = $_SERVER['DOCUMENT_ROOT'];
+$base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 
 $error = "";
 $error1 = "";
@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         }
 
         $sql = "INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, password, email, foto)
-VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
+                VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
         $sql = $dbh->prepare($sql);
 
         $sql->bindParam(":username", $username);
@@ -57,7 +57,9 @@ VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :f
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="<?= $base_path ?>/css/stylesheet.css">
+    <base href="http://localhost:8080/samsen-night/" target="_blank">
+
+    <link rel="stylesheet" href="css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
 

@@ -1,21 +1,48 @@
 <?php
 
+//Inlcudes en define base_path
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
+require_once($base_path . '\includes\password.php');
+require_once($base_path . '\includes\dbh.php');
 
 session_start();
+
+//Check welke pagina geladen moet worden
+$page = '';
+if(isset($_GET['p'])){
+
+    $page = $_GET['p'];
+
+} else {
+
+    $page = 'home';
+
+}
+
+$sql = "
+#sql
+SELECT c.content
+FROM   content    AS c
+JOIN   pagina     AS p
+ON     p.paginaid = c.paginaid
+WHERE  p.naam     = :page
+LIMIT  1
+";
+
+$sql = $dbh->prepare($sql);
+$sql->bindParam(':page', $page);
+$sql->execute();
+
+$pageresult = $sql->fetch();
+
 $error = "";
-require_once ($base_path . '\includes\password.php');
 
-$user = "root";
-$password = "usbw";
-
-$dbh = new PDO('mysql:host=localhost:3307;dbname=samsen-night',$user,$password);
 if(isset($_POST['submit'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "
+    $query = " 
         #sql
         SELECT userid, wachtwoord
         FROM   user
@@ -37,7 +64,7 @@ if(isset($_POST['submit'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $result['userid'];
-            header('Location: ' . $base_path . 'admin\cpanel.php');
+            header('Location: ' . $base_path . '\admin\cpanel.php');
             exit;
 
         } else {
@@ -88,7 +115,8 @@ if(isset($_POST['submit'])) {
             <div class="row">
 
                 <div class="col-xs-12 content">
-                    <div class="img-wrapper">
+
+                    <!--<div class="img-wrapper">
 
                         <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
 
@@ -97,6 +125,13 @@ if(isset($_POST['submit'])) {
                     <h1>Samsen Night</h1>
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
+                    -->
+
+                    <?php
+
+                    echo $pageresult[0];
+
+                    ?>
 
                 </div>
 

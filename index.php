@@ -21,11 +21,9 @@ if(isset($_GET['p'])){
 
 $sql = "
 #sql
-SELECT c.content
-FROM   content    AS c
-JOIN   pagina     AS p
-ON     p.paginaid = c.paginaid
-WHERE  p.naam     = :page
+SELECT content
+FROM   pagina
+WHERE  naam = :page
 LIMIT  1
 ";
 

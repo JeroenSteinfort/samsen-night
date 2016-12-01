@@ -64,26 +64,27 @@ $menuresults = $sql->fetchAll();
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <?php
-                        echo $error;
-                        ?> <span class="glyphicon glyphicon-user">  </span> </a>
-                    <ul class="dropdown-menu">
-                        <?php
-                        if(isset($_SESSION['logged_in'])) {
+                            echo $error;
                         ?>
-                        <li><a href="includes\loguit.php">Log uit</a></li>
-                            <li><a href="admin\cpanel.php">Control Panel</a></li>
+                        <span class="glyphicon glyphicon-user">  </span> </a>
+                        <ul class="dropdown-menu">
+                        <?php
+                            if(isset($_SESSION['logged_in'])) {
+                        ?>
+                                <li><a href="includes\loguit.php">Log uit</a></li>
+                                <li><a href="admin\cpanel.php">Control Panel</a></li>
+                                <li><a href="admin\cpanel.php">Control Panel</a></li>
                         <?php } else { ?>
-    <form action="#" method="post">
-        <input id="name" name="username" placeholder="username" type="text">
-        <input id="password" name="password" placeholder="**********" type="password">
-        <input name="submit" type="submit" value=" Login ">
-    </form>
+                        <form action="#" method="post">
+                            <input id="name" name="username" placeholder="username" type="text">
+                            <input id="password" name="password" placeholder="**********" type="password">
+                            <input name="submit" type="submit" value=" Login ">
+                        </form>
                             <li role="separator" class="divider"></li>
                             <li><a class="dropdownlink" href="register.php">Registreren</a></li>
-    <?php
-}
-?>
-
+                            <?php
+                        }
+                        ?>
 
                     </ul>
                 </li>

@@ -69,3 +69,7 @@ ul.dropdown-menu{
 a.dropdownlink{
     color: #274c96 !important;
 }
+.cms-submit{
+    background-color: white;
+    border: 1px solid lightgray;
+}

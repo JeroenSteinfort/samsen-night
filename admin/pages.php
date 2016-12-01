@@ -16,6 +16,23 @@ if(!isset($_SESSION['logged_in'])) {
 
 $error = "";
 
+if(isset($_POST['submit'])){
+
+    $content   = $_POST['editor1'];
+    $paginaid  = $_GET['p'];
+
+    $sql = "
+    #sql
+    UPDATE pagina
+    SET    content  = :content
+    WHERE  paginaid = :paginaid
+    ";
+    $sql = $dbh->prepare($sql);
+    $sql->bindParam(':content',  $content);
+    $sql->bindParam(':paginaid', $paginaid);
+    $sql->execute();
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -73,6 +90,27 @@ include_once($base_path . '/includes/menu.php');
 
                 }
 
+                if(isset($_GET['p'])){
+
+                    $paginaid = $_GET['p'];
+
+                    $sql = '
+                    #sql
+                    SELECT paginaid, naam, content
+                    FROM   pagina
+                    WHERE  paginaid = :paginaid
+                    LIMIT  1
+                    ';
+                    $sql = $dbh->prepare($sql);
+                    $sql->bindParam(':paginaid', $paginaid);
+                    $sql->execute();
+
+                    $contentresult = $sql->fetch();
+
+                    echo '<form method="POST" action="admin/pages.php?p=' . $paginaid . '"><textarea id="editor1" name="editor1">' . $contentresult[2] . '</textarea><br /><input class="cms-submit" type="submit" name="submit" value="submit" /></form>';
+
+                }
+
                 ?>
 
             </ul>
@@ -94,6 +132,14 @@ include_once($base_path . '/includes/footer.php');
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="admin/ckeditor/ckeditor.js"></script>
+
+<script>
+
+    CKEDITOR.replace( 'editor1' );
+
+</script>
 
 </body>
 </html>

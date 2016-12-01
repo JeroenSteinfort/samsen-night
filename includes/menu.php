@@ -45,7 +45,7 @@ $menuresults = $sql->fetchAll();
 
                     echo '<li ';
 
-                    if($_GET['p'] == $row['naam']){
+                    if(isset($_GET['p']) && $_GET['p'] == $row['naam']){
 
                         echo 'class="active"';
 

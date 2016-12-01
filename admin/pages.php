@@ -1,9 +1,10 @@
 <?php
 
 //Inlcudes en define base_path
-$base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
+$base_path = $_SERVER['DOCUMENT_ROOT'] . '\samsen-night';
 require_once($base_path . '\includes\password.php');
 require_once($base_path . '\includes\dbh.php');
+
 session_start();
 
 if(!isset($_SESSION['logged_in'])) {
@@ -14,6 +15,7 @@ if(!isset($_SESSION['logged_in'])) {
 }
 
 $error = "";
+
 
 ?>
 <!DOCTYPE html>
@@ -47,15 +49,31 @@ include_once($base_path . '/includes/menu.php');
 
         <div class="col-xs-12 content">
 
-            <h1>CMS Samsen Night</h1>
+            <h1>CMS Samsen Night - Content beheren</h1>
 
-            <p>Dit is het CMS van Samsen Night. Kies een optie:</p>
+            <p>In dit gedeelte van het CMS kan de content aangepast worden, kies een pagina:</p>
 
             <ul>
 
-                <li><a href="admin/pages.php">Content beheren</a></li>
-                <li><a href="admin/partners.php">Partners beheren</a></li>
-                <li><a href="admin/users.php">Users beheren</a></li>
+                <?php
+
+                $sql = "
+                #sql
+                SELECT paginaid, naam
+                FROM   pagina
+                ";
+                $sql = $dbh->prepare($sql);
+                $sql->execute();
+
+                $paginaresults = $sql->fetchAll();
+
+                foreach ($paginaresults as $row){
+
+                    echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a></li>';
+
+                }
+
+                ?>
 
             </ul>
 

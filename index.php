@@ -1,7 +1,7 @@
 <?php
 
 //Inlcudes en define base_path
-$base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
+$base_path = $_SERVER['DOCUMENT_ROOT'] . "\samsen-night";
 require_once($base_path . '\includes\password.php');
 require_once($base_path . '\includes\dbh.php');
 
@@ -33,7 +33,7 @@ $sql = $dbh->prepare($sql);
 $sql->bindParam(':page', $page);
 $sql->execute();
 
-$pageresult = $sql->fetch();
+$contentresult = $sql->fetch();
 
 $error = "";
 
@@ -129,7 +129,15 @@ if(isset($_POST['submit'])) {
 
                     <?php
 
-                    echo $pageresult[0];
+                    if($contentresult > 1){
+
+                        echo $contentresult[0];
+
+                    } else {
+
+                        echo '<p>Pagina is niet gevonden</p>';
+
+                    }
 
                     ?>
 

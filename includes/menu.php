@@ -1,3 +1,18 @@
+<?php
+
+$sql = '
+#sql
+SELECT paginaid, naam
+FROM   pagina
+';
+
+$sql = $dbh->prepare($sql);
+$sql->execute();
+
+$menuresults = $sql->fetchAll();
+
+?>
+
 <nav class="navbar navbar-default navbar-fixed-top ">
 
     <div class="container">
@@ -16,11 +31,31 @@
 
             <ul class="nav navbar-nav">
 
+                <!--
                 <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Partners</a></li>
                 <li><a href="#">Projecten</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Eigenaar</a></li>
+                -->
+
+                <?php
+
+                foreach($menuresults as $row){
+
+                    echo '<li ';
+
+                    if($_GET['p'] == $row['naam']){
+
+                        echo 'class="active"';
+
+                    }
+
+                    echo '><a href="index.php?p=' . $row['naam'] . '">' . $row['naam'] . '</a></li>';
+
+                }
+
+                ?>
 
             </ul>
 

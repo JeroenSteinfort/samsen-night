@@ -73,7 +73,9 @@ $menuresults = $sql->fetchAll();
                         ?>
                                 <li><a href="includes\loguit.php">Log uit</a></li>
                                 <li><a href="admin\cpanel.php">Control Panel</a></li>
-                                <li><a href="admin\cpanel.php">Control Panel</a></li>
+                                <li><a href="admin/pages.php">Content beheren</a></li>
+                                <li><a href="admin/partners.php">Partners beheren</a></li>
+                                <li><a href="admin/users.php">Users beheren</a></li>
                         <?php } else { ?>
                         <form action="#" method="post">
                             <input id="name" name="username" placeholder="username" type="text">

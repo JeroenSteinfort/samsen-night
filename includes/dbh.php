@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ethan
- * Date: 25/11/2016
- * Time: 15:47
- */
 
-$servername = "localhost";
 $username = "root";
 $password = "usbw";
 
@@ -18,6 +11,6 @@ try {
 }
 catch(PDOException $e)
 {
-   // echo "Connection failed: " . $e->getMessage();
+   echo "Connection failed: " . $e->getMessage();
 }
 ?>

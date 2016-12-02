@@ -46,10 +46,10 @@
       <file leaf-file-name="register.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/register.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="104" column="24" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+            <state relative-caret-position="580">
+              <caret line="173" column="38" selection-start-line="173" selection-start-column="38" selection-end-line="173" selection-end-column="38" />
               <folding>
-                <marker date="1480676075166" expanded="true" signature="513:589" ph="SELECT useri... user" />
+                <marker date="1480676186105" expanded="true" signature="513:589" ph="SELECT useri... user" />
               </folding>
             </state>
           </provider>
@@ -347,12 +347,12 @@
       <workItem from="1480493636026" duration="9095000" />
       <workItem from="1480578174263" duration="11250000" />
       <workItem from="1480669154926" duration="2606000" />
-      <workItem from="1480673600830" duration="2475000" />
+      <workItem from="1480673600830" duration="2586000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43122000" />
+    <option name="totallyTimeSpent" value="43233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -511,7 +511,7 @@
         <state relative-caret-position="136">
           <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
           <folding>
-            <marker date="1480676075166" expanded="true" signature="513:589" ph="SELECT useri... user" />
+            <marker date="1480676186105" expanded="true" signature="513:589" ph="SELECT useri... user" />
           </folding>
         </state>
       </provider>
@@ -739,10 +739,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="104" column="24" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+        <state relative-caret-position="580">
+          <caret line="173" column="38" selection-start-line="173" selection-start-column="38" selection-end-line="173" selection-end-column="38" />
           <folding>
-            <marker date="1480676075166" expanded="true" signature="513:589" ph="SELECT useri... user" />
+            <marker date="1480676186105" expanded="true" signature="513:589" ph="SELECT useri... user" />
           </folding>
         </state>
       </provider>

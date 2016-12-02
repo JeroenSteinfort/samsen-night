@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
 
 <?php
 
-include_once('/includes/menu.php');
+include $base_path . '/includes/menu.php';
 
 ?>
 
@@ -171,7 +171,7 @@ include_once('/includes/menu.php');
 
 <?php
 
-include_once('includes\footer.php');
+include $base_path . '/includes/footer.php';
 
 ?>
 

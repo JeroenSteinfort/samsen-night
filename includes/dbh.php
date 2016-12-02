@@ -1,7 +1,7 @@
 <?php
 
 $username = "u339047138_root";
-$password = "UMORFBNfQi4Yt4ikr2";
+$password = "WTthQWQZs6pQNA";
 
 try {
     $dbh = new PDO("mysql:host=sql1.hostinger.nl;dbname=u339047138_db", $username, $password);

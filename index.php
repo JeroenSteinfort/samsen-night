@@ -1,9 +1,9 @@
 <?php
 
 //Inlcudes en define base_path
-$base_path = $_SERVER['DOCUMENT_ROOT'] . "\samsen-night";
-require_once($base_path . '\includes\password.php');
-require_once($base_path . '\includes\dbh.php');
+$base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
+require_once($base_path . '/includes/password.php');
+require_once($base_path . '/includes/dbh.php');
 
 session_start();
 

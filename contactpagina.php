@@ -49,7 +49,11 @@
 
                     <form method="post" action="contactpagina.php">
 
-                        Naam:  <input type="text" name="naam"> <br>
+                        Voornaam:  <input type="text" name="voornaam"> <br>
+                        Tussenvoegsel: <input type="text" name="tussen"> <br>
+                        Achternaam: <input type="text" name="achternaam"> <br>
+                        bedrijfsnaam: <input type="text" name="bedrijfsnaam"> <br>
+                        Onderwerp: <input type="text" name="onderwerp"> <br>
                         Email: <input type="text" name="email"><br>
                         <input type="submit" name="verzenden" value="verzenden">
                     </form>

@@ -103,11 +103,9 @@ if (isset($_POST['submit'])) {
 <?php
 
 include_once('includes\menu.php');
+
 ?>
 
-<?php
-require_once('includes\dbh.php');
-?>
 
 <div class="container container-custom">
 

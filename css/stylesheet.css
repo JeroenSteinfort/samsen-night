@@ -73,3 +73,10 @@ a.dropdownlink{
     background-color: white;
     border: 1px solid lightgray;
 }
+.cms-page-list{
+    margin: 20px 0 20px 0 !important;
+}
+.plus-button{
+    background-color: white;
+    border: 0px;
+}

@@ -70,9 +70,9 @@ include_once($base_path . '/includes/menu.php');
 
             <p>In dit gedeelte van het CMS kan de content aangepast worden, kies een pagina:</p>
 
-            <ul>
-
                 <?php
+
+                echo '<ul class="cms-page-list">';
 
                 $sql = "
                 #sql
@@ -89,6 +89,15 @@ include_once($base_path . '/includes/menu.php');
                     echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a></li>';
 
                 }
+
+                echo '<li>Nieuwe pagina maken: 
+                    <form method="POST" action="#">
+                    <input type="text" name="paginanaam" />
+                    <button class="plus-button" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+                    </form>
+                    </li>';
+
+                echo '</ul>';
 
                 if(isset($_GET['p'])){
 
@@ -110,6 +119,7 @@ include_once($base_path . '/includes/menu.php');
                     echo '<form method="POST" action="admin/pages.php?p=' . $paginaid . '"><textarea id="editor1" name="editor1">' . $contentresult[2] . '</textarea><br /><input class="cms-submit" type="submit" name="submit" value="submit" /></form>';
 
                 }
+
 
                 ?>
 

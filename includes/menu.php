@@ -49,6 +49,10 @@ $menuresults = $sql->fetchAll();
 
                         echo 'class="active"';
 
+                    } elseif(!isset($_GET['p']) && $row['naam'] == "Home"){
+
+                        echo 'class="active"';
+
                     }
 
                     echo '><a href="index.php?p=' . $row['naam'] . '">' . $row['naam'] . '</a></li>';

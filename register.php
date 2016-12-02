@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-echo password_hash("admin", PASSWORD_BCRYPT);
+//echo password_hash("admin", PASSWORD_BCRYPT);
 
 ?>
 

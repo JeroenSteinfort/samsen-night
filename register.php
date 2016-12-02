@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
 
 <?php
 
-include_once('includes\menu.php');
+include_once('/includes/menu.php');
 
 ?>
 

@@ -61,7 +61,7 @@ if(isset($_POST['submit'])) {
             //Password is correct
 
             $_SESSION['logged_in'] = true;
-            $_SESSION['user_id'] = $result['userid'];
+            $_SESSION['user_id']   = $result['userid'];
             header('Location: ' . $base_path . '\admin\cpanel.php');
             exit;
 

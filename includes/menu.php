@@ -76,15 +76,15 @@ $menuresults = $sql->fetchAll();
                             if(isset($_SESSION['logged_in'])) {
                         ?>
 
-                                <li><a href="admin\cpanel.php">Control Panel</a></li>
+                                <li><a href="admin/cpanel.php">Control Panel</a></li>
                                 <li><a href="admin/pages.php">Content beheren</a></li>
                                 <li><a href="admin/partners.php">Partners beheren</a></li>
                                 <li><a href="admin/users.php">Users beheren</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="includes\loguit.php">Log uit</a></li>
+                                <li><a href="includes/loguit.php">Log uit</a></li>
 
                         <?php } else { ?>
-                        <form action="#" method="post">
+                        <form action="index.php?p=Home" method="post">
                             <input id="name" name="username" placeholder="username" type="text">
                             <input id="password" name="password" placeholder="**********" type="password">
                             <input name="submit" type="submit" value=" Login ">

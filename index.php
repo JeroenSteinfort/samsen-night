@@ -35,12 +35,12 @@ $contentresult = $sql->fetch();
 
 $error = "";
 
-if(isset($_POST['login'])) {
+if(isset($_POST['submit'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "
+    $query = " 
         #sql
         SELECT userid, wachtwoord
         FROM   user
@@ -62,7 +62,7 @@ if(isset($_POST['login'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
-            header('Location: ' . $base_path . '/admin/cpanel.php');
+            header('Location: ' . $base_path . '\admin\cpanel.php');
             exit;
 
         } else {
@@ -78,8 +78,8 @@ if(isset($_POST['login'])) {
         $error = "Username or password is incorrect";
 
     }
-
 }
+
 
 ?>
 

@@ -84,10 +84,10 @@ $menuresults = $sql->fetchAll();
                                 <li><a href="includes/loguit.php">Log uit</a></li>
 
                         <?php } else { ?>
-                        <form action="index.php?p=Home" method="post">
+                        <form action="index.php" method="POST">
                             <input id="name" name="username" placeholder="username" type="text">
                             <input id="password" name="password" placeholder="**********" type="password">
-                            <input name="submit" type="submit" value=" Login ">
+                            <button name="login" type="submit">Login</button>
                         </form>
                             <li role="separator" class="divider"></li>
                             <li><a class="dropdownlink" href="register.php">Registreren</a></li>

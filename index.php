@@ -62,7 +62,7 @@ if(isset($_POST['login'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
-            header('Location: ' . $base_path . '/admin/cpanel.php');
+            header('Location: admin/cpanel.php');
             exit;
 
         } else {

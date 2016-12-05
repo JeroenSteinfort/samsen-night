@@ -23,6 +23,7 @@ $results = $userquery->fetchAll();
     <table class="cms">
     <th class="cms"> UserID </th>
     <th class="cms"> Username </th>
+        <th class="cms"> Voornaam </th>
     <th class="cms"> Tussenvoegsel </th>
     <th class="cms"> Achternaam </th>
     <th class="cms"> Email </th>
@@ -30,6 +31,7 @@ $results = $userquery->fetchAll();
     <th class="cms"> Rolid </th>
         <th class="cms"> Wijzig </th>
         <th class="cms"> Delete </th>
+        <form action='#' method='POST'>
     <?php
 foreach ($results as $row) {
     echo "<tr class=\"cms\"> <td class=\"cms\">" .  $row['userid']  . " " . "</td>";
@@ -39,8 +41,8 @@ foreach ($results as $row) {
     echo "<td class=\"cms\">" .  $row['email']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['foto']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['rolid']  . " " . "</td>";
-    echo "<td class=\"cms\">" . "<form action='#' method='post'<button class='cmsbutton' name='wijzig'>" . 'Wijzig' .  " </td> </button> </form>";
-    echo "<td class=\"cms\">" . "<form action='#' method='post'<button class='cmsbutton' name='delete'>" . 'Delete' . "  </td> </button> </form>";
+    echo "<td class=\"cms\">" . "<input type='wijzig' class='cmsbutton'>" . 'Wijzig' .  " </button> </td> ";
+    echo "<td class=\"cms\">" . "<button class='cmsbutton' name='delete'>" . 'Delete' . " </button>  </td> ";
     echo "<br> </tr>";
 }
 ?>

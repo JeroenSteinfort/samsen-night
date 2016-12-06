@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b95ef39b-0118-4e40-b015-f0d10e15838b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contactpagina.php" afterPath="$PROJECT_DIR$/contactpagina.php" />
-    </list>
+    <list default="true" id="b95ef39b-0118-4e40-b015-f0d10e15838b" name="Default" comment="" />
     <ignored path="samsen-night.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -351,12 +348,12 @@
       <workItem from="1480578174263" duration="11250000" />
       <workItem from="1480669154926" duration="2606000" />
       <workItem from="1480673600830" duration="4102000" />
-      <workItem from="1481015343223" duration="1408000" />
+      <workItem from="1481015343223" duration="2003000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46157000" />
+    <option name="totallyTimeSpent" value="46752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />

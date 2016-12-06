@@ -21,7 +21,7 @@ if(isset($_GET['p'])){
 
 $sql = "
 #sql
-SELECT content
+SELECT content, naam
 FROM   pagina
 WHERE  naam = :page
 LIMIT  1
@@ -165,9 +165,13 @@ if(isset($_POST['login'])) {
 
                     <?php
 
-                    if($contentresult > 1){
+                    if($contentresult > 1) {
 
                         echo $contentresult[0];
+
+                    } elseif($contentresult['naam'] == 'Contact'){
+
+                        require_once($base_path . '/contactpagina.php');
 
                     } else {
 

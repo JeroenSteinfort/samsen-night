@@ -102,9 +102,39 @@ and open the template in the editor.
                         $query->bindParam(':bericht', $_POST['bericht']);
                         $query->execute();
                     }
+                    $msg = "";
+                    if(empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
+                        $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>"
+                                . $_POST['bedrijfsnaam'] . "<br>" . 
+                                $_POST['email'] . "<br>" . 
+                                $_POST['onderwerp'] . "<br>" . 
+                                $_POST['bericht'];
+                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                    }elseif(!empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
+                        $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>"
+                                . $_POST['bedrijfsnaam'] . "<br>" . 
+                                $_POST['email'] . "<br>" . 
+                                $_POST['onderwerp'] . "<br>" . 
+                                $_POST['bericht'];
+                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                    }elseif(empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
+                        $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>" .
+                                $_POST['email'] . "<br>" . 
+                                $_POST['onderwerp'] . "<br>" . 
+                                $_POST['bericht'];
+                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                    }elseif(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
+                        $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>" .
+                                $_POST['email'] . "<br>" . 
+                                $_POST['onderwerp'] . "<br>" . 
+                                $_POST['bericht'];
+                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                    }
+
+                    
 ?>
                     
-<!--value= "<?php print($_POST[" "]) ?>">-->
+<!--value= "<?php // print($_POST[" "]) ?>">-->
                     
     </body>
 </html>

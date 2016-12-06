@@ -1,7 +1,7 @@
 <?php
-$user='root';
-$password='usbw';
-$dbh=new PDO('mysql:host=localhost:3307;dbname=samsen-night', $user, $password);
+//$user='root';
+//$password='usbw';
+//$dbh=new PDO('mysql:host=localhost:3307;dbname=samsen-night', $user, $password);
 
 echo '<pre>'.print_r($_POST, true).'</pre>';
 

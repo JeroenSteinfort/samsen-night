@@ -29,8 +29,7 @@ if (isset($_POST['submit'])) {
         $error1 = "Username of Email is al ingebruik.";
     } else {
 
-        if ( $username = "" OR $voornaam = ""  OR $achternaam="" OR $password = "") {
-        //$error1 = "Je ";
+       if ( $username == "" OR $voornaam == ""  OR $achternaam=="" OR $password == "") {$error1 = "Je ";
 
 
         } else {
@@ -55,7 +54,7 @@ if (isset($_POST['submit'])) {
 
         }
 
-    }
+   }
 }
 
 //echo password_hash("admin", PASSWORD_BCRYPT);

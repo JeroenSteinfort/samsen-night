@@ -16,7 +16,7 @@ if(!isset($_SESSION['logged_in'])) {
 
 $error = "";
 
-if(isset($_POST['submit'])){
+if(isset($_POST['editpage'])){
 
     $content   = $_POST['editor1'];
     $paginaid  = $_GET['p'];
@@ -30,6 +30,21 @@ if(isset($_POST['submit'])){
     $sql = $dbh->prepare($sql);
     $sql->bindParam(':content',  $content);
     $sql->bindParam(':paginaid', $paginaid);
+    $sql->execute();
+
+}
+
+if(isset($_POST['addpage'])){
+
+    $naam = $_POST['paginanaam'];
+
+    $sql = "
+    #sql
+    INSERT INTO pagina  (naam)
+    VALUES             (:naam)
+    ";
+    $sql = $dbh->prepare($sql);
+    $sql->bindParam(':naam', $naam);
     $sql->execute();
 
 }
@@ -72,7 +87,7 @@ include_once($base_path . '/includes/menu.php');
 
                 <?php
 
-                echo '<ul class="cms-page-list">';
+
 
                 $sql = "
                 #sql
@@ -84,18 +99,39 @@ include_once($base_path . '/includes/menu.php');
 
                 $paginaresults = $sql->fetchAll();
 
+                //echo '<ul class="cms-page-list">';
+
+                echo '<table class="cms-page-list">
+                        ';
+
                 foreach ($paginaresults as $row){
 
-                    echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a></li>';
+                    //echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a><a href=""><span class="glyphicon glyphicon-minus"></span></a></li>';
+
+                    echo '<tr><td>' . $row['naam'] . '</td><td><a href="admin/pages.php?p=' . $row['paginaid'] . '"><span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="includes/deletepage.php?p=' . $row['paginaid'] . '"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
 
                 }
 
-                echo '<li>Nieuwe pagina maken: 
-                    <form method="POST" action="#">
-                    <input type="text" name="paginanaam" />
-                    <button class="plus-button" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
-                    </form>
-                    </li>';
+                echo '<tr><td>Nieuwe pagina maken:<br />
+                      <form method="POST" action="admin/pages.php">
+                      <input type="text" name="paginanaam" />
+                      <button name="addpage" type="submit" class="plus-button"><span class="glyphicon glyphicon-plus"></span></button>
+                      </form></td></tr>';
+
+                echo '</table>';
+
+                //foreach ($paginaresults as $row){
+
+                    //echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a><a href=""><span class="glyphicon glyphicon-minus"></span></a></li>';
+
+                //}
+
+                //echo '<li>Nieuwe pagina maken:
+                //    <form method="POST" action="admin/pages.php">
+                //    <input type="text" name="paginanaam" />
+                //    <button name="addpage" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+                //    </form>
+                 //   </li>';
 
                 echo '</ul>';
 
@@ -116,7 +152,7 @@ include_once($base_path . '/includes/menu.php');
 
                     $contentresult = $sql->fetch();
 
-                    echo '<form method="POST" action="admin/pages.php?p=' . $paginaid . '"><textarea id="editor1" name="editor1">' . $contentresult[2] . '</textarea><br /><input class="cms-submit" type="submit" name="submit" value="submit" /></form>';
+                    echo '<form method="POST" action="admin/pages.php?p=' . $paginaid . '"><textarea id="editor1" name="editor1">' . $contentresult[2] . '</textarea><br /><input class="cms-submit" type="submit" name="editpage" value="submit" /></form>';
 
                 }
 

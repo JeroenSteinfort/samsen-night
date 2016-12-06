@@ -169,7 +169,7 @@ if(isset($_POST['login'])) {
 
                         echo $contentresult[0];
 
-                    } elseif($contentresult['naam'] == 'Contact'){
+                    } else if($contentresult['naam'] == 'Contact'){
 
                         require_once($base_path . '/contactpagina.php');
 

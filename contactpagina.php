@@ -1,9 +1,4 @@
 <?php
-$user='root';
-$password='usbw';
-$dbh=new PDO('mysql:host=localhost:3307;dbname=samsen-night', $user, $password);
-
-echo '<pre>'.print_r($_POST, true).'</pre>';
 
 //wanneer iets is ingevuld, maar een bepaalde veld is niet ingevuld
 //terwijl die wel verplicht was, zet deze het ingevulde veld gewoon terug.
@@ -17,30 +12,16 @@ function check_fill($input) {
 
 //kijken of een veld verplicht is. Zo wel, en niet ingevuld, word de naam rood.
 function required($input) {
-        if (!isset($_POST[$input]) || empty($_POST[$input])) {
-            return ' style="color:red;"';
-        
+    if (!isset($_POST[$input]) || empty($_POST[$input])) {
+
+        return ' style="color:red;"';
+
     }
 }
-?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-                    <h1>Contact pagina</h1>
-                    <p>
-                        mocht je een vraag hebben, of wilt gewoon een mail sturen, of je loopt gewoon te kutten ofzo boeit mij het wat stuur me gewoon een mail ik ben echt lonely help! <br> <br>
-                        stuur me dan ff een mailtje yo. Vul het onderstaande contact formulier in en misschien stuur ik er nog eentje terug <3
 
-                    </p>
+
+?>
+
                         <?php if(isset($_POST["verzenden"]) 
                                 && 
                                 (empty($_POST['voornaam']) || 
@@ -133,8 +114,3 @@ and open the template in the editor.
 
                     
 ?>
-                    
-<!--value= "<?php // print($_POST[" "]) ?>">-->
-                    
-    </body>
-</html>

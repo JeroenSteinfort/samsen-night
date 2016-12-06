@@ -102,3 +102,9 @@ button.cmsbutton:hover{
 td.cms{
     border: 1px solid black !important;
 }
+.carousel {
+    width: 45%;
+    height: 50%;
+    margin: 0 auto;
+    position: relative;
+}

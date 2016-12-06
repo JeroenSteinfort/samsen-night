@@ -31,27 +31,30 @@ $results = $userquery->fetchAll();
     <th class="cms"> Rolid </th>
         <th class="cms"> Wijzig </th>
         <th class="cms"> Delete </th>
-        <form action='#' method='POST'>
+
     <?php
 foreach ($results as $row) {
     echo "<tr class=\"cms\"> <td class=\"cms\">" .  $row['userid']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['username']  . " " . "</td>";
+    echo "<td class=\"cms\">" .  $row['voornaam']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['tussenvoegsel']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['achternaam']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['email']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['foto']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['rolid']  . " " . "</td>";
-    echo "<td class=\"cms\">" . "<input type='wijzig' class='cmsbutton'>" . 'Wijzig' .  " </button> </td> ";
-    echo "<td class=\"cms\">" . "<button class='cmsbutton' name='delete'>" . 'Delete' . " </button>  </td> ";
+    echo "<td class=\"cms\">" . "<form action='#' method='GET' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Wijzig' name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
+    echo "<td class=\"cms\">" . "<form action='#' method='GET' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
     echo "<br> </tr>";
 }
 ?>
 </table>
 <?php
-if(isset($_POST['delete'])) {
-    $delete = $dbh->prepare("DELETE * from user where userid = :$userid");
-    $delete->bindParam(':userid', $_POST['userid']);
-    $delete->execute();
+
+if(isset($_GET['delete'])) {;
+    $delete = $dbh->prepare("DELETE from user where userid =?");
+    //$delete->bindParam(':userid', $_GET['userid']);
+    $delete->execute(array($_GET['userid']));
+    header('Location: usercms.php');
 }
 
 

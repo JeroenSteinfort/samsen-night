@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b95ef39b-0118-4e40-b015-f0d10e15838b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/cpanel.php" afterPath="$PROJECT_DIR$/admin/cpanel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/pages.php" afterPath="$PROJECT_DIR$/admin/pages.php" />
     </list>
     <ignored path="samsen-night.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,12 +53,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pages.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pages.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/pages.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="-2040">
+              <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+              <folding>
+                <marker date="1481015471007" expanded="true" signature="2150:2175" ph="..." />
+                <marker date="1481015471007" expanded="true" signature="2758:3093" ph="..." />
+                <marker date="1481015471007" expanded="true" signature="2762:3088" ph="..." />
+                <marker date="1481015471007" expanded="true" signature="2856:3083" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,14 +101,14 @@
       <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1768">
+            <state relative-caret-position="1767">
               <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cpanel.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cpanel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/cpanel.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-510">
@@ -139,10 +144,10 @@
         <option value="$PROJECT_DIR$/css/stylesheet.css" />
         <option value="$PROJECT_DIR$/contactpagina.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/admin/pages.php" />
         <option value="$PROJECT_DIR$/includes/dbh.php" />
         <option value="$PROJECT_DIR$/register.php" />
         <option value="$PROJECT_DIR$/admin/cpanel.php" />
+        <option value="$PROJECT_DIR$/admin/pages.php" />
       </list>
     </option>
   </component>
@@ -343,12 +348,12 @@
       <workItem from="1480578174263" duration="11250000" />
       <workItem from="1480669154926" duration="2606000" />
       <workItem from="1480673600830" duration="4102000" />
-      <workItem from="1481015343223" duration="32000" />
+      <workItem from="1481015343223" duration="138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44781000" />
+    <option name="totallyTimeSpent" value="44887000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -420,7 +425,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1649">
           <caret line="97" column="27" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
-          <folding />
+          <folding>
+            <marker date="1481015471007" expanded="true" signature="2150:2175" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2758:3093" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2762:3088" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2856:3083" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -468,7 +478,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1481015471007" expanded="true" signature="2150:2175" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2758:3093" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2762:3088" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2856:3083" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -698,14 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/dbh.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -730,19 +737,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/pages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/cpanel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-510">
           <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/pages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2040">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+          <folding>
+            <marker date="1481015471007" expanded="true" signature="2150:2175" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2758:3093" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2762:3088" ph="..." />
+            <marker date="1481015471007" expanded="true" signature="2856:3083" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

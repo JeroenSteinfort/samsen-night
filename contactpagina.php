@@ -29,15 +29,32 @@ function required($input) {
                     <form method="post" action="index.php?p=Contact" id="contactpagina">
                         
                         <table>
-                        <tr>
-                            <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" name="voornaam" value= "<?php print(check_fill("voornaam")) ?>"></td></tr><tr>
-                            <td>Tussenvoegsel:</td> <td><input type="text" name="tussen" value= "<?php print($_POST["tussen"]) ?>"></td></tr><tr>
-                            <td <?php print(required("achternaam")) ?>>Achternaam:</td> <td><input type="text" name="achternaam" value= "<?php print($_POST["achternaam"]) ?>"></td></tr><tr>
-                            <td>bedrijfsnaam:</td><td><input type="text" name="bedrijfsnaam" value= "<?php print($_POST["bedrijfsnaam"]) ?>"></td></tr><tr>
-                            <td <?php print(required("onderwerp")) ?>>Onderwerp:</td><td><input type="text" name="onderwerp" value= "<?php print($_POST["onderwerp"]) ?>"></td></tr><tr>
-                            <td <?php print(required("email")) ?>>Email: </td><td><input type="text" name="email" value= "<?php print($_POST["email"]) ?>"></td>
-                        </tr>
-                        <tr><td<?php print(required("bericht")) ?>>Bericht:</td></tr> <br>
+                            <tr>
+                                <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" name="voornaam" value= "<?php print(check_fill("voornaam")) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>Tussenvoegsel:</td>
+                                <td><input type="text" name="tussen" value= "<?php print($_POST["tussen"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td <?php print(required("achternaam")) ?>>Achternaam:</td>
+                                <td><input type="text" name="achternaam" value= "<?php print($_POST["achternaam"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>bedrijfsnaam:</td>
+                                <td><input type="text" name="bedrijfsnaam" value= "<?php print($_POST["bedrijfsnaam"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td <?php print(required("onderwerp")) ?>>Onderwerp:</td>
+                                <td><input type="text" name="onderwerp" value= "<?php print($_POST["onderwerp"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td <?php print(required("email")) ?>>Email: </td>
+                                <td><input type="text" name="email" value= "<?php print($_POST["email"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td<?php print(required("bericht")) ?>>Bericht:</td>
+                            </tr> <br>
                         </table>
                         
                         <textarea  id="contactpagina" form="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
@@ -49,14 +66,32 @@ function required($input) {
 
                     <form method="post" action="index.php?p=Contact" id="contactpagina">
                         <table>
-                        <tr>
-                            <td>Voornaam:</td> <td><input type="text" name="voornaam"></td></tr><tr>
-                            <td>Tussenvoegsel:</td> <td><input type="text" name="tussen"></td></tr><tr>
-                            <td>Achternaam:</td> <td><input type="text" name="achternaam"></td></tr><tr>
-                            <td>bedrijfsnaam:</td><td><input type="text" name="bedrijfsnaam"></td></tr><tr>
-                            <td>Onderwerp:</td><td><input type="text" name="onderwerp"></td></tr><tr>
-                            <td>Email: </td><td><input type="email" name="email"></td></tr>
-                        </tr>
+                            <tr>
+                                <td>Voornaam:</td>
+                                <td><input type="text" name="voornaam"></td>
+                            </tr>
+                            <tr>
+                                <td>Tussenvoegsel:</td>
+                                <td><input type="text" name="tussen"></td>
+                            </tr>
+                            <tr>
+                                <td>Achternaam:</td>
+                                <td><input type="text" name="achternaam">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>bedrijfsnaam:</td>
+                                <td><input type="text" name="bedrijfsnaam"></td>
+                            </tr>
+                            <tr>
+                                <td>Onderwerp:</td>
+                                <td><input type="text" name="onderwerp"></td>
+                            </tr>
+                            <tr>
+                                <td>Email: </td>
+                                <td><input type="email" name="email"></td>
+                            </tr>
+                            </tr>
                         </table>
                         Bericht: <br>
                         <textarea id="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"></textarea><br>

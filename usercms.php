@@ -42,19 +42,20 @@ foreach ($results as $row) {
     echo "<td class=\"cms\">" .  $row['email']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['foto']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['rolid']  . " " . "</td>";
-    echo "<td class=\"cms\">" . "<form action='#' method='GET' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Wijzig' name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
-    echo "<td class=\"cms\">" . "<form action='#' method='GET' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
+    echo "<td class=\"cms\">" . "<form action='#' method='POST' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Wijzig' name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
+    echo "<td class=\"cms\">" . "<form action='#' method='POST' name=\"test\"><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
     echo "<br> </tr>";
 }
 ?>
 </table>
 <?php
 
-if(isset($_GET['delete'])) {;
+if(isset($_POST['delete'])) {
+    
     $delete = $dbh->prepare("DELETE from user where userid =?");
     //$delete->bindParam(':userid', $_GET['userid']);
-    $delete->execute(array($_GET['userid']));
-    header('Location: usercms.php');
+    $delete->execute(array($_POST['userid']));
+    header('Location: http://localhost:8080/samsen-night/usercms.php');
 }
 
 

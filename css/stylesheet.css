@@ -103,8 +103,9 @@ td.cms{
     border: 1px solid black !important;
 }
 .carousel {
-    width: 45%;
-    height: 50%;
-    margin: 0 auto;
-    position: relative;
+    width: 75% !important;
+    margin: 0 auto !important;
+}
+.carousel {
+    margin-bottom: 30px !important;
 }

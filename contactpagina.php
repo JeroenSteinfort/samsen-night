@@ -40,7 +40,7 @@ function required($input) {
                         <tr><td<?php print(required("bericht")) ?>>Bericht:</td></tr> <br>
                         </table>
                         
-                        <textarea  id="contactpagina" form="contactpagina" name="bericht" rows="15" cols="50" wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
+                        <textarea  id="contactpagina" form="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
                         <input type="submit" name="verzenden" value="verzenden"> 
                         <br>
                         <h3 style="color: red; text-align: center;">rode velden zijn verplicht</h3>
@@ -59,7 +59,7 @@ function required($input) {
                         </tr>
                         </table>
                         Bericht: <br>
-                        <textarea id="contactpagina" name="bericht" rows="15" cols="50" wrap="soft"></textarea><br>
+                        <textarea id="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"></textarea><br>
                         <input type="submit" name="verzenden" value="verzenden">
 
                         

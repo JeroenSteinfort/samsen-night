@@ -65,8 +65,8 @@ function required($input) {
                         
                     </form>
                     <?php } 
-                    else{
-                        print("<h4>" . "Bericht is verstuurd. U ontvangt zo spoedig mogelijk een bericht." . "</h4>");
+                    elseif(isset($_POST['verzenden'])&& !empty($_POST['voornaam']) && !empty($_POST['achternaam']) && !empty($_POST['email']) && !empty($_POST['onderwerp']) && !empty($_POST['bericht'])){
+                        print("<h3>" . "Bericht is verstuurd. U ontvangt zo spoedig mogelijk een bericht." . "</h3>");
                         
                         $query = 'INSERT INTO formulier
                                 (voornaam, tussenvoegsel,  achternaam, email, bedrijfsnaam, onderwerp, bericht)
@@ -82,34 +82,35 @@ function required($input) {
                         $query->bindParam(':onderwerp', $_POST['onderwerp']);
                         $query->bindParam(':bericht', $_POST['bericht']);
                         $query->execute();
-                    }
+                    
                     $msg = "";
-                    if(empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
+                    if(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" . 
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
                         mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
-                    }elseif(!empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
+                    }elseif(empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" . 
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
                         mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
-                    }elseif(empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
+                    }elseif(!empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
                         mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
-                    }elseif(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
+                    }elseif(empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
                         mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                    }
                     }
 
                     

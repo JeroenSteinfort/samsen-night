@@ -79,7 +79,7 @@ $menuresults = $sql->fetchAll();
                                 <li><a href="admin/cpanel.php">Control Panel</a></li>
                                 <li><a href="admin/pages.php">Content beheren</a></li>
                                 <li><a href="admin/partners.php">Partners beheren</a></li>
-                                <li><a href="admin/users.php">Users beheren</a></li>
+                                <li><a href="admin/usercms.php">Users beheren</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="includes/loguit.php">Log uit</a></li>
 

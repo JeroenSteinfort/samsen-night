@@ -100,7 +100,7 @@ button.cmsbutton:hover{
     color: white;
 }
 td.cms{
-    border: 1px solid black !important;
+    border: 2px solid black !important;
 }
 .carousel {
     width: 75% !important;

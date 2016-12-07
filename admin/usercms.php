@@ -1,25 +1,59 @@
 <?php
-
-session_start();
 /**
  * Created by PhpStorm.
  * User: Ethan
  * Date: 02/12/2016
  * Time: 11:02
  */
+
+//Inlcudes en define base_path
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
-include $base_path . '/includes/dbh.php';
+require_once($base_path . '\includes\password.php');
+require_once($base_path . '\includes\dbh.php');
+session_start();
+
+if(!isset($_SESSION['logged_in'])) {
+
+    header("Location: ../index.php");
+    exit;
+
+}
+
+$error = "";
+
 ?>
-<link rel="stylesheet" type="text/css" href="..\css\stylesheet.css">
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="http://localhost:8080/samsen-night/" >
+
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+
 <?php
 
-$userquery = $dbh->prepare("Select * from user");
-$userquery->execute();
-
-$results = $userquery->fetchAll();
-// Bovenste gedeeltje maakt link met CSS en de database connectie
+include_once($base_path . '/includes/menu.php');
 
 ?>
+
+<div class="container container-custom">
+
+    <div class="row">
+
+        <div class="col-xs-12 content">
+
+
 
     <table class="cms">
     <th class="cms"> UserID </th>
@@ -32,7 +66,15 @@ $results = $userquery->fetchAll();
     <th class="cms"> Rolid </th>
         <th class="cms"> Wijzig </th>
         <th class="cms"> Delete </th>
+        <?php
 
+        $userquery = $dbh->prepare("Select * from user");
+        $userquery->execute();
+
+        $results = $userquery->fetchAll();
+        // Bovenste gedeeltje maakt link met CSS en de database connectie
+
+        ?>
     <?php
     // bovenste gedeelte zijn headers voor tabel
 foreach ($results as $row) {

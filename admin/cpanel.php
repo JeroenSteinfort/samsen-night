@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Ethan
+ * Date: 02/12/2016
+ * Time: 11:02
+ */
 
 //Inlcudes en define base_path
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
@@ -55,7 +61,7 @@ include_once($base_path . '/includes/menu.php');
 
                 <li><a href="admin/pages.php">Content beheren</a></li>
                 <li><a href="admin/partners.php">Partners beheren</a></li>
-                <li><a href="admin/users.php">Users beheren</a></li>
+                <li><a href="admin/usercms.php">Users beheren</a></li>
 
             </ul>
 

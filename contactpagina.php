@@ -26,7 +26,7 @@ function required($input) {
                                 && 
                                 (empty($_POST['voornaam']) || 
                                 empty($_POST['achternaam']) || empty($_POST['onderwerp']) || empty($_POST['email']) || empty($_POST['bericht']))) {?>
-                    <form method="post" action="contactpagina.php" id="contactpagina">
+                    <form method="post" action="Localhost:8080/samsen-night/index.php" id="contactpagina">
                         
                         <table>
                         <tr>
@@ -47,7 +47,7 @@ function required($input) {
                     </form>
                     <?php }elseif(!isset($_POST['verzenden'])){ ?>
 
-                    <form method="post" action="contactpagina.php" id="contactpagina">
+                    <form method="post" action="Localhost:8080/samsen-night/index.php" id="contactpagina">
                         <table>
                         <tr>
                             <td>Voornaam:</td> <td><input type="text" name="voornaam"></td></tr><tr>

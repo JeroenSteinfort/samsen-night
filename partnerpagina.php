@@ -1,12 +1,21 @@
 <html>
 <head>
+        <link rel="stylesheet" type="text/css" href="partners.css">
+     <h1>Partner pagina</h1>
 </head>
 <body>
-<h1>Partner 1</h1>
-inzurt immitsj hier
-<p>Hoi ik ben partner 1 en ik heb geld nodig en waarschijnlijk ga ik het geld gebruiken aan cocaine en hoeren en ga ik dood onder een brug. #thuglife </p><br>
-<h1>Partner 2</h1>
-inzurt immitsj hier
-<p>Hoj ick ben partnur 2 en ick cha mein chelt chebruikun aan un heule goede kompjoeter en dan cha ik hekkermen worden. hestek fokjemoeder </p><br>
+<div class="partner">
+<img src="rename.png" alt="Samsen">
+<h2>Partner 1</h2>
+<p>Beschrijving</p>
+<a href="http://www.ishetalvrijdag.nl">Link</a>
+</div>
+<br>
+<div class="partner">
+<img src="rename.png" alt="Samsen">
+<h2>Partner 2</h2>
+<p>Beschrijving</p>
+<a href="http://www.ishetalvrijdag.nl">Link</a><br>
+</div>
 </body>
 </html>

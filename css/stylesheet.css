@@ -109,3 +109,24 @@ td.cms{
 .carousel {
     margin-bottom: 30px !important;
 }
+.tracker-table{
+    width: 100%;
+}
+.tracker-table > tbody > tr > th{
+    border-bottom: 1px black solid;
+}
+.tracker-table > tbody > tr > td{
+    border-bottom: 1px #BFBFBF solid;
+}
+.tracker-table > tbody > tr:nth-child(even){
+background-color: #D7E3F5;
+}
+.tracker-selector{
+    border: 1px solid #D9E6FA;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.tracker-selector-table > tbody > tr > td{
+    padding: 5px;
+}

@@ -4,6 +4,7 @@
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 require_once($base_path . '/includes/password.php');
 require_once($base_path . '/includes/dbh.php');
+require_once($base_path . '/includes/tracker.php');
 
 session_start();
 
@@ -80,6 +81,9 @@ if(isset($_POST['login'])) {
     }
 
 }
+
+//User tracker functies
+newVisitor($dbh, $page);
 
 ?>
 

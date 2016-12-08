@@ -174,7 +174,7 @@ if(isset($_POST['login'])) {
 
                             require($base_path . '/contactpagina.php');
 
-                        }elseif($_GET['p'] == 'algemene-voorwaarden'){
+                        }elseif(isset($_GET['p']) && $_GET['p'] == 'algemene-voorwaarden'){
 
                             require($base_path . '/algemene-voorwaarden.php');
 

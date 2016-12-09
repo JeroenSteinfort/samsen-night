@@ -125,6 +125,7 @@ newVisitor($dbh, $page);
                             <li data-target="#myCarousel" data-slide-to="1"></li>
                             <li data-target="#myCarousel" data-slide-to="2"></li>
                             <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#meCarousel" data-slide-to="4"></li>
                         </ol>
 
                         <!-- Wrapper for slides -->
@@ -134,15 +135,19 @@ newVisitor($dbh, $page);
                             </div>
 
                             <div class="item">
-                                <img src="img\wiggers.png" alt="Chania">
+                                <img src="img\knobben.jpg" alt="Chania">
                             </div>
 
                             <div class="item">
-                                <img src="img\wiggers.png" alt="Flower">
+                                <img src="img\rscarwash.png" alt="Flower">
                             </div>
 
                             <div class="item">
-                                <img src="img\wiggers.png" alt="Flower">
+                                <img src="img\sting.jpg" alt="Flower">
+                            </div>
+
+                            <div class="item">
+                                <img src="img\wierda.jpg" alt="Chania">
                             </div>
                         </div>
 

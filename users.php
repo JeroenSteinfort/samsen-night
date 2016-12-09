@@ -51,7 +51,25 @@ foreach ($results as $row) {
 }
 ?>
 </table>
+
 <?php
+
+/*
+if (isset($_POST['wijzig'])) {
+    echo "<form method= 'POST' action= '#'>
+           <input type= 'text' name= 'vnaam' value= 'Voornaam'> " .
+         " <input type= 'text' name= 'tv' value= 'Tussenvoegsel'> " .
+         " <input type= 'text' name= 'anaam' value= 'Achternaam'> " .
+         " <input type= 'text' name= 'email' value= 'E-mail'> " .
+         " <input type= 'text' name= 'foto' value= 'Foto'> " .
+         " <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'> " . " </input> </form> ";
+}
+
+if(isset($_POST['finalize'])) {
+    $update = $dbh->prepare("UPDATE user SET voornaam = '$_POST['vnaam']', tussenvoegsel = '$_POST['tv']',
+                            achternaam = '$_POST['anaam']', email = '$_POST['email']', foto = '$_POST['foto']' WHERE userid = $_POST['userid']");
+    $update->execute(array($_POST['userid']));
+}*/
 
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";

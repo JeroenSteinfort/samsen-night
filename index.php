@@ -113,7 +113,7 @@ newVisitor($dbh, $page);
 
         ?>
 
-        <div class="container container-custom">
+        <div class="container container-custom carousel-fade">
 
             <div class="row">
 
@@ -131,7 +131,7 @@ newVisitor($dbh, $page);
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src="img\wiggers.png" alt="Chania">
+                                <img src="img\wiggers1.jpg" alt="Chania">
                             </div>
 
                             <div class="item">
@@ -143,7 +143,7 @@ newVisitor($dbh, $page);
                             </div>
 
                             <div class="item">
-                                <img src="img\sting.jpg" alt="Flower">
+                                <img src="img\sting.jpg" alt="Chania">
                             </div>
 
                             <div class="item">

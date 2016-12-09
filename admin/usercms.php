@@ -86,8 +86,8 @@ foreach ($results as $row) {
     echo "<td class=\"cms\">" .  $row['email']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['foto']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['rolid']  . " " . "</td>";
-    echo "<td class=\"cms\">" . "<form action='#' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Wijzig' name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
-    echo "<td class=\"cms\">" . "<form action='#' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
+    echo "<td class=\"cms\">" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Wijzig' name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
+    echo "<td class=\"cms\">" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
     echo "<br> </tr>";
     //Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van de user id. Een input waarde word niet geshowed maar word wel gebruikt.
 }
@@ -98,7 +98,7 @@ foreach ($results as $row) {
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";
     ?>
-    <form method="POST" action="#">
+    <form method="POST" action="admin/usercms.php">
         <input type="submit" name="optie" value="Ja" class="cmsbutton">
         <input type="submit" name="optie" value="Nee" class="cmsbutton">
         <input type="hidden" name="userid" value="<?= $_POST['userid'] ?>">
@@ -111,11 +111,11 @@ if(isset($_POST['delete'])) {
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     //als er op delete word geklikt word onderstaande query gedraait.
-    echo 'hoi';
+
     $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
-    header("Location: usercms.php");
+    echo 'refresh nu de pagina';
     exit;
     //na dat de query klaar is moet de pagina ververst worden.;
 }

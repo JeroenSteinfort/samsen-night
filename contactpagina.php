@@ -121,6 +121,8 @@ function required($input) {
                         $msg = "";
                         $naar = "mathijs.breuker@hotmail.com";
                         $van = "From: noreply@samsennight.com";
+                        $ingevuld_door = $_POST["email"];
+                        $antwoord = "Uw mail is ontvangen. U ontvangt zo spoedig mogelijk een reactie.";
                         if(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                             $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" .
@@ -128,6 +130,7 @@ function required($input) {
                                 $_POST['onderwerp'] . "<br>" .
                                 $_POST['bericht'];
                             mail($naar, $_POST['onderwerp'], $msg, $van);
+                            mail($ingevuld_door, $antwoord, $antwoord, $van);
                         }elseif(empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                             $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" .
@@ -135,18 +138,21 @@ function required($input) {
                                 $_POST['onderwerp'] . "<br>" .
                                 $_POST['bericht'];
                             mail($naar, $_POST['onderwerp'], $msg, $van);
+                            mail($ingevuld_door, $antwoord, $antwoord, $van);
                         }elseif(!empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                             $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" .
                                 $_POST['onderwerp'] . "<br>" .
                                 $_POST['bericht'];
                             mail($naar, $_POST['onderwerp'], $msg, $van);
+                            mail($ingevuld_door, $antwoord, $antwoord, $van);
                         }elseif(empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                             $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" .
                                 $_POST['onderwerp'] . "<br>" .
                                 $_POST['bericht'];
                             mail($naar, $_POST['onderwerp'], $msg, $van);
+                            mail($ingevuld_door, $antwoord, $antwoord, $van);
                         }
                     }
 

@@ -131,23 +131,23 @@ newVisitor($dbh, $page);
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src="img\wiggers1.jpg" alt="Chania">
+                                <a href="http://www.wiggersmastercars.nl" target="_blank"><img src="img\wiggers1.jpg" alt="Chania">
                             </div>
 
                             <div class="item">
-                                <img src="img\knobben.jpg" alt="Chania">
+                                <a href="http://www.knobbencaravans.nl" target="_blank"><img src="img\knobben.jpg" alt="Chania">
                             </div>
 
                             <div class="item">
-                                <img src="img\rscarwash.png" alt="Flower">
+                                <a href="http://www.rscarwash.nl" target="_blank"><img src="img\rscarwash.png" alt="Flower">
                             </div>
 
                             <div class="item">
-                                <img src="img\sting.jpg" alt="Chania">
+                                <a href="http://www.meloveradio.com" target="_blank"><img src="img\sting.jpg" alt="Chania">
                             </div>
 
                             <div class="item">
-                                <img src="img\wierda.jpg" alt="Chania">
+                                <a href="http://www.wierdavermogensbeheer.nl" target="_blank"><img src="img\wierda.jpg" alt="Chania">
                             </div>
                         </div>
 

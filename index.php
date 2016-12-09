@@ -178,11 +178,11 @@ newVisitor($dbh, $page);
 
                             require($base_path . '/contactpagina.php');
 
-                        }elseif(isset($_GET['p']) && $_GET['p'] == 'algemene-voorwaarden'){
-
-                            require($base_path . '/algemene-voorwaarden.php');
-
                         }
+
+                    } elseif(isset($_GET['p']) && $_GET['p'] == 'algemene-voorwaarden'){
+
+                        require($base_path . '/algemene-voorwaarden.php');
 
                     } else {
 

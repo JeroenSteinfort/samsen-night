@@ -9,13 +9,13 @@
 
 <table class="partners">
     <tr>
-        <td> </td>
-        <td>Partner 1</td>
-        <td> </td>
+        <th> </th>
+        <th>Partner 1</th>
+        <th> </th>
     </tr>
     <tr>
         <td><img src="img/rename.png" alt="Samsen"></td>
-        <td>Beschrijving</td>
+        <td>Dit bedrijf is gewoon echt heel erg kut want gewoon.</td>
         <td> </td>
     </tr>
     <tr>
@@ -29,13 +29,13 @@
 
 <table class="partners">
     <tr>
-        <td> </td>
-        <td>Partner 1</td>
-        <td> </td>
+        <th> </th>
+        <th>Partner 2</th>
+        <th> </th>
     </tr>
     <tr>
         <td><img src="img/rename.png" alt="Samsen"></td>
-        <td>Beschrijving</td>
+        <td>Dit bedrijf is gewoon een stuk minder kut want.</td>
         <td> </td>
     </tr>
     <tr>

@@ -1,4 +1,9 @@
 <?php
+$user='root';
+$password='usbw';
+$dbh=new PDO('mysql:host=localhost:3307;dbname=samsen-night', $user, $password);
+
+echo '<pre>'.print_r($_POST, true).'</pre>';
 
 //wanneer iets is ingevuld, maar een bepaalde veld is niet ingevuld
 //terwijl die wel verplicht was, zet deze het ingevulde veld gewoon terug.
@@ -12,89 +17,68 @@ function check_fill($input) {
 
 //kijken of een veld verplicht is. Zo wel, en niet ingevuld, word de naam rood.
 function required($input) {
-    if (!isset($_POST[$input]) || empty($_POST[$input])) {
-
-        return ' style="color:red;"';
-
+        if (!isset($_POST[$input]) || empty($_POST[$input])) {
+            return ' style="color:red;"';
+        
     }
 }
-
-
 ?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+                    <h1>Contact pagina</h1>
+                    <p>
+                        mocht je een vraag hebben, of wilt gewoon een mail sturen, of je loopt gewoon te kutten ofzo boeit mij het wat stuur me gewoon een mail ik ben echt lonely help! <br> <br>
+                        stuur me dan ff een mailtje yo. Vul het onderstaande contact formulier in en misschien stuur ik er nog eentje terug <3
 
+                    </p>
                         <?php if(isset($_POST["verzenden"]) 
                                 && 
                                 (empty($_POST['voornaam']) || 
                                 empty($_POST['achternaam']) || empty($_POST['onderwerp']) || empty($_POST['email']) || empty($_POST['bericht']))) {?>
-                    <form method="post" action="index.php?p=Contact" id="contactpagina">
+                    <form method="post" action="contactpagina.php" id="contactpagina">
                         
                         <table>
-                            <tr>
-                                <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" name="voornaam" value= "<?php print(check_fill("voornaam")) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>Tussenvoegsel:</td>
-                                <td><input type="text" name="tussen" value= "<?php print($_POST["tussen"]) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td <?php print(required("achternaam")) ?>>Achternaam:</td>
-                                <td><input type="text" name="achternaam" value= "<?php print($_POST["achternaam"]) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>bedrijfsnaam:</td>
-                                <td><input type="text" name="bedrijfsnaam" value= "<?php print($_POST["bedrijfsnaam"]) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td <?php print(required("onderwerp")) ?>>Onderwerp:</td>
-                                <td><input type="text" name="onderwerp" value= "<?php print($_POST["onderwerp"]) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td <?php print(required("email")) ?>>Email: </td>
-                                <td><input type="text" name="email" value= "<?php print($_POST["email"]) ?>"></td>
-                            </tr>
-                            <tr>
-                                <td<?php print(required("bericht")) ?>>Bericht:</td>
-                            </tr> <br>
+                        <tr>
+                            <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" name="voornaam" value= "<?php print(check_fill("voornaam")) ?>"></td></tr><tr>
+                            <td>Tussenvoegsel:</td> <td><input type="text" name="tussen" value= "<?php print($_POST["tussen"]) ?>"></td></tr><tr>
+                            <td <?php print(required("achternaam")) ?>>Achternaam:</td> <td><input type="text" name="achternaam" value= "<?php print($_POST["achternaam"]) ?>"></td></tr><tr>
+                            <td>bedrijfsnaam:</td><td><input type="text" name="bedrijfsnaam" value= "<?php print($_POST["bedrijfsnaam"]) ?>"></td></tr><tr>
+                            <td <?php print(required("onderwerp")) ?>>Onderwerp:</td><td><input type="text" name="onderwerp" value= "<?php print($_POST["onderwerp"]) ?>"></td></tr><tr>
+                            <td <?php print(required("email")) ?>>Email: </td><td><input type="text" name="email" value= "<?php print($_POST["email"]) ?>"></td>
+                        </tr>
+                        <tr><td<?php print(required("bericht")) ?>>Bericht:</td></tr> <br>
                         </table>
                         
-                        <textarea  id="contactpagina" form="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
+                        <textarea  id="contactpagina" form="contactpagina" name="bericht" rows="15" cols="50" wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
                         <input type="submit" name="verzenden" value="verzenden"> 
                         <br>
                         <h3 style="color: red; text-align: center;">rode velden zijn verplicht</h3>
                     </form>
                     <?php }elseif(!isset($_POST['verzenden'])){ ?>
 
-                    <form method="post" action="index.php?p=Contact" id="contactpagina">
+                    <form method="post" action="contactpagina.php" id="contactpagina">
                         <table>
-                            <tr>
-                                <td>Voornaam:</td>
-                                <td><input type="text" name="voornaam"></td>
-                            </tr>
-                            <tr>
-                                <td>Tussenvoegsel:</td>
-                                <td><input type="text" name="tussen"></td>
-                            </tr>
-                            <tr>
-                                <td>Achternaam:</td>
-                                <td><input type="text" name="achternaam">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>bedrijfsnaam:</td>
-                                <td><input type="text" name="bedrijfsnaam"></td>
-                            </tr>
-                            <tr>
-                                <td>Onderwerp:</td>
-                                <td><input type="text" name="onderwerp"></td>
-                            </tr>
-                            <tr>
-                                <td>Email: </td>
-                                <td><input type="email" name="email"></td>
-                            </tr>
-                            </tr>
+                        <tr>
+                            <td>Voornaam:</td> <td><input type="text" name="voornaam"></td></tr><tr>
+                            <td>Tussenvoegsel:</td> <td><input type="text" name="tussen"></td></tr><tr>
+                            <td>Achternaam:</td> <td><input type="text" name="achternaam"></td></tr><tr>
+                            <td>bedrijfsnaam:</td><td><input type="text" name="bedrijfsnaam"></td></tr><tr>
+                            <td>Onderwerp:</td><td><input type="text" name="onderwerp"></td></tr><tr>
+                            <td>Email: </td><td><input type="email" name="email"></td></tr>
+                        </tr>
                         </table>
                         Bericht: <br>
-                        <textarea id="contactpagina" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"></textarea><br>
+                        <textarea id="contactpagina" name="bericht" rows="15" cols="50" wrap="soft"></textarea><br>
                         <input type="submit" name="verzenden" value="verzenden">
 
                         
@@ -119,34 +103,41 @@ function required($input) {
                         $query->execute();
                     
                     $msg = "";
+                    $naar = "mathijs.breuker@hotmail.com";
+                    $van = "noreply@samsennight.com";
                     if(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" . 
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
-                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                        mail($naar, $_POST['onderwerp'], $msg, $van);
                     }elseif(empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" . 
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
-                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                        mail($naar, $_POST['onderwerp'], $msg, $van);
                     }elseif(!empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
-                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                        mail($naar, $_POST['onderwerp'], $msg, $van);
                     }elseif(empty($_POST['tussenvoegsel']) && empty($_POST['bedrijfsnaam'])){
                         $msg = $_POST['voornaam'] . " " . $_POST['achternaam'] . "<br>" .
                                 $_POST['email'] . "<br>" . 
                                 $_POST['onderwerp'] . "<br>" . 
                                 $_POST['bericht'];
-                        mail("mathijs.breuker@hotmail.com", $_POST['onderwerp'], $msg);
+                        mail($naar, $_POST['onderwerp'], $msg, $van);
                     }
                     }
 
                     
 ?>
+                    
+<!--value= "<?php // print($_POST[" "]) ?>">-->
+                    
+    </body>
+</html>

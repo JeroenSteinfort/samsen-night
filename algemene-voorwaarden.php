@@ -1,4 +1,4 @@
-<html>
+
 
 
     <h2> Disclaimer voor samsennight.nl</h2>
@@ -23,4 +23,3 @@
 
 
 
-</html>

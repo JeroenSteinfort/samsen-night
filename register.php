@@ -21,13 +21,14 @@ if (isset($_POST['submit'])) {
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
+    $special   = preg_match('@#-_$%^&+=§!?', $password);
     if ($password != $password2) {
         $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+        if (!$uppercase || !$lowercase || !$special || !$number || strlen($password) < 8) {
             $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
-            //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
+            //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer en een speciaal teken. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
         } else {
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $email = $_POST['email'];

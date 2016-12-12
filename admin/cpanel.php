@@ -52,12 +52,17 @@ include_once($base_path . '/includes/menu.php');
             <p>Dit is het CMS van Samsen Night. Kies een optie:</p>
 
             <ul>
-
-                <li><a href="admin/pages.php">Content beheren</a></li>
-                <li><a href="admin/partners.php">Partners beheren</a></li>
-                <li><a href="admin/usercms.php">Users beheren</a></li>
-                <li><a href="admin/tracker.php">Website tracker resultaten</a></li>
-
+                <?php if(isset($_SESSION['rolid'])){
+                    //rolid 0 = gebruiker,
+                    //rolid 1 = superadmin,
+                    //rolid 2 = site beheerder,
+                    //rolid 3 = contentbeheerder
+                    ?>
+                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><li><a href="admin/pages.php">Content beheren</a></li> <?php } ?>
+                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><li><a href="admin/partners.php">Partners beheren</a></li> <?php } ?>
+                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><li><a href="admin/usercms.php">Users beheren</a></li> <?php } ?>
+                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><li><a href="admin/tracker.php">Website tracker resultaten</a></li> <?php } ?>
+                <?php } ?>
             </ul>
 
         </div>

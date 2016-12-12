@@ -43,7 +43,7 @@ if(isset($_POST['login'])) {
 
     $query = "
         #sql
-        SELECT userid, wachtwoord
+        SELECT userid, wachtwoord, rolid
         FROM   user
         WHERE  username = :username
         LIMIT 1
@@ -59,10 +59,11 @@ if(isset($_POST['login'])) {
         //User is found
         if (password_verify($password, $result['wachtwoord'])) {
 
-            //Password is correct
+            //Password is correct && admin recht is gedefinieerd
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
+            $_SESSION['rolid']     = $result['rolid'];
             header('Location: admin/cpanel.php');
             exit;
 

@@ -1,6 +1,6 @@
 <html>
 <head>
-        <link rel="stylesheet" type="text/css" href="partners.css">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
@@ -8,17 +8,11 @@
 <h1>Partner pagina</h1>
 
 <?php
-$db_servername = "localhost";
-$db_username = "root";
-$db_password = "usbw";
-$db_name = "samsen-night";
-
-// Connectie maken met database
-$conn = new mysqli($db_servername, $db_username, $db_password, $db_name);
-// Connectie met database checken
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+//Inlcudes en define base_path
+$base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
+require_once($base_path . '\includes\password.php');
+require_once($base_path . '\includes\dbh.php');
+session_start();
 
 $sql = '
 #sql
@@ -31,14 +25,14 @@ $sql->execute();
 $partners = $sql->fetchAll();
 
 foreach ($partners as $partner){
-    echo "<tr class= partner> <td class=partner>" .  $row['partnernaam']  . " " . "</td>";
-    echo "<td class= partner>" .  $row['beschrijving']  . " " . "</td>";
-    echo "<td class= partner>" .  $row['link']  . " " . "</td>";
+    echo "<tr class= partner> <td class=partner>" .  $partner['partnernaam']  . " " . "</td>";
+    echo "<td class= partner>" .  $partner['beschrijving']  . " " . "</td>";
+    echo "<td class= partner>" .  $partner['link']  . " " . "</td>";
 }
 
-?>
 
-<table class="partners">
+
+/*<table class="partners">
     <tr>
         <th> </th>
         <th>Partner 1</th>
@@ -77,4 +71,6 @@ foreach ($partners as $partner){
 </table>
 </body>
 
-</html>
+<html>
+*/
+?>

@@ -21,11 +21,11 @@ if (isset($_POST['submit'])) {
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
-    $special   = preg_match('@#-_$%^&+=§!?', $password);
+    $special = preg_match('@!@#$%@' , $password);
     if ($password != $password2) {
         $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        if (!$uppercase || !$lowercase || !$special || !$number || strlen($password) < 8) {
+        if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
             $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
             //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer en een speciaal teken. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
@@ -94,25 +94,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 
-<body>
 
-
-
-<!DOCTYPE html>
-<html>
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-</head>
 <body>
 
 <?php

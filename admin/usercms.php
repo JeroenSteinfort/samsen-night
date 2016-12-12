@@ -115,7 +115,7 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
-    echo 'refresh nu de pagina';
+    header("Location:" . '$basepath' ." /admin/usercms.php");
     exit;
     //na dat de query klaar is moet de pagina ververst worden.;
 }

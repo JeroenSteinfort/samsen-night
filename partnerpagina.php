@@ -20,9 +20,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sql = '
+#sql
+SELECT partnernaam, beschrijving, link, eigenaar FROM partners
+';
 
-$sql = "SELECT partnernaam FROM partners WHERE partnerid = 1";
-$result = $conn->query($sql);
+$sql = $dbh->prepare($sql);
+$sql->execute();
+
+$partners = $sql->fetchAll();
+
+foreach ($partners as $partner){
+    echo "<tr class= partner> <td class=partner>" .  $row['partnernaam']  . " " . "</td>";
+    echo "<td class= partner>" .  $row['beschrijving']  . " " . "</td>";
+    echo "<td class= partner>" .  $row['link']  . " " . "</td>";
+}
 
 ?>
 

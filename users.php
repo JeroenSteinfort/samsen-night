@@ -88,14 +88,14 @@ if(isset($_POST['delete'])) {
 }
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
-    //als er op delete word geklikt word onderstaande query gedraait.
+    //als er op delete word geklikt wordt de onderstaande query gedraait.
     echo 'hoi';
     $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
-    header("Location: usercms.php");
+    header("Location: users.php");
     exit;
-    //na dat de query klaar is moet de pagina ververst worden.;
+    //nadat de query klaar is moet de pagina ververst worden.;
 }
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Nee")) {

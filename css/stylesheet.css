@@ -151,3 +151,6 @@ background-color: #D7E3F5;
 .tracker-selector-table > tbody > tr > td{
     padding: 5px;
 }
+.form-group{
+    width: 50%;
+}

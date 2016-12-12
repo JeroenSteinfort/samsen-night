@@ -172,7 +172,6 @@ require_once('includes\dbh.php');
                 <div class="form-group">
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
                     <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                    <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Profiel foto</label>

@@ -15,7 +15,7 @@ session_start();
 if(!isset($_SESSION['logged_in'])) {
 
     header("Location: ../index.php");
-    exit;
+    exit();
 
 }
 
@@ -74,8 +74,6 @@ include_once($base_path . '/includes/menu.php');
         $results = $userquery->fetchAll();
         // Bovenste gedeeltje maakt link met CSS en de database connectie
 
-        ?>
-    <?php
     // bovenste gedeelte zijn headers voor tabel
 foreach ($results as $row) {
     echo "<tr class=\"cms\"> <td class=\"cms\">" .  $row['userid']  . " " . "</td>";
@@ -94,7 +92,6 @@ foreach ($results as $row) {
 ?>
 </table>
 <?php
-
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";
     ?>
@@ -105,8 +102,6 @@ if(isset($_POST['delete'])) {
     </form>
     <?php
     // form hierboven kiest optie 1 of 2 and stuurt de user id door naaar de inhoud van de forms.
-
-
 }
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
@@ -115,8 +110,9 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
-    header("Location:" . '$basepath' ." /admin/usercms.php");
-    exit;
+    ?>
+    <a href="http://localhost:8080/samsen-night/admin/usercms.php">Refresh de pagina</a> <?php
+    exit();
     //na dat de query klaar is moet de pagina ververst worden.;
 }
 

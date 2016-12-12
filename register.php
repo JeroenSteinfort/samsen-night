@@ -5,6 +5,7 @@ $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 $error = "";
 $error1 = "";
 $error2= "";
+$error3 = "";
 
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
@@ -15,56 +16,60 @@ if (isset($_POST['submit'])) {
     $voornaam = $_POST['voornaam'];
     $tussenvoegsel = $_POST['tussenvoegsel'];
     $achternaam = $_POST['achternaam'];
+    $password2 = $_POST["password2"];
     $password = $_POST["password"];
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
-
-    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-        $error2 = "Wachtwoord voldoet niet aan de eisen.";
-
-        //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
+    if ($password != $password2) {
+        $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $email = $_POST['email'];
-        $foto = $_POST['foto'];
+        if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+            $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
-        $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
-
-        $sql = $dbh->prepare($sql);
-        $sql->bindParam(":username", $username);
-        $sql->bindParam(":email", $email);
-        $sql->execute();
-        $results = $sql->fetch();
-        if ($results > 0) {
-            $error1 = "Username of Email is al ingebruik.";
-            // ^ word er gekeken of de username of email al voorkomt in onze database.
+            //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
         } else {
-            if ($username == "" OR $voornaam == "" OR $achternaam == "" OR $password == "") {
-                $error1 = "Er zijn velden niet ingevuld die verplicht zijn. ";
-            // Als velden niet ingevuld zijn.
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            $email = $_POST['email'];
+            $foto = $_POST['foto'];
 
+            $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
+
+            $sql = $dbh->prepare($sql);
+            $sql->bindParam(":username", $username);
+            $sql->bindParam(":email", $email);
+            $sql->execute();
+            $results = $sql->fetch();
+            if ($results > 0) {
+                $error1 = "Username of Email is al ingebruik.";
+                // ^ word er gekeken of de username of email al voorkomt in onze database.
             } else {
+                if ($username == "" OR $voornaam == "" OR $achternaam == "" OR $password == "") {
+                    $error1 = "Er zijn velden niet ingevuld die verplicht zijn. ";
+                    // Als velden niet ingevuld zijn.
 
-                $sql = "#sql
+                } else {
+
+                    $sql = "#sql
                     INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email, foto)
                     VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
-                $sql = $dbh->prepare($sql);
+                    $sql = $dbh->prepare($sql);
 
-                $sql->bindParam(":username", $username);
-                $sql->bindParam(":voornaam", $voornaam);
-                $sql->bindParam(":tussenvoegsel", $tussenvoegsel);
-                $sql->bindParam(":achternaam", $achternaam);
-                $sql->bindParam(":password", $password);
-                $sql->bindParam(":email", $email);
-                $sql->bindParam(":foto", $foto);
-                $sql->execute();
+                    $sql->bindParam(":username", $username);
+                    $sql->bindParam(":voornaam", $voornaam);
+                    $sql->bindParam(":tussenvoegsel", $tussenvoegsel);
+                    $sql->bindParam(":achternaam", $achternaam);
+                    $sql->bindParam(":password", $password);
+                    $sql->bindParam(":email", $email);
+                    $sql->bindParam(":foto", $foto);
+                    $sql->execute();
 
-                header("Location: index.php");
-                //Wanneer alles goed gegaan is zal hij de usergegevens in de database zetten en u naar de index brengen.
+                    header("Location: index.php");
+                    //Wanneer alles goed gegaan is zal hij de usergegevens in de database zetten en u naar de index brengen.
+
+                }
 
             }
-
         }
     }
 }
@@ -164,7 +169,11 @@ require_once('includes\dbh.php');
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
                 </div>
-
+                <div class="form-group">
+                    <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
+                    <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Profiel foto</label>
                     <input type="file" class="form-control-file" name="foto" id="exampleInputFile" aria-describedby="fileHelp">

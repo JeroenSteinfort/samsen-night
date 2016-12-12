@@ -4,60 +4,70 @@ $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 
 $error = "";
 $error1 = "";
+$error2= "";
 
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
-
+// voegt het wachtwoord en db bestanden.
 if (isset($_POST['submit'])) {
-
+    //kijkt of er een form gepost is
     $username = $_POST['username'];
     $voornaam = $_POST['voornaam'];
     $tussenvoegsel = $_POST['tussenvoegsel'];
     $achternaam = $_POST['achternaam'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $email = $_POST['email'];
-    $foto = $_POST['foto'];
+    $password = $_POST["password"];
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number = preg_match('@[0-9]@', $password);
 
-    $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
+    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+        $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
-    $sql = $dbh->prepare($sql);
-    $sql->bindParam(":username", $username);
-    $sql->bindParam(":email", $email);
-    $sql->execute();
-    $results = $sql->fetch();
-    if ($results > 0) {
-        $error1 = "Username of Email is al ingebruik.";
+        //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
     } else {
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $email = $_POST['email'];
+        $foto = $_POST['foto'];
 
-       if ( $username == "" OR $voornaam == ""  OR $achternaam=="" OR $password == "") {$error1 = "Er zijn velden niet ingevuld die verplicht zijn. ";
+        $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
 
-
+        $sql = $dbh->prepare($sql);
+        $sql->bindParam(":username", $username);
+        $sql->bindParam(":email", $email);
+        $sql->execute();
+        $results = $sql->fetch();
+        if ($results > 0) {
+            $error1 = "Username of Email is al ingebruik.";
+            // ^ word er gekeken of de username of email al voorkomt in onze database.
         } else {
+            if ($username == "" OR $voornaam == "" OR $achternaam == "" OR $password == "") {
+                $error1 = "Er zijn velden niet ingevuld die verplicht zijn. ";
+            // Als velden niet ingevuld zijn.
 
-            $sql = "#sql
+            } else {
+
+                $sql = "#sql
                     INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email, foto)
                     VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
-            $sql = $dbh->prepare($sql);
+                $sql = $dbh->prepare($sql);
 
-            $sql->bindParam(":username",        $username);
-            $sql->bindParam(":voornaam",        $voornaam);
-            $sql->bindParam(":tussenvoegsel",   $tussenvoegsel);
-            $sql->bindParam(":achternaam",      $achternaam);
-            $sql->bindParam(":password",        $password);
-            $sql->bindParam(":email",           $email);
-            $sql->bindParam(":foto",            $foto);
-            $sql->execute();
+                $sql->bindParam(":username", $username);
+                $sql->bindParam(":voornaam", $voornaam);
+                $sql->bindParam(":tussenvoegsel", $tussenvoegsel);
+                $sql->bindParam(":achternaam", $achternaam);
+                $sql->bindParam(":password", $password);
+                $sql->bindParam(":email", $email);
+                $sql->bindParam(":foto", $foto);
+                $sql->execute();
 
-            header("Location: index.php");
+                header("Location: index.php");
+                //Wanneer alles goed gegaan is zal hij de usergegevens in de database zetten en u naar de index brengen.
 
-
+            }
 
         }
-
-   }
+    }
 }
-
-echo password_hash("admin", PASSWORD_BCRYPT);
 
 ?>
 
@@ -120,6 +130,7 @@ require_once('includes\dbh.php');
             </div>
             <?php
                 echo $error1;
+
             ?>
             <h1>Samsen Night</h1>
             <br> <br> <br> <br> <br> <br> <br>
@@ -146,14 +157,14 @@ require_once('includes\dbh.php');
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else</small>
                     <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label for="exampleInputPassword1">Password</label>                 <?php echo $error2; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
                 </div>
+
                 <div class="form-group">
                     <label for="exampleInputFile">Profiel foto</label>
                     <input type="file" class="form-control-file" name="foto" id="exampleInputFile" aria-describedby="fileHelp">

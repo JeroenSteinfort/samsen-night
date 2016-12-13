@@ -3,7 +3,7 @@
 session_start();
 /**
  * Created by PhpStorm.
- * User: Ethan
+ * User: Ethan/Wout
  * Date: 02/12/2016
  * Time: 11:02
  */
@@ -27,19 +27,20 @@ $results = $userquery->fetchAll();
     <table class="cms">
     <th class="cms"> UserID </th>
     <th class="cms"> Username </th>
-        <th class="cms"> Voornaam </th>
+    <th class="cms"> Voornaam </th>
     <th class="cms"> Tussenvoegsel </th>
     <th class="cms"> Achternaam </th>
     <th class="cms"> Email </th>
     <th class="cms"> Foto </th>
     <th class="cms"> Rolid </th>
-        <th class="cms"> Wijzig </th>
-        <th class="cms"> Delete </th>
+    <th class="cms"> Wijzig </th>
+    <th class="cms"> Delete </th>
 
     <?php
     // bovenste gedeelte zijn headers voor tabel
 foreach ($results as $row) {
-    echo "<tr class=\"cms\"> <td class=\"cms\">" .  $row['userid']  . " " . "</td>";
+    echo "<tr class=\"cms\">";
+    echo "<td class=\"cms\">" .  $row['userid']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['username']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['voornaam']  . " " . "</td>";
     echo "<td class=\"cms\">" .  $row['tussenvoegsel']  . " " . "</td>";
@@ -71,8 +72,9 @@ if (isset($_POST['wijzig'])) { ?>
           </form> <?php ;
 }
 
+//Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
 if(isset($_POST['finalize']) && !empty($_POST['vnaam']) && !empty($_POST['anaam']) && !empty($_POST['email'])) {
-    echo ("Weet u zeker dat u deze wijzigingen over" . $_POST['userid'] ." wilt toepassen?");
+    echo ("Weet u zeker dat u deze wijzigingen over ID" . $_POST['userid'] ." wilt toepassen?");
     ?>
     <form method="POST" action="#">
         <input type="submit" name="option" value="Ja" class="cmsbutton">

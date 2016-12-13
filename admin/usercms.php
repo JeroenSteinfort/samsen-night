@@ -145,6 +145,8 @@ if(isset($_POST['option']) && $_POST['option'] == "Ja") {
     exit();
 }
 
+//testan
+
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";
     ?>

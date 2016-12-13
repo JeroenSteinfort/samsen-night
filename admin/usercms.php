@@ -92,6 +92,59 @@ foreach ($results as $row) {
 ?>
 </table>
 <?php
+
+//Bij het aanklikken van de 'wijzig' knop ontstaat de volgende vragenlijst
+if (isset($_POST['wijzig'])) { ?>
+    <form method= 'POST' action= 'admin/usercms.php'>
+        <input type= 'text' name= 'vnaam' placeholder= 'Voornaam'>
+        <input type= 'text' name= 'tv' placeholder= 'Tussenvoegsel'>
+        <input type= 'text' name= 'anaam' placeholder= 'Achternaam'>
+        <input type= 'text' name= 'email' placeholder= 'E-mail'>
+        <input type= 'text' name= 'foto' placeholder= 'Foto'>
+        <input type= 'text' name= 'rolid' placeholder= 'Rol-ID'>
+        <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'>
+        <input type= 'hidden' name= 'userid' value=" <?= $_POST['userid'] ?>">
+    </form> <?php ;
+}
+
+//Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
+if(isset($_POST['finalize']) && !empty($_POST['vnaam']) && !empty($_POST['anaam']) && !empty($_POST['email'])) {
+    echo ("Weet u zeker dat u deze wijzigingen over ID" . $_POST['userid'] ." wilt toepassen?");
+    ?>
+    <form method="POST" action="admin/usercms.php">
+        <input type="submit" name="option" value="Ja" class="cmsbutton">
+        <input type="submit" name="option" value="Nee" class="cmsbutton">
+        <input type="hidden" name="userid" value="<?= $_POST['userid'] ?>">
+        <input type="hidden" name="vnaam" value="<?= $_POST['vnaam'] ?>">
+        <input type="hidden" name="tv" value="<?= $_POST['tv'] ?>">
+        <input type="hidden" name="anaam" value="<?= $_POST['anaam'] ?>">
+        <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+        <input type="hidden" name="foto" value="<?= $_POST['foto'] ?>">
+        <input type="hidden" name="rolid" value="<?= $_POST['rolid'] ?>">
+    </form>
+    <?php
+} else {
+    if (isset($_POST['finalize'])) {
+        echo ("Vul de verplichte gegevens in.");
+    }
+}
+
+if(isset($_POST['option']) && $_POST['option'] == "Ja") {
+    $update = $dbh->prepare("UPDATE user SET voornaam = :vnaam, tussenvoegsel = :tv, achternaam = :anaam, 
+                             email = :email, foto = :foto, rolid = :rolid WHERE userid = :userid");
+    $update->bindParam(':userid', $_POST['userid']);
+    $update->bindValue(':vnaam', $_POST['vnaam']);
+    $update->bindValue(':tv', $_POST['tv']);
+    $update->bindValue(':anaam', $_POST['anaam']);
+    $update->bindValue(':email', $_POST['email']);
+    $update->bindValue(':foto', $_POST['foto']);
+    $update->bindValue(':rolid', $_POST['rolid']);
+    $update->execute();
+    ?>
+    <a href="http://localhost:8080/samsen-night/admin/usercms.php">Refresh de pagina</a> <?php
+    exit();
+}
+
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";
     ?>

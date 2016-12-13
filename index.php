@@ -132,11 +132,11 @@ newVisitor($dbh, $page);
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <a href="http://www.wiggersmastercars.nl" target="_blank"><img src="img\wiggers1.jpg" alt="Chania">
+                                <a href="http://www.wiggersmastercars.nl" target="_blank"><img src="img\wiggers1.png" alt="Chania">
                             </div>
 
                             <div class="item">
-                                <a href="http://www.knobbencaravans.nl" target="_blank"><img src="img\knobben.jpg" alt="Chania">
+                                <a href="http://www.knobbencaravans.nl" target="_blank"><img src="img\knobben.png" alt="Chania">
                             </div>
 
                             <div class="item">
@@ -148,7 +148,7 @@ newVisitor($dbh, $page);
                             </div>
 
                             <div class="item">
-                                <a href="http://www.wierdavermogensbeheer.nl" target="_blank"><img src="img\wierda.jpg" alt="Chania">
+                                <a href="http://www.wierdavermogensbeheer.nl" target="_blank"><img src="img\wierda.png" alt="Chania">
                             </div>
                         </div>
 

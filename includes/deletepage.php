@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -15,6 +16,8 @@ if(!isset($_SESSION['logged_in'])) {
 $error = "";
 
 if(isset($_GET['p'])){
+    ?>
+
 
     $id = $_GET['p'];
 

@@ -67,6 +67,7 @@ if (isset($_POST['wijzig'])) { ?>
           <input type= 'text' name= 'anaam' placeholder= 'Achternaam'>
           <input type= 'text' name= 'email' placeholder= 'E-mail'>
           <input type= 'text' name= 'foto' placeholder= 'Foto'>
+          <input type= 'text' name= 'rolid' placeholder= 'Rol-ID'>
           <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'>
           <input type= 'hidden' name= 'userid' value=" <?= $_POST['userid'] ?>">
           </form> <?php ;
@@ -85,6 +86,7 @@ if(isset($_POST['finalize']) && !empty($_POST['vnaam']) && !empty($_POST['anaam'
         <input type="hidden" name="anaam" value="<?= $_POST['anaam'] ?>">
         <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
         <input type="hidden" name="foto" value="<?= $_POST['foto'] ?>">
+        <input type="hidden" name="rolid" value="<?= $_POST['rolid'] ?>">
     </form>
     <?php
 } else {
@@ -95,13 +97,14 @@ if(isset($_POST['finalize']) && !empty($_POST['vnaam']) && !empty($_POST['anaam'
 
 if(isset($_POST['option']) && $_POST['option'] == "Ja") {
     $update = $dbh->prepare("UPDATE user SET voornaam = :vnaam, tussenvoegsel = :tv, achternaam = :anaam, 
-                             email = :email, foto = :foto WHERE userid = :userid");
+                             email = :email, foto = :foto, rolid = :rolid WHERE userid = :userid");
     $update->bindParam(':userid', $_POST['userid']);
     $update->bindValue(':vnaam', $_POST['vnaam']);
     $update->bindValue(':tv', $_POST['tv']);
     $update->bindValue(':anaam', $_POST['anaam']);
     $update->bindValue(':email', $_POST['email']);
     $update->bindValue(':foto', $_POST['foto']);
+    $update->bindValue(':rolid', $_POST['rolid']);
     $update->execute();
     header("Location: users.php");
     exit;

@@ -154,7 +154,7 @@ require_once('includes\dbh.php');
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
-                    <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                    <input type="password"  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Profiel foto</label>

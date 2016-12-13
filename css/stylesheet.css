@@ -30,7 +30,7 @@ footer{
     margin-top: 50px;
 }
 .img-logo{
-
+margin-right: auto !important;
 }
 .img-wrapper{
     float: right;
@@ -103,7 +103,7 @@ td.cms{
     border: 2px solid black !important;
 }
 .carousel {
-    width: 75% !important;
+    width: 100% !important;
 
     margin: 0 auto !important;
 }
@@ -153,4 +153,13 @@ background-color: #D7E3F5;
 }
 .form-group{
     width: 50%;
+}
+.carousel img {
+    min-width: 100%;
+}
+.carousel-control.left, .carousel-control.right {
+    opacity: 100% !important;
+}
+.carousel-control.left:hover, .carousel-control.right:hover {
+    opacity: 100% !important;
 }

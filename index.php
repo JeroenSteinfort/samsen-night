@@ -43,11 +43,17 @@ if(isset($_POST['login'])) {
 
     $query = "
         #sql
-        SELECT userid, wachtwoord, rolid
-        FROM   user
-        WHERE  username = :username
-        LIMIT 1
+            SELECT rol.rolid as rolid, u.userid as userid, u.wachtwoord as wachtwoord
+            FROM heeft_recht AS hr 
+            JOIN rol AS rol 
+            ON  hr.rolid = rol.rolid 
+            JOIN user AS u 
+            ON u.rolid = rol.rolid
+            WHERE  username = :username
+            LIMIT 1
+
         ";
+
 
     $query = $dbh->prepare($query);
     $query->bindParam(":username", $username);
@@ -63,7 +69,7 @@ if(isset($_POST['login'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
-            $_SESSION['rolid']     = $result['rolid'];
+            $_SESSION['rolid']       = $result['rolid'];
             header('Location: admin/cpanel.php');
             exit;
 

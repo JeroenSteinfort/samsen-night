@@ -75,19 +75,25 @@ $menuresults = $sql->fetchAll();
                         <?php
                             if(isset($_SESSION['logged_in'])) {
 
+                                $sql = '
+                                #sql
+                                SELECT r.recht as recht
+                                FROM recht as r
+                                JOIN rol
+                                ON rol.rolid = r.rechtid
 
-                                //rolid 0 = gebruiker,
-                                //rolid 1 = superadmin,
-                                //rolid 2 = site beheerder,
-                                //rolid 3 = contentbeheerder
+
+                                '
+//                                $_SESSION['rol']       = $result['rol'];
+//                                $_SESSION['recht']     = $result['recht'];
 
 
                         ?>
                             <?php if(isset($_SESSION['rolid'])){ ?>
-                            <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2 || $_SESSION['rolid'] == 3){ ?> <li><a href="admin/cpanel.php">Control Panel</a></li> <?php } ?>
-                            <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3){ ?><li><a href="admin/pages.php">Content beheren</a></li> <?php } ?>
-                            <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3){ ?><li><a href="admin/partners.php">Partners beheren</a></li> <?php } ?>
-                            <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2){ ?><li><a href="admin/usercms.php">Users beheren</a></li> <?php } ?>
+                            <?php  ?> <li><a href="admin/cpanel.php">Control Panel</a></li> <?php  ?>
+                            <?php  ?><li><a href="admin/pages.php">Content beheren</a></li> <?php  ?>
+                            <?php  ?><li><a href="admin/partners.php">Partners beheren</a></li> <?php  ?>
+                            <?php  ?><li><a href="admin/usercms.php">Users beheren</a></li> <?php  ?>
                             <li role="separator" class="divider"></li>
                             <li><a href="includes/loguit.php">Log uit</a></li>
                             <?php } ?>

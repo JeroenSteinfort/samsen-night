@@ -87,20 +87,30 @@ $menuresults = $sql->fetchAll();
                                 $sql = $dbh->prepare($sql);
                                 $sql->bindParam(':rolid', $_SESSION['rolid']);
                                 $sql->execute();
-                                $result = $sql->fetch();
+                                $result = $sql->fetchAll();
                                 print_r($result);
 
 
+                                print(" <li><a href=\"admin/cpanel.php\">Control Panel</a></li> ");
+                                foreach($result as $row){
+
+                                    if($row['recht'] == "contentbeheren"){
+                                        print("<li><a href=\"admin/pages.php\">Content beheren</a></li>");
+                                    }
+                                    if($row['recht'] == "partnersbeheren"){
+                                        print("<li><a href=\"admin/partners.php\">Partners beheren</a></li>");
+                                    }
+                                    if($row['recht'] == "usersbeheren"){
+                                        print("<li><a href=\"admin/usercms.php\">Users beheren</a></li>");
+                                    }
+                                }
+
                         ?>
-                            <?php if(isset($_SESSION['rolid'])){ ?>
-                            <?php  ?> <li><a href="admin/cpanel.php">Control Panel</a></li> <?php  ?>
-                            <?php  ?><li><a href="admin/pages.php">Content beheren</a></li> <?php  ?>
-                            <?php  ?><li><a href="admin/partners.php">Partners beheren</a></li> <?php  ?>
-                            <?php  ?><li><a href="admin/usercms.php">Users beheren</a></li> <?php  ?>
                             <li role="separator" class="divider"></li>
                             <li><a href="includes/loguit.php">Log uit</a></li>
-                            <?php } ?>
-                        <?php } else { ?>
+                            <?php }
+
+                        else { ?>
                         <form action="index.php" method="POST">
                             <input id="name" name="username" placeholder="username" type="text">
                             <input id="password" name="password" placeholder="**********" type="password">

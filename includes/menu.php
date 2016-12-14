@@ -75,17 +75,20 @@ $menuresults = $sql->fetchAll();
                         <?php
                             if(isset($_SESSION['logged_in'])) {
 
-                                $sql = '
-                                #sql
-                                SELECT r.recht as recht
-                                FROM recht as r
-                                JOIN rol
-                                ON rol.rolid = r.rechtid
-
-
-                                '
-//                                $_SESSION['rol']       = $result['rol'];
-//                                $_SESSION['recht']     = $result['recht'];
+                                $sql = ' #sql
+                                    SELECT r.recht as recht
+                                    FROM recht as r
+                                    JOIN heeft_recht as hr
+                                    ON hr.rechten = r.rechtid
+                                    JOIN rol
+                                    ON rol.rolid = hr.rolid
+                                    WHERE roldid = :rolid 
+                                ';
+                                $sql = $dbh->prepare($sql);
+                                bindParam(':rolid', $_SESSION['rolid']);
+                                $sql->execute();
+                                $result = $sql->fetch();
+                                print_r($result);
 
 
                         ?>

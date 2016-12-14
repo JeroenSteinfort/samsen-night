@@ -82,10 +82,10 @@ $menuresults = $sql->fetchAll();
                                     ON hr.rechten = r.rechtid
                                     JOIN rol
                                     ON rol.rolid = hr.rolid
-                                    WHERE roldid = :rolid 
+                                    WHERE hr.rolid = :rolid 
                                 ';
                                 $sql = $dbh->prepare($sql);
-                                bindParam(':rolid', $_SESSION['rolid']);
+                                $sql->bindParam(':rolid', $_SESSION['rolid']);
                                 $sql->execute();
                                 $result = $sql->fetch();
                                 print_r($result);

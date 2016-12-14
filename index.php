@@ -69,7 +69,7 @@ if(isset($_POST['login'])) {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
-            $_SESSION['rolid']       = $result['rolid'];
+            $_SESSION['rolid']     = $result['rolid'];
             header('Location: admin/cpanel.php');
             exit;
 

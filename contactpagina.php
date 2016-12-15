@@ -99,7 +99,8 @@ function required($input) {
 
                         
                     </form>
-                    <?php } 
+                    <?php }
+                    //als je op verzenden hebt gedrukt, en al het verplichte is ingevuld, dan gaat hij verder
                     elseif(isset($_POST['verzenden'])&& !empty($_POST['voornaam']) && !empty($_POST['achternaam']) && !empty($_POST['email']) && !empty($_POST['onderwerp']) && !empty($_POST['bericht'])){
                         print("<h3>" . "Bericht is verstuurd. U ontvangt zo spoedig mogelijk een bericht." . "</h3>");
                         
@@ -123,6 +124,11 @@ function required($input) {
                         $van = "From: noreply@samsennight.com";
                         $ingevuld_door = $_POST["email"];
                         $antwoord = "Uw mail is ontvangen. U ontvangt zo spoedig mogelijk een reactie.";
+
+                        //mail sturen!
+
+
+                        //bij elk niet-verplicht punt kijken of het wel of niet is ingevuld.
                         if(!empty($_POST['tussenvoegsel']) && !empty($_POST['bedrijfsnaam'])){
                             $msg = $_POST['voornaam'] . " " . $_POST['tussenvoegsel'] . " " . $_POST['achternaam'] . "<br>"
                                 . $_POST['bedrijfsnaam'] . "<br>" .

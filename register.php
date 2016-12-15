@@ -122,6 +122,53 @@ require_once('includes\dbh.php');
             ?>
             <h1>Samsen Night</h1>
             <br> <br> <br> <br> <br> <br> <br>
+            <?php if(isset($_POST["submit"])
+            &&
+            (empty($_POST['gebruikersnaam']) ||
+                empty($_POST['voornaam']) || empty($_POST['achternaam']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password2']))) {?>
+            <form method="POST" action="register.php">
+                <div class="form-group">
+                    <label for="exampleInputgebruikersnaam">Gebruikersnaam</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail1" value= "<?php print($_POST["username"]) ?>" aria-describedby="emailHelp" placeholder="Vul hier je gebruikersnaam">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputvoornaam">Voornaam</label>
+                    <input type="text" name="voornaam" class="form-control" id="exampleInputEmail1" value= "<?php print($_POST["voornaam"]) ?>" aria-describedby="emailHelp" placeholder="Vul hier je voornaam in">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputtussenvoegsel   ">Tussenvoegsel</label>
+                    <input type="text" name="tussenvoegsel" class="form-control" id="exampleInputEmail1" value= "<?php print($_POST["tussenvoegsel"]) ?>" aria-describedby="emailHelp" placeholder="Vul hier eventueel je tussenvoegsel in">
+                </div>
+                <div class="form-group">
+                    <label for="exampleachternaam">Achternaam</label>
+                    <input type="text" name="achternaam" class="form-control" id="exampleInputEmail1" value= "<?php print($_POST["achternaam"]) ?>" aria-describedby="emailHelp" placeholder="Vul hier je achternaam in">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" value= "<?php print($_POST["email"]) ?>" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>                 <?php echo $error2; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
+                    <input type="password" name="password" class="form-control" value= "<?php print($_POST["password"]) ?>" id="exampleInputPassword1" placeholder="Password">
+                    <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
+                    <input type="password"  name="password2" class="form-control" value= "<?php print($_POST["password2"]) ?>" id="exampleInputPassword2" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Profiel foto</label>
+                    <input type="file" class="form-control-file" name="foto" value= "<?php print($_POST["foto"]) ?>" id="exampleInputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">.PNG 50 x 50 pixels</small>
+                </div>
+                </fieldset>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <?php }elseif(!isset($_POST['verzenden'])){ ?>
             <form method="POST" action="register.php">
                 <div class="form-group">
                     <label for="exampleInputgebruikersnaam">Gebruikersnaam</label>
@@ -164,6 +211,7 @@ require_once('includes\dbh.php');
                 </fieldset>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
+            <?php } ?>
             </p>
 
         </div>

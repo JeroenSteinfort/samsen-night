@@ -75,6 +75,8 @@ $menuresults = $sql->fetchAll();
                         <?php
                             if(isset($_SESSION['logged_in'])) {
 
+
+                                // hier haal ik alle rechten die de gebruiker heeft op
                                 $sql = ' #sql
                                     SELECT r.recht as recht
                                     FROM recht as r
@@ -88,10 +90,13 @@ $menuresults = $sql->fetchAll();
                                 $sql->bindParam(':rolid', $_SESSION['rolid']);
                                 $sql->execute();
                                 $result = $sql->fetchAll();
-                                print_r($result);
+
 
 
                                 print(" <li><a href=\"admin/cpanel.php\">Control Panel</a></li> ");
+
+
+                                //alle rechten die de gebruiker worden op deze manier laten zien. controlpanel word bij iedereen laten zien
                                 foreach($result as $row){
 
                                     if($row['recht'] == "contentbeheren"){
@@ -102,6 +107,9 @@ $menuresults = $sql->fetchAll();
                                     }
                                     if($row['recht'] == "usersbeheren"){
                                         print("<li><a href=\"admin/usercms.php\">Users beheren</a></li>");
+                                    }
+                                    if($row['recht'] == "gebruiker"){
+                                        print("hier komt de optie om je eigen account aan te passen");
                                     }
                                 }
 

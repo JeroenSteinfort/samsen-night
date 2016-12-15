@@ -52,17 +52,50 @@ include_once($base_path . '/includes/menu.php');
             <p>Dit is het CMS van Samsen Night. Kies een optie:</p>
 
             <ul>
-                <?php if(isset($_SESSION['rolid'])){
-                    //rolid 0 = gebruiker,
-                    //rolid 1 = superadmin,
-                    //rolid 2 = site beheerder,
-                    //rolid 3 = contentbeheerder
+                <?php
+
+                // hier haal ik alle rechten die de gebruiker heeft op
+                    $sql = ' #sql
+                                    SELECT r.recht as recht
+                                    FROM recht as r
+                                    JOIN heeft_recht as hr
+                                    ON hr.rechten = r.rechtid
+                                    JOIN rol
+                                    ON rol.rolid = hr.rolid
+                                    WHERE hr.rolid = :rolid 
+                                ';
+                    $sql = $dbh->prepare($sql);
+                    $sql->bindParam(':rolid', $_SESSION['rolid']);
+                    $sql->execute();
+                    $result = $sql->fetchAll();
+
+                    //alle rechten die de gebruiker worden op deze manier laten zien.
+
+                    foreach($result as $row) {
+
+                        if ($row['recht'] == "contentbeheren") {
+                            print("<li><a href=\"admin/pages.php\">Content beheren</a></li>");
+                        }
+                        if ($row['recht'] == "partnersbeheren") {
+                            print("<li><a href=\"admin/partners.php\">Partners beheren</a></li>");
+                        }
+                        if ($row['recht'] == "usersbeheren") {
+                            print("<li><a href=\"admin/usercms.php\">Users beheren</a></li>");
+                        }
+                        if($row['recht'] == "tracksysteem"){
+                            print("<li><a href=\"admin/tracker.php\">Website tracker resultaten</a></li>");
+                        }
+                        if($row['recht'] == "gebruiker"){
+                            print("hier komt de optie om je eigen account aan te passen");
+                        }
+                    }
                     ?>
-                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><li><a href="admin/pages.php">Content beheren</a></li> <?php } ?>
-                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><li><a href="admin/partners.php">Partners beheren</a></li> <?php } ?>
-                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><li><a href="admin/usercms.php">Users beheren</a></li> <?php } ?>
-                <?php if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><li><a href="admin/tracker.php">Website tracker resultaten</a></li> <?php } ?>
-                <?php } ?>
+
+<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><!--<li><a href="admin/pages.php">Content beheren</a></li> --><?php //} ?>
+<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><!--<li><a href="admin/partners.php">Partners beheren</a></li> --><?php //} ?>
+<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><!--<li><a href="admin/usercms.php">Users beheren</a></li> --><?php //} ?>
+<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><!--<li><a href="admin/tracker.php">Website tracker resultaten</a></li> --><?php //} ?>
+                <?php  ?>
             </ul>
 
         </div>

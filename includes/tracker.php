@@ -73,7 +73,7 @@ function getAllVisitorsByDate($dbh, $begindate, $enddate){
     FROM      bezoeker AS b
     LEFT JOIN user     AS u
     ON        u.userid = b.userid
-    WHERE     DATE(tijddatum) BETWEEN :begindate AND :enddate
+    WHERE     DATE_FORMAT(tijddatum, "%d-%c-%Y") BETWEEN :begindate AND :enddate
     GROUP BY  DATE(tijddatum), pagina
     ORDER BY  tijddatum DESC
     ';

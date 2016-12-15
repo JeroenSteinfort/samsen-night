@@ -34,6 +34,8 @@ $error = "";
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
 
@@ -61,7 +63,7 @@ include_once($base_path . '/includes/menu.php');
 
                             <td><label for="begindate">Kies een begin datum: </label></td>
 
-                            <td><input value="<?php if(isset($_POST['begindate'])){ echo $_POST['begindate']; } else { echo '00-00-0000'; } ?>" type="date" name="begindate"><br /></td>
+                            <td><input class="date-picker" type="text" value="<?php if(isset($_POST['begindate'])){ echo $_POST['begindate']; } else { echo '00-00-0000'; }   ?>" name="begindate"><br /></td>
 
                         </tr>
 
@@ -69,7 +71,7 @@ include_once($base_path . '/includes/menu.php');
 
                             <td><label for="enddate">Kies een eind datum: </label></td>
 
-                            <td><input value="<?php if(isset($_POST['begindate'])){ echo $_POST['enddate']; } else { echo '00-00-0000'; }   ?>" type="date" name="enddate"><br /></td>
+                            <td><input class="date-picker" type="text" value="<?php if(isset($_POST['enddate'])){ echo $_POST['enddate']; } else { echo '00-00-0000'; }   ?>" name="enddate"><br /></td>
 
                         </tr>
 
@@ -176,11 +178,25 @@ include_once($base_path . '/includes/footer.php');
 
 ?>
 
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+
+    $( document ).ready( function () {
+
+        $( ".date-picker" ).datepicker({
+
+            dateFormat: 'dd-mm-yy'
+
+        });
+
+    } );
+
+</script>
 
 </body>
 </html>

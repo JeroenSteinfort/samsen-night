@@ -42,18 +42,14 @@ if(isset($_POST['login'])) {
     $password = $_POST['password'];
 
     $query = "
-        #sql
-            SELECT rol.rolid as rolid, u.userid as userid, u.wachtwoord as wachtwoord
-            FROM heeft_recht AS hr 
-            JOIN rol AS rol 
-            ON  hr.rolid = rol.rolid 
-            JOIN user AS u 
-            ON u.rolid = rol.rolid
-            WHERE  username = :username
-            LIMIT 1
-
-        ";
-
+    #sql
+        SELECT rol.rolid AS rolid, u.userid AS userid, u.wachtwoord AS wachtwoord
+        FROM heeft_recht AS hr
+        RIGHT JOIN rol AS rol ON hr.rolid = rol.rolid
+        JOIN user AS u ON u.rolid = rol.rolid
+        WHERE username =  :username
+        LIMIT 1
+    ";
 
     $query = $dbh->prepare($query);
     $query->bindParam(":username", $username);
@@ -76,14 +72,14 @@ if(isset($_POST['login'])) {
         } else {
 
             //Password is incorrect
-            $error = "Username or password is incorrect";
+            $error = "Username or password is incorrect pwd";
 
         }
 
     } else {
 
         //User is not found
-        $error = "Username or password is incorrect";
+        $error = "Username or password is incorrect usn";
 
     }
 

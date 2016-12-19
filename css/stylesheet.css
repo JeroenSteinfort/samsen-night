@@ -163,3 +163,6 @@ background-color: #D7E3F5;
 .carousel-control.left:hover, .carousel-control.right:hover {
     opacity: 100% !important;
 }
+.partnertable {
+    border: black 2px solid !important;
+}

@@ -1,6 +1,6 @@
 <html>
 <head>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 </head>
 
 <body>
@@ -25,9 +25,9 @@ $sql->execute();
 $partners = $sql->fetchAll();
 
 foreach ($partners as $partner){
-    echo "<tr class= partner> <td class=partner>" .  $partner['partnernaam']  . " " . "</td>";
+    echo "<tr class= partnertable> <td class=partner>" .  $partner['partnernaam']  . " " . "</td>";
     echo "<td class= partner>" .  $partner['beschrijving']  . " " . "</td>";
-    echo "<td class= partner>" .  $partner['link']  . " " . "</td>";
+    echo "<td class= partner>" .  $partner['link']  . " " . "</td><br><br>";
 }
 
 

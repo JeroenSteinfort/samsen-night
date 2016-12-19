@@ -7,7 +7,7 @@ require_once($base_path . '\includes\dbh.php');
 
 session_start();
 
-if(!isset($_SESSION['logged_in'])) {
+if(!isset($_SESSION['logged_in']) || $_SESSION['rolid'] == 0 || $_SESSION['rolid'] == 3) {
 
     header("Location: ../index.php");
     exit;

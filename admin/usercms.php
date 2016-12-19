@@ -12,7 +12,7 @@ require_once($base_path . '\includes\password.php');
 require_once($base_path . '\includes\dbh.php');
 session_start();
 // gaat door met sessie zodat hij weet of je ingelogd bent. anders terug naar home pagina
-if(!isset($_SESSION['logged_in'])) {
+if(!isset($_SESSION['logged_in']) || $_SESSION['rolid'] == 0 || $_SESSION['rolid'] == 2) {
 
     header("Location: ../index.php");
     exit();

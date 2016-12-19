@@ -21,7 +21,8 @@ function required($input) {
 
 
 ?>
-
+<!--                            wanneer er op verzennden is gedrukt, en een van de verplichte velden is nog niet ingevuld, dan springt hij naar deze pagina, en laat hij de verplichte velden, wat niet is ingevuld, als rood zien
+                                maar het gene wat wel is ingevuld, neemt hij wel mee van het vorige formulier. -->
                         <?php if(isset($_POST["verzenden"]) 
                                 && 
                                 (empty($_POST['voornaam']) || 
@@ -62,6 +63,10 @@ function required($input) {
                         <br>
                         <h3 style="color: red; text-align: center;">rode velden zijn verplicht</h3>
                     </form>
+
+
+
+<!--                            als er nog niet op verzenden is gedrukt gaar hij hier heen-->
                     <?php }elseif(!isset($_POST['verzenden'])){ ?>
 
                     <form method="post" action="index.php?p=Contact" id="contactpagina">
@@ -161,6 +166,8 @@ function required($input) {
                             mail($ingevuld_door, $antwoord, $antwoord, $van);
                         }
                     }
+
+                    //er worden twee mails gestuurd. Een mail naar samsen night, en een naar de gene wie het contactformulier heeft ingevuld.
 
                     
 ?>

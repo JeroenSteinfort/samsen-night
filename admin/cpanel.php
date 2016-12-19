@@ -91,11 +91,6 @@ include_once($base_path . '/includes/menu.php');
                     }
                     ?>
 
-<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><!--<li><a href="admin/pages.php">Content beheren</a></li> --><?php //} ?>
-<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 3) { ?><!--<li><a href="admin/partners.php">Partners beheren</a></li> --><?php //} ?>
-<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><!--<li><a href="admin/usercms.php">Users beheren</a></li> --><?php //} ?>
-<!--                --><?php //if($_SESSION['rolid'] == 1 || $_SESSION['rolid'] == 2) { ?><!--<li><a href="admin/tracker.php">Website tracker resultaten</a></li> --><?php //} ?>
-                <?php  ?>
             </ul>
 
         </div>

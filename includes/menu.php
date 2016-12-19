@@ -92,11 +92,9 @@ $menuresults = $sql->fetchAll();
                                 $result = $sql->fetchAll();
 
 
-
+                                //alle rechten die de gebruiker worden op deze manier laten zien. controlpanel word bij iedereen laten zien
                                 print(" <li><a href=\"admin/cpanel.php\">Control Panel</a></li> ");
 
-
-                                //alle rechten die de gebruiker worden op deze manier laten zien. controlpanel word bij iedereen laten zien
                                 foreach($result as $row){
 
                                     if($row['recht'] == "contentbeheren"){

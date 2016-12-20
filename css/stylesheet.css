@@ -193,4 +193,8 @@ background-color: #D7E3F5;
 }
 .footer {
     text-align:center !important;
+    vertical-align: middle !important;
+}
+.footimg{
+    padding: 5px;
 }

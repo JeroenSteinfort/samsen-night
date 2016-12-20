@@ -31,6 +31,7 @@ footer{
 }
 .img-logo{
 margin-right: auto !important;
+    padding: 30px;
 }
 .img-wrapper{
     float: right;
@@ -103,12 +104,12 @@ td.cms{
     border: 2px solid black !important;
 }
 .carousel {
-    width: 100% !important;
-
-    margin: 0 auto !important;
-}
-.carousel {
     margin-bottom: 30px !important;
+    display:block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+
 }
 .carousel-fade .carousel-inner .item {
     opacity: 0;

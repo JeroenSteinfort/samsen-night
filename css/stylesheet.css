@@ -190,3 +190,7 @@ background-color: #D7E3F5;
 .partner-wrapper {
     padding: 10px;
 }
+.footer {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

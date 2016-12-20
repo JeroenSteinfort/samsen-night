@@ -191,6 +191,5 @@ background-color: #D7E3F5;
     padding: 10px;
 }
 .footer {
-    margin-left: auto !important;
-    margin-right: auto !important;
+    text-align:center !important;
 }

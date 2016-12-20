@@ -2,7 +2,7 @@
 
 $sql = '
 #sql
-SELECT partnernaam, link, beschrijving, eigenaar, foto
+SELECT partnernaam, link, beschrijving, foto
 FROM   partners
 ';
 

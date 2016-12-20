@@ -8,7 +8,51 @@ require_once($base_path . '\includes\tracker.php');
 date_default_timezone_set("Europe/Paris");
 session_start();
 
-if(!isset($_SESSION['logged_in']) || $_SESSION['rolid'] == 0 || $_SESSION['rolid'] == 2) {
+
+
+$sql = ' #sql
+                                    SELECT r.recht as recht
+                                    FROM recht as r
+                                    JOIN heeft_recht as hr
+                                    ON hr.rechten = r.rechtid
+                                    JOIN rol
+                                    ON rol.rolid = hr.rolid
+                                    WHERE hr.rolid = :rolid 
+                                ';
+$sql = $dbh->prepare($sql);
+$sql->bindParam(':rolid', $_SESSION['rolid']);
+$sql->execute();
+$result = $sql->fetchAll();
+
+//alle rechten die de gebruiker worden op deze manier laten zien.
+$contentbeheren=false;
+$partnersbeheren=false;
+$usersbeheren=false;
+$tracksysteem=false;
+$gebruiker=false;
+foreach($result as $row) {
+
+    if ($row['recht'] == "contentbeheren") {
+        $contentbeheren=true;
+    }
+    if ($row['recht'] == "partnersbeheren") {
+        $partnersbeheren=true;
+    }
+    if ($row['recht'] == "usersbeheren") {
+        $usersbeheren=true;
+    }
+    if($row['recht'] == "tracksysteem"){
+        $tracksysteem=true;
+    }
+    if($row['recht'] == "gebruiker"){
+        $gebruiker=true;
+    }
+}
+
+
+
+
+if(!isset($_SESSION['logged_in']) || $tracksysteem==false) {
 
     header("Location: ../index.php");
     exit;

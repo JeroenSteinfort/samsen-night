@@ -12,7 +12,52 @@ require_once($base_path . '\includes\password.php');
 require_once($base_path . '\includes\dbh.php');
 session_start();
 // gaat door met sessie zodat hij weet of je ingelogd bent. anders terug naar home pagina
-if(!isset($_SESSION['logged_in']) || $_SESSION['rolid'] == 0 || $_SESSION['rolid'] == 2) {
+
+
+
+
+// hier haal ik alle rechten die de gebruiker heeft op
+$sql = ' #sql
+                                    SELECT r.recht as recht
+                                    FROM recht as r
+                                    JOIN heeft_recht as hr
+                                    ON hr.rechten = r.rechtid
+                                    JOIN rol
+                                    ON rol.rolid = hr.rolid
+                                    WHERE hr.rolid = :rolid 
+                                ';
+$sql = $dbh->prepare($sql);
+$sql->bindParam(':rolid', $_SESSION['rolid']);
+$sql->execute();
+$result = $sql->fetchAll();
+
+//alle rechten die de gebruiker worden op deze manier laten zien.
+$contentbeheren=false;
+$partnersbeheren=false;
+$usersbeheren=false;
+$tracksysteem=false;
+$gebruiker=false;
+foreach($result as $row) {
+
+    if ($row['recht'] == "contentbeheren") {
+        $contentbeheren=true;
+    }
+    if ($row['recht'] == "partnersbeheren") {
+        $partnersbeheren=true;
+    }
+    if ($row['recht'] == "usersbeheren") {
+        $usersbeheren=true;
+    }
+    if($row['recht'] == "tracksysteem"){
+        $tracksysteem=true;
+    }
+    if($row['recht'] == "gebruiker"){
+        $gebruiker=true;
+    }
+}
+
+
+if(!isset($_SESSION['logged_in']) || $usersbeheren == false) {
 
     header("Location: ../index.php");
     exit();
@@ -178,5 +223,6 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Nee")) {
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 

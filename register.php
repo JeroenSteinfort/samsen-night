@@ -32,8 +32,6 @@ if (isset($_POST['submit'])) {
         } else {
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $email = $_POST['email'];
-            $foto = $_POST['foto'];
-
             $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
 
             $sql = $dbh->prepare($sql);
@@ -52,8 +50,8 @@ if (isset($_POST['submit'])) {
                 } else {
 
                     $sql = "#sql
-                    INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email, foto)
-                    VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email, :foto)";
+                    INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email,)
+                    VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email,)";
                     $sql = $dbh->prepare($sql);
 
                     $sql->bindParam(":username", $username);
@@ -62,7 +60,7 @@ if (isset($_POST['submit'])) {
                     $sql->bindParam(":achternaam", $achternaam);
                     $sql->bindParam(":password", $password);
                     $sql->bindParam(":email", $email);
-                    $sql->bindParam(":foto", $foto);
+
                     $sql->execute();
 
                     header("Location: index.php");
@@ -202,11 +200,6 @@ require_once('includes\dbh.php');
                 <div class="form-group">
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
                     <input type="password"  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">Profiel foto</label>
-                    <input type="file" class="form-control-file" name="foto" id="exampleInputFile" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">.PNG 50 x 50 pixels</small>
                 </div>
                 </fieldset>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

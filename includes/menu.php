@@ -124,6 +124,7 @@ $menuresults = $sql->fetchAll();
                         </form>
                             <li role="separator" class="divider"></li>
                             <li><a class="dropdownlink" href="register.php">Registreren</a></li>
+                            <li><a class="dropdownlink" href="forgetpass.php">Wachtwoord vergeten?</a></li>
                             <?php
                         }
                         ?>

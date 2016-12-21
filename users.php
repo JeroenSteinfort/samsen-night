@@ -96,8 +96,9 @@ if(isset($_POST['finalize']) && !empty($_POST['vnaam']) && !empty($_POST['anaam'
 }
 
 if(isset($_POST['option']) && $_POST['option'] == "Ja") {
-    $update = $dbh->prepare("UPDATE user SET voornaam = :vnaam, tussenvoegsel = :tv, achternaam = :anaam, 
-                             email = :email, foto = :foto, rolid = :rolid WHERE userid = :userid");
+    $update = $dbh->prepare("UPDATE user 
+                             SET voornaam = :vnaam, tussenvoegsel = :tv, achternaam = :anaam, email = :email, foto = :foto, rolid = :rolid 
+                             WHERE userid = :userid");
     $update->bindParam(':userid', $_POST['userid']);
     $update->bindValue(':vnaam', $_POST['vnaam']);
     $update->bindValue(':tv', $_POST['tv']);

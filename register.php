@@ -96,8 +96,8 @@ if (isset($_POST['submit'])) {
 <body>
 
 <?php
-
 include_once('includes\menu.php');
+
 ?>
 
 <?php
@@ -193,12 +193,12 @@ require_once('includes\dbh.php');
                     <small id="emailHelp" class="form-text text-muted">Verplicht veld</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>                 <?php echo $error2; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
+                    <label for="exampleInputPassword1">Password</label>    <?php echo $error2; //als er een wachtwoord fout is opgetreden wordt hij hier getoont.?>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     <small id="emailHelp" class="form-text text-muted">Verplicht veld, wachtwoord moet voldoen aan minimaal 8 tekens, een hoofdletter en kleine letters.</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
+                    <label for="exampleInputPassword2"> Password opnieuw typen.</label>    <?php echo $error3; //als er een wachtwoord fout is opgetreden wordt hij hier getoont.?>
                     <input type="password"  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
                 </div>
                 </fieldset>

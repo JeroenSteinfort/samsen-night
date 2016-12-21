@@ -14,6 +14,16 @@ $error2 = "";
 $results = 0;
 $hoofd = "Geef hieronder uw geregistreerd e-mail adres op. U krijgt op dit adres een link toegestuurd om uw nieuwe wachtwoord toe te passen.";
 
+function random_str($length) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
 
@@ -24,21 +34,13 @@ if (isset($_POST['verstuur'])) {
     $sql->bindParam(":email", $email);
     $sql->execute();
     $results = $sql->fetch();
-    if ($results > 0) {
-        $error = "U heeft geen geregistreerd e-mail adres opgegeven.";
+    if ($results == 0) {
+        $error2 = "Als dit adres in het systeem is gevonden is er een e-mail naartoe verstuurd. Volg in dit geval de instructies.";
     } else {
-        function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-        {
-            $str = '';
-            $max = mb_strlen($keyspace, '8bit') - 1;
-            for ($i = 0; $i < $length; ++$i) {
-                $str .= $keyspace[random_int(0, $max)];
-            }
-            return $str;
-        }
         $passkey = random_str(12);
+        $error2 = "Er is een mail gestuurd naar het opgegeven e-mail adres. Volg de instructies in deze mail.";
 
-        $sql = "INSERT INTO user (passkey) VALUE :passkey WHERE email = :email;";
+        $sql = "UPDATE user SET passkey = :passkey WHERE email = :email;";
         $sql = $dbh->prepare($sql);
         $sql->bindParam(":email", $email);
         $sql->bindParam(":passkey", $passkey);
@@ -53,6 +55,7 @@ if (isset($_POST['verstuur'])) {
          mail($email, "Wijziging wachtwoord Samsen Night", $message);
     }
 }
+
 if (isset($_POST['finalize'])) {
     $pass1 = $_POST['pass1'];
     $pass2 = $_POST['pass2'];
@@ -60,20 +63,19 @@ if (isset($_POST['finalize'])) {
     $lowercase = preg_match('@[a-z]@', $pass1);
     if ($pass1 != $pass2) {
         $error2 = ("Wachtwoorden moeten gelijk aan elkaar zijn.");
-    } else {
-        if (!$uppercase || !$lowercase || str_len($pass1 < 8)) {
+    } elseif (!$uppercase || !$lowercase || strlen($pass1) < 8) {
             $error1 = ("Het wachtwoord moet voldoen aan de voorwaarden.");
         } else {
             $password = password_hash($pass1, PASSWORD_BCRYPT);
-            $update = $dbh->prepare("UPDATE user SET wachtwoord = :password WHERE passkey = :passkey");
+            $update = $dbh->prepare("UPDATE user SET wachtwoord = :password, passkey = NULL WHERE passkey = :passkey");
             $update->bindParam(':password', $password);
-            $update->bindValue(':passkey', $passkey);
+            $update->bindValue(':passkey', $_GET['key']);
             $update->execute();
-            $error = ("");
+            echo '<script type="text/javascript">alert("Bye bye.");</script>';
             header("Location: index.php");
-        }
     }
 }
+
 ?>
 <html>
 
@@ -111,43 +113,57 @@ if (isset($_POST['finalize'])) {
                 <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
 
             </div>
-            <h1>Samsen Night</h1>
-            <br> <br> <br> <?php echo $hoofd ?> <br> <br>
-            <?php echo $error; ?> <br><br>
-            <?php if(isset($_POST['verstuur']) && empty($_POST['email']) || empty($_POST['pass1']) || empty($_POST['pass2']))   { ?>
-            <form method="POST" action="#">
+            <h1>Samsen Nights</h1>
+            <br> <br> <br>
+            <?php echo $hoofd ?> <br> <br>
+            <?php echo $error2; ?> <br><br>
+            <?php
+            $passkey = "";
+            if (isset($_GET['key'])) {
+                $passkey = $_GET["key"];
+            }
+            $sql = $dbh->prepare("SELECT userid FROM user WHERE passkey = :passkey limit 1");
+            $sql->bindValue(':passkey', $passkey);
+            $sql->execute();
+            $results = $sql->fetch();
+
+            if ($results > 0) {
+                $hoofd = "Geef hieronder uw nieuwe wachtwoorden op.";
+            ?>
+            <form method="post" action="forgetpass.php?key=<?= $passkey ?>">
+                <div class="form-group">
+                    <label for="exampleInputemail">Nieuw wachtwoord</label> <?php echo ($error1); //error wordt getoond bij ongeldig wachtwoord  ?>
+                    <input type="password" name="pass1" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier uw nieuwe wachtwoord in">
+                    <small id="emailHelp" class="form-text text-muted">Een wachtwoord moet minimaal 8 tekens, één hoofdletter en één kleine letter bevatten.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputemail">Herhaling nieuw wachtwoord</label> <?php ($error2); //error wordt getoond bij ongelijk wachtwoord ?>
+                    <input type="password" name="pass2" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier nogmaals uw nieuwe wachtwoord in">
+                </div>
+                <button type="submit" name="finalize" class="btn btn-primary">Verstuur</button>
+            </form>
+
+            <?php } elseif(!isset($_POST['verstuur']) || $results == 0) {
+                ?>
+            <form method="POST" action="forgetpass.php">
                 <div class="form-group">
                     <label for="exampleInputemail">Email adres</label>
                     <input type="text" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier uw e-mail adres in">
                 </div>
                 <button type="submit" name="verstuur" class="btn btn-primary">Verstuur</button>
             </form>
-            <?php } elseif(isset($_POST['verstuur'])) {
-                $hoofd = "Een e-mail is verstuurd naar het opgegeven adres. Volg de instructies die in deze mail staan.";
-            } else {
-                $email = $_POST['email'];
-                $sql = "SELECT userid FROM user WHERE passkey = :key limit 1;";
-                $sql = $dbh->prepare($sql);
-                $sql->bindParam(":key", $_GET['key']);
-                $sql->execute();
-                $results = $sql->fetch();
-            }
-                if ($results > 0){
-                ?>
-                <form method="post" action="#">
-                    <div class="form-group">
-                        <label for="exampleInputemail">Nieuw wachtwoord</label> <?php echo ($error1); //error wordt getoond bij ongeldig wachtwoord  ?>
-                        <input type="password" name="pass1" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier uw nieuwe wachtwoord in">
-                        <small id="emailHelp" class="form-text text-muted">Een wachtwoord moet minimaal 8 tekens, één hoofdletter en één kleine letter bevatten.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputemail">Herhaling nieuw wachtwoord</label> <?php ($error2); //error wordt getoond bij ongelijk wachtwoord ?>
-                        <input type="password" name="pass2" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier nogmaals uw nieuwe wachtwoord in">
-                        <small id="emailHelp" class="form-text text-muted">Een wachtwoord moet minimaal 8 tekens, één hoofdletter en één kleine letter bevatten.</small>
-                    </div>
-                    <button type="submit" name="finalize" class="btn btn-primary">Verstuur</button>
-                </form>
-            <?php }?>
+            <?php } elseif (isset($_POST['verstuur']) && empty($_POST['email'])) { ?>
+                <form method="POST" action="forgetpass.php">
+                <div class="form-group">
+                    <label for="exampleInputemail">Email adres</label>
+                    <input type="text" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Vul hier uw e-mail adres in">
+                </div>
+                <button type="submit" name="verstuur" class="btn btn-primary">Verstuur</button>
+            </form>
+            <?php } elseif(isset($_POST['verstuur']) && $results > 0) {
+                $error2 = "Als dit adres in het systeem is gevonden is er een e-mail naartoe verstuurd. Volg in dit geval de instructies.";
+            } ?>
+
         </div>
     </div>
 </div>

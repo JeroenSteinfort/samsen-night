@@ -21,11 +21,10 @@ if (isset($_POST['submit'])) {
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
-    $special = preg_match('@!@#$%@' , $password);
     if ($password != $password2) {
         $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+        if (!$uppercase || !$lowercase || strlen($password) < 8) {
             $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
             //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer en een speciaal teken. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
@@ -49,7 +48,7 @@ if (isset($_POST['submit'])) {
 
                 } else {
 
-                    $sql = "#sql
+                    $sql = "
                     INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email,)
                     VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email,)";
                     $sql = $dbh->prepare($sql);
@@ -157,11 +156,6 @@ require_once('includes\dbh.php');
                 <div class="form-group">
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
                     <input type="password"  name="password2" class="form-control" value= "<?php print($_POST["password2"]) ?>" id="exampleInputPassword2" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">Profiel foto</label>
-                    <input type="file" class="form-control-file" name="foto" value= "<?php print($_POST["foto"]) ?>" id="exampleInputFile" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">.PNG 50 x 50 pixels</small>
                 </div>
                 </fieldset>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

@@ -217,7 +217,14 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Nee")) {
 }
 
     ?>
+            </div>
+        </div>
+    </div>
+            <?php
 
+            include_once($base_path . '/includes/footer.php');
+
+            ?>
 <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 

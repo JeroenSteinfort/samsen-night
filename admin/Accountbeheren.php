@@ -34,6 +34,8 @@ and open the template in the editor.
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <base href="http://localhost:8080/samsen-night/">
+        
         <link rel="stylesheet" href="css/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
@@ -58,7 +60,7 @@ and open the template in the editor.
                     $sql->execute();
                     $result = $sql->fetchAll();
 
-            include_once('includes/menu.php');
+            include_once($base_path . '/includes/menu.php');
 
         ?>
 
@@ -121,7 +123,7 @@ and open the template in the editor.
 
         <?php
 
-            include_once('includes/footer.php');
+            include_once($base_path . '/includes/footer.php');
 
         ?>
 

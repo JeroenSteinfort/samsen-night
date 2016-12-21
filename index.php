@@ -61,23 +61,86 @@ if(isset($_POST['login'])) {
     $result = $query->fetch();
 
     if ($result > 0) {
+        $query = '
+        #sql
+        SELECT active, attempts 
+        FROM login as l
+        JOIN user as u 
+        ON l.userid = u.userid
+        WHERE u.username = :username
+        LIMIT 1
+        
+        ';
+        $query = $dbh->prepare($query);
+        $query->bindParam(":username", $username);
+        $query->execute();
+        $resultaat = $query->fetch();
+
+
+        if($resultaat['attempts'] >= 4 ){
+            $query = '
+                #sql
+            UPDATE login 
+            SET active = 0, attempts = 0
+            WHERE userid = :userid';
+
+            $query = $dbh->prepare($query);
+            $query->bindParam(":userid", $result['userid']);
+            $query->execute();
+
+        }
+
 
         //User is found
-        if (password_verify($password, $result['wachtwoord'])) {
+        if (password_verify($password, $result['wachtwoord']) && $resultaat['active'] == 1) {
 
             //Password is correct && admin recht is gedefinieerd
 
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
             $_SESSION['rolid']     = $result['rolid'];
+
+            // de attempts worden gereset
+            $query = '
+            #sql
+            UPDATE login
+            SET attempts = 0
+            WHERE userid = :userid
+            ';
+            $query = $dbh->prepare($query);
+            $query->bindParam(":userid", $result['userid']);
+            $query->execute();
+
+
             header('Location: admin/cpanel.php');
             exit;
 
-        } else {
+        }
+
+        if($resultaat['active'] == 1 && $resultaat['attempts'] <=4) {
+            //password is fout, bij attempts word 1 bij op getelt.
+            $resultaat['attempts'] = $resultaat['attempts'] +1;
+
+            $query = '
+            #sql
+            UPDATE login 
+            SET attempts = :attempts
+            WHERE userid = :userid
+            ';
+
+            $query = $dbh->prepare($query);
+            $query->bindParam(":userid", $result['userid']);
+            $query->bindParam(":attempts", $resultaat['attempts']);
+            $query->execute();
+
 
             //Password is incorrect
             $error = "Username or password is incorrect";
 
+        }
+        else {
+            //account is geblokkeerd
+            $error = "Account is blocked";
         }
 
     } else {
@@ -189,6 +252,7 @@ newVisitor($dbh, $page);
                         </a>
                     </div>
                     <?php
+
                         if($contentresult['naam'] == 'Contact') {
 
                             require($base_path . '/contactpagina.php');

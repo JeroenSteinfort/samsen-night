@@ -125,26 +125,31 @@ include_once($base_path . '/includes/menu.php');
                     echo "<td>" .  $row['partnernaam']  . " " . "</td>";
                     echo "<td>" .  $row['link']  . " " . "</td>";
                     echo "<td>" .  $row['beschrijving']  . " " . "</td>";
-                    echo "<td>" . "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Wijzig'  name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
-                    echo "<td>" . "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
+                    echo "<td>" . "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='partnerid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Wijzig'  name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
+                    echo "<td>" . "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='partnerid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
                     echo "<br> </tr>";
                     //Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van het partner id. Een input waarde word niet geshowed maar word wel gebruikt.
                 }
                 ?>
-            </table>
             <?php
 
             //Bij het aanklikken van de 'wijzig' knop ontstaat de volgende vragenlijst
             if (isset($_POST['wijzig'])) { ?>
             <form method= 'POST' action= 'admin/partners.php'>
-                <input type= 'text' name= 'partnerid' placeholder= 'Partner-ID'>
-                <input type= 'text' name= 'foto' placeholder= 'Foto'>
-                <input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'>
-                <input type= 'text' name= 'link' placeholder= 'Link'>
-                <input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'>
-                <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'>
-                <input type= 'hidden' name= 'partnerid' value=" <?= $_POST['partnerid'] ?>">
-            </form> <?php ;
+                <tr><td><?php echo $_POST['partnerid']?></td>
+                <td><input type= 'text' name= 'foto' placeholder= 'Foto'></td>
+                <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
+                <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
+                <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
+                <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'finalize' class= 'cmsbutton'></td>
+                    <td><input type= 'hidden' name= 'partnerid' value=" <?= $_POST['partnerid'] ?>"></td></tr>
+            </form>
+            </table>
+            <?php
+            } else {
+
+                echo "</table>";
+
             }
 
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
@@ -163,7 +168,24 @@ include_once($base_path . '/includes/menu.php');
 
                 <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
             </form>
-            <?php } ?>
+            <?php } else {
+                if (isset($_POST['finalize'])) {
+                    echo ("Vul de verplichte gegevens in.");
+                }
+            }
+
+            if(isset($_POST['option']) && $_POST['option'] == "Ja") {
+                $update = $dbh->prepare("UPDATE partners SET foto = :foto, partnernaam = :partnernaam, link = :link, beschrijving = :beschrijving WHERE partnerid = :partnerid");
+                $update->bindParam(':partnerid', $_POST['partnerid']);
+                $update->bindValue(':foto', $_POST['foto']);
+                $update->bindValue(':partnernaam', $_POST['partnernaam']);
+                $update->bindValue(':link', $_POST['link']);
+                $update->bindValue(':beschrijving', $_POST['beschrijving']);
+                $update->execute();
+                ?>
+                <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
+                exit();
+            } ?>
 
         </div>
 

@@ -103,6 +103,9 @@ button.cmsbutton:hover{
 td.cms{
     border: 2px solid black !important;
 }
+th.mathijs{
+    padding-right:3px;
+}
 .carousel {
     margin-bottom: 30px !important;
     display:block !important;
@@ -171,6 +174,28 @@ background-color: #D7E3F5;
 .tracker-selector-table > tbody > tr > td{
     padding: 5px;
 }
+
+
+.usercms-table{
+    width: 100% !important;
+}
+.usercms-table > tbody > tr > th{
+    border-bottom: 1px black solid;
+}
+.usercms-table > tbody > tr > td{
+    border-bottom: 1px #BFBFBF solid;
+}
+.usercms-table > tbody > tr:nth-child(even){
+    background-color: #D7E3F5;
+}
+.usercms-table{
+    border: 1px solid #D9E6FA;
+}
+.usercms-table > tbody > tr > td{
+    padding: px;
+}
+
+
 .form-group{
     width: 50%;
 }

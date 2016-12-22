@@ -100,17 +100,17 @@ include_once($base_path . '/includes/menu.php');
 
 
 
-    <table class="tracker-table">
-        <tr>    <th > UserID </th>
-    <th > Username </th>
-        <th>  Voornaam </th>
-    <th> Tussenvoegsel </th>
-    <th> Achternaam </th>
-    <th> Email </th>
-    <th> Rolid </th>
-            <th> actief </th>
-        <th> Wijzig </th>
-        <th> Delete </th> </tr>
+    <table class="usercms-table">
+        <tr>    <th  class='mathijs' > UserID </th>
+        <th class='mathijs'> Username </th>
+        <th class='mathijs'>  Voornaam </th>
+         <th class='mathijs'> Tussenvoegsel </th>
+        <th class='mathijs'> Achternaam </th>
+        <th class='mathijs'> Email </th>
+        <th class='mathijs'> Rolid </th>
+            <th class='mathijs'> actief </th>
+        <th class='mathijs'>  Wijzig </th>
+        <th class='mathijs'> Delete </th> </tr>
         <?php
 
         $userquery = $dbh->prepare("Select * from user JOIN login ON user.userid = login.userid");
@@ -215,7 +215,7 @@ if(isset($_POST['delete'])) {
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
 
-    $delete = $dbh->prepare("DELETE from user where userid = :userid");
+    $delete = $dbh->prepare("DELETE from user join login ON user.userid = login.userid where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
     ?>

@@ -185,7 +185,37 @@ include_once($base_path . '/includes/menu.php');
                 ?>
                 <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
                 exit();
-            } ?>
+            }
+
+            if(isset($_POST['delete'])) {
+                Echo "Weet u zeker dat u de user met ID = " .  $_POST['partnerid']  . " wilt deleten?";
+                ?>
+                <form method="POST" action="admin/partners.php">
+                    <input type="submit" name="optie" value="Ja" class="cms-submit">
+                    <input type="submit" name="optie" value="Nee" class="cms-submit">
+                    <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
+                </form>
+                <?php
+                // form hierboven kiest optie 1 of 2 and stuurt de user id door naaar de inhoud van de forms.
+            }
+
+            if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
+                //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
+
+                $delete = $dbh->prepare("DELETE from user where partnerid = :partnerid");
+                $delete->bindParam(':partnerid', $_POST['partnerid']);
+                $delete->execute();
+                ?>
+                <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
+                exit();
+                //na dat de query klaar is moet de pagina ververst worden.;
+            }
+
+            if (isset($_POST['optie']) && ($_POST['optie'] == "Nee")) {
+                echo 'Deleten gecancelled.';
+            }
+
+            ?>
 
         </div>
 

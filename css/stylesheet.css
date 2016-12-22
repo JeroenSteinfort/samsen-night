@@ -1,5 +1,5 @@
 body{
-    background-color: #D88D1A !important;
+    background-color: #d0daea !important;
     /*background: url('../img/background.png'); */
     background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
@@ -130,6 +130,25 @@ td.cms{
 }
 .carousel-fade .carousel-control {
     z-index: 2;
+}
+.carousel-control.right{
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.0) 50%) !important;
+}
+.carousel-control.left{
+    background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.0) 50%) !important;
+}
+.carousel-indicators li {
+    background: #32363d !important;
+}
+
+.carousel-indicators .active {
+    background: #07090c !important;
+}
+.carousel-control {
+    font-size: 20px;
+    color: #07090c !important;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
 }
 .tracker-table{
     width: 100%;

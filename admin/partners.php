@@ -130,13 +130,6 @@ include_once($base_path . '/includes/menu.php');
                     echo "<br> </tr>";
                     //Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van het partner id. Een input waarde word niet geshowed maar word wel gebruikt.
                 }
-                echo \"<tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>" . "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='partnerid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Toevoegen'  name='toevoegen' class='cmsbutton'>" .  " </input> </td> </form>";
                 ?>
             <?php
 
@@ -158,7 +151,7 @@ include_once($base_path . '/includes/menu.php');
                 echo "</table>";
 
             }
-
+            echo "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='partnerid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input> </form>";
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
             if(isset($_POST['finalize']) && !empty($_POST['foto']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
             echo ("Weet u zeker dat u deze wijzigingen over ID" . $_POST['partnerid'] ." wilt toepassen?");

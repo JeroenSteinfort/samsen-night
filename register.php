@@ -62,6 +62,20 @@ if (isset($_POST['submit'])) {
 
                     $sql->execute();
 
+
+                    $userid = $dbh->lastInsertId();
+
+                    $sql = '
+                    #sql
+                    INSERT INTO login (attempts, active, userid)
+                    VALUES (0, 1, :userid) 
+                    ';
+                    $sql = $dbh->prepare($sql);
+                    $sql->bindParam(":userid", $userid);
+                    $sql->execute();
+
+
+
                     header("Location: index.php");
                     //Wanneer alles goed gegaan is zal hij de usergegevens in de database zetten en u naar de index brengen.
 

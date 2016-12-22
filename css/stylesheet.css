@@ -16,7 +16,8 @@ p{
     min-height: 700px;
     font-size: 16px;
     padding: 30px 40px 25px 40px !important;
-    margin: 10px auto 0 auto;
+    margin: 50px 0 0 0;
+
 }
 footer{
     background-color: white;
@@ -40,6 +41,7 @@ margin-right: auto !important;
 nav{
     background-color: white !important;
     border: 0px !important;
+
 }
 li.active > a{
     background-color: white !important;
@@ -222,4 +224,7 @@ background-color: #D7E3F5;
 }
 .footimg{
     padding: 5px;
+}
+p.footer{
+    font-size: 13px !important;
 }

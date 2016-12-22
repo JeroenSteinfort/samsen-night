@@ -13,6 +13,7 @@ $error1 = "";
 $error2 = "";
 $results = 0;
 $hoofd = "Geef hieronder uw geregistreerd e-mail adres op. U krijgt op dit adres een link toegestuurd om uw nieuwe wachtwoord toe te passen.";
+//Dit definieert de variables die in deze file worden gebruikt van tevoren.
 
 function random_str($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -23,6 +24,7 @@ function random_str($length) {
     }
     return $randomString;
 }
+//Deze functie maakt een willekeurige passkey van 12 karakters lang.
 
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
@@ -55,6 +57,7 @@ if (isset($_POST['verstuur'])) {
          mail($email, "Wijziging wachtwoord Samsen Night", $message);
     }
 }
+//Hier wordt de emailcontrole uitgevoerd. Een hit genereert een passkey en stuurt een URL met deze key naar dit adres.
 
 if (isset($_POST['finalize'])) {
     $pass1 = $_POST['pass1'];
@@ -75,6 +78,7 @@ if (isset($_POST['finalize'])) {
             header("Location: index.php");
     }
 }
+//Hier worden de nieuwe wachtwoorden gecontroleerd. Als ze aan de voorwaarden voldoen wordt het wachtwoord gewijzigd en wordt de user teruggebracht naar de homepage.
 
 ?>
 <html>
@@ -162,7 +166,9 @@ if (isset($_POST['finalize'])) {
             </form>
             <?php } elseif(isset($_POST['verstuur']) && $results > 0) {
                 $error2 = "Als dit adres in het systeem is gevonden is er een e-mail naartoe verstuurd. Volg in dit geval de instructies.";
-            } ?>
+            }
+            //Hierboven staan de twee formulieren die worden opgegeven op deze pagina. De conditions zijn zo opgesteld dat je alleen het wachtwoordenformulier ziet als je beschikking hebt tot de passkey.
+            ?>
 
         </div>
     </div>

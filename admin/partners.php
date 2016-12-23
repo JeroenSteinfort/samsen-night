@@ -57,7 +57,7 @@ foreach($result as $row) {
 }
 
 
-if(!isset($_SESSION['logged_in']) || $usersbeheren == false) {
+if(!isset($_SESSION['logged_in']) || $partnersbeheren == false) {
 
     header("Location: ../index.php");
     exit();

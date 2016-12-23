@@ -225,7 +225,7 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
-    ?>
+    ?>  
 
     <a href="http://localhost:8080/samsen-night/admin/usercms.php">Refresh de pagina</a> <?php
     exit();

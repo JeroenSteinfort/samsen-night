@@ -13,7 +13,6 @@ p{
 .content{
     background-color: white;
     color: #274c96;
-    min-height: 700px;
     font-size: 16px;
     padding: 30px 40px 25px 40px !important;
     margin: 50px 0 0 0;
@@ -180,6 +179,7 @@ background-color: #D7E3F5;
 
 .usercms-table{
     width: 100% !important;
+    max-width: 100% !important;
 }
 .usercms-table > tbody > tr > th{
     border-bottom: 1px black solid;

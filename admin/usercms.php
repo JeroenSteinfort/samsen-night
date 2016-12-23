@@ -98,21 +98,25 @@ include_once($base_path . '/includes/menu.php');
 
         <div class="col-xs-12 content">
 
+            Welkom op het user CMS.
+
+            Wijzigingen in het user CMS worden direct uitgevoerd op de database. <br>
+            Een delete is dus permanent. Controleer voordat u een wijziging of delete uitvoerd of de gegevens kloppen. <br> <br>
 
 
-    <table class="usercms-table">
-        <tr>    <th  class='mathijs' > UserID </th>
-        <th class='mathijs'> Username </th>
-        <th class='mathijs'>  Voornaam </th>
-         <th class='mathijs'> Tussenvoegsel </th>
-        <th class='mathijs'> Achternaam </th>
-        <th class='mathijs'> Email </th>
-        <th class='mathijs'> Rolid </th>
+            <table class="usercms-table">
+            <tr>    <th  class='mathijs' > UserID </th>
+            <th class='mathijs'> Username </th>
+            <th class='mathijs'>  Voornaam </th>
+            <th class='mathijs'> Tussenvoegsel </th>
+            <th class='mathijs'> Achternaam </th>
+            <th class='mathijs'> Email </th>
+            <th class='mathijs'> Rolid </th>
             <th class='mathijs'> actief </th>
-        <th class='mathijs'>  Wijzig </th>
-        <th class='mathijs'> Delete </th> </tr>
-        <?php
+            <th class='mathijs'>  Wijzig </th>
+            <th class='mathijs'> Delete </th> </tr>
 
+            <?php
         $userquery = $dbh->prepare("Select * from user JOIN login ON user.userid = login.userid");
         $userquery->execute();
 
@@ -131,7 +135,7 @@ foreach ($results as $row) {
     echo "<td>" .  $row['active']  . " " . "</td>";
     echo "<td>" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Wijzig'  name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
     echo "<td>" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
-    echo "<br> </tr>";
+    echo "</tr>";
     //Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van de user id. Een input waarde word niet geshowed maar word wel gebruikt.
 }
 ?>

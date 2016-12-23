@@ -6,11 +6,18 @@ $error = "";
 $error1 = "";
 $error2= "";
 $error3 = "";
+$error4 = "";
 
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
 // voegt het wachtwoord en db bestanden.
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptcha-response'])  {
+    $secret = "6Ld2cQ8UAAAAAFiJ3Nr7cJMb0bpDbkX4F8K-EtJH";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $captcha = $_POST['g-recaptcha-response'];
+    $rsp = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
+    $arr = json_decode($rsp, TRUE);
+
     //kijkt of er een form gepost is
     $username = $_POST['username'];
     $voornaam = $_POST['voornaam'];
@@ -83,6 +90,8 @@ if (isset($_POST['submit'])) {
             }
         }
     }
+} elseif (isset($_POST['submit']) && !$_POST['g-recaptcha-response'] || $_POST['g-recaptcha-response'])  {
+    $error4= "U heeft geen captcha ingevuld";
 }
 
 ?>
@@ -92,7 +101,7 @@ if (isset($_POST['submit'])) {
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src='https://www.google.com/recaptcha/api.js?hl=nl'></script>
     <base href="http://localhost:8080/samsen-night/" >
 
     <link rel="stylesheet" href="css/stylesheet.css">
@@ -128,7 +137,7 @@ require_once('includes\dbh.php');
             </div>
             <?php
                 echo $error1;
-
+                echo $error4;
             ?>
             <h1>Samsen Night</h1>
             <br> <br> <br> <br> <br> <br> <br>
@@ -170,6 +179,7 @@ require_once('includes\dbh.php');
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>                 <?php echo $error3; //als er een wachtwoord fout is opgetreden word hij hier getoont.?>
                     <input type="password"  name="password2" class="form-control" value= "<?php print($_POST["password2"]) ?>" id="exampleInputPassword2" placeholder="Password">
                 </div>
+                <br><div class="g-recaptcha" data-sitekey="6Ld2cQ8UAAAAAP1Tg9tRgFhkU14XDHW77r0Hzx9H"></div> <br>
                 </fieldset>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -208,6 +218,7 @@ require_once('includes\dbh.php');
                     <label for="exampleInputPassword2"> Password opnieuw typen.</label>    <?php echo $error3; //als er een wachtwoord fout is opgetreden wordt hij hier getoont.?>
                     <input type="password"  name="password2" class="form-control" id="exampleInputPassword2" placeholder="Password">
                 </div>
+                <br><div class="g-recaptcha" data-sitekey="6Ld2cQ8UAAAAAP1Tg9tRgFhkU14XDHW77r0Hzx9H"></div> <br>
                 </fieldset>
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -228,7 +239,8 @@ include_once('includes\footer.php');
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<!-- Catpcha -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

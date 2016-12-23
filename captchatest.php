@@ -18,17 +18,19 @@
 
 <body>
 <?php
-if(isset($_POST['g-recaptcha-response'])&&$_POST['g-recaptcha-response']){
+if(isset($_POST['g-recaptcha-response'])&&$_POST['g-recaptcha-response']) {
 
-$secret = "6Ld2cQ8UAAAAAFiJ3Nr7cJMb0bpDbkX4F8K-EtJH";
-$ip = $_SERVER['REMOTE_ADDR'];
-$captcha = $_POST['g-recaptcha-response'];
-$rsp = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
-$arr = json_decode($rsp,TRUE);
-if($arr['success']){
-echo "ongewensten met een afrikaanse emigratie achtergrond";
+    $secret = "6Ld2cQ8UAAAAAFiJ3Nr7cJMb0bpDbkX4F8K-EtJH";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $captcha = $_POST['g-recaptcha-response'];
+    $rsp = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
+    $arr = json_decode($rsp, TRUE);
+    if ($arr['success']) {
+        echo "Ja";
 
-}
+    } else {
+        echo "Nee";
+    }
 }
 ?>
 <form action="" method="POST">

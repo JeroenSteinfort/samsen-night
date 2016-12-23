@@ -203,7 +203,7 @@ include_once($base_path . '/includes/menu.php');
             if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
                 //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
 
-                $delete = $dbh->prepare("DELETE from user where partnerid = :partnerid");
+                $delete = $dbh->prepare("DELETE from partners where partnerid = :partnerid");
                 $delete->bindParam(':partnerid', $_POST['partnerid']);
                 $delete->execute();
                 ?>

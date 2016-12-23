@@ -119,7 +119,7 @@ if (isset($_POST['finalize'])) {
             </div>
             <h1>Samsen Nights</h1>
             <br> <br> <br>
-            <?php echo $hoofd ?> <br> <br>
+            <?php echo $hoofd; ?> <br> <br>
             <?php echo $error2; ?> <br><br>
             <?php
             $passkey = "";

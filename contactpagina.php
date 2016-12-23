@@ -167,7 +167,7 @@ function required($input) {
                         }
                     }
 
-                    //er worden twee mails gestuurd. Een mail naar samsen night, en een naar de gene wie het contactformulier heeft ingevuld.
+                    //er worden twee mails gestuurd. Een mail naar Samsen Night, en een naar degene die het contactformulier heeft ingevuld.
 
                     
 ?>

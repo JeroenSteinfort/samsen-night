@@ -214,11 +214,15 @@ if(isset($_POST['delete'])) {
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
     //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
+    $delete2 = $dbh->prepare("DELETE FROM login WHERE userid = :userid");
+    $delete2->bindParam('userid', $_POST['userid']);
+    $delete2->execute();
 
-    $delete = $dbh->prepare("DELETE from user join login ON user.userid = login.userid where userid = :userid");
+    $delete = $dbh->prepare("DELETE from user where userid = :userid");
     $delete->bindParam(':userid', $_POST['userid']);
     $delete->execute();
     ?>
+
     <a href="http://localhost:8080/samsen-night/admin/usercms.php">Refresh de pagina</a> <?php
     exit();
     //na dat de query klaar is moet de pagina ververst worden.;

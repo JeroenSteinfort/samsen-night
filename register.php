@@ -18,13 +18,12 @@ if (isset($_POST['submit'])) {
     $achternaam = $_POST['achternaam'];
     $password2 = $_POST["password2"];
     $password = $_POST["password"];
-    $uppercase = preg_match('@[A-Z]@', $password);
-    $lowercase = preg_match('@[a-z]@', $password);
-    $number = preg_match('@[0-9]@', $password);
+    $special = preg_match("#[\\~\\`\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\-\\+\\=\\{\\}\\[\\]\\|\\:\\;\\&lt;\\&gt;\\.\\?\\/\\\\\\\\]+#", $password);
+
     if ($password != $password2) {
         $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        if (!$uppercase || !$lowercase || strlen($password) < 8) {
+        if ( !$special || strlen($password) < 8) {
             $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
             //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer en een speciaal teken. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
@@ -49,8 +48,8 @@ if (isset($_POST['submit'])) {
                 } else {
 
                     $sql = "
-                    INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email,)
-                    VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email,)";
+                    INSERT INTO user (username, voornaam, tussenvoegsel, achternaam, wachtwoord, email)
+                    VALUES (:username, :voornaam, :tussenvoegsel, :achternaam, :password, :email)";
                     $sql = $dbh->prepare($sql);
 
                     $sql->bindParam(":username", $username);

@@ -87,6 +87,26 @@ if(isset($_POST['login'])) {
             $query = $dbh->prepare($query);
             $query->bindParam(":userid", $result['userid']);
             $query->execute();
+            $to = "adminsamsennight@hotmail.com";
+            $onderwerp = "account is geblokkeerd";
+            $bericht = "het account met id " . $result['userid'] . " is geblokkeerd. ";
+            $van = "From: noreply@samsennight.com";
+            mail($to, $onderwerp, $bericht, $van);
+
+            $query =  "
+            #sql
+            SELECT email 
+            FROM user
+            WHERE userid = :userid
+            ";
+            $query = $dbh->prepare($query);
+            $query->bindParam(":userid", $result['userid']);
+            $query->execute();
+            $email = $query->fetch();
+            $onderwerp = "uw account is geblokkeerd";
+            $bericht = "volgens onze gegevens is er meer dan 5x geprobeerd om in te loggen op uw account <br> 
+            om uw account weer te activeren moet u een mail sturen naar adminsamsennight@hotmail.com";
+            mail($email["email"], $onderwerp, $bericht, $van);
 
         }
 

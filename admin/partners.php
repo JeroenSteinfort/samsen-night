@@ -57,7 +57,7 @@ foreach($result as $row) {
 }
 
 
-if(!isset($_SESSION['logged_in']) || $usersbeheren == false) {
+if(!isset($_SESSION['logged_in']) || $partnersbeheren == false) {
 
     header("Location: ../index.php");
     exit();
@@ -137,7 +137,7 @@ include_once($base_path . '/includes/menu.php');
             if (isset($_POST['wijzig'])) { ?>
             <form method= 'POST' action= 'admin/partners.php'>
                 <tr><td><?php echo $_POST['partnerid']?></td>
-                <td><input type= 'text' name= 'foto' placeholder= 'Foto'></td>
+                <td><input type= 'file' name= 'foto' placeholder= 'Foto'></td>
                 <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
                 <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
                 <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
@@ -151,7 +151,7 @@ include_once($base_path . '/includes/menu.php');
                 echo "</table>";
 
             }
-            echo "<form action='admin/partners.php' method='POST'><input type='text' value='" .  $row['partnerid']  . "' name='partnerid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input> </form>";
+
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
             if(isset($_POST['finalize']) && !empty($_POST['foto']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
             echo ("Weet u zeker dat u deze wijzigingen over ID" . $_POST['partnerid'] ." wilt toepassen?");
@@ -216,7 +216,71 @@ include_once($base_path . '/includes/menu.php');
                 echo 'Deleten gecancelled.';
             }
 
+
+            echo "<form action='admin/partners.php' method='POST'><input type='submit' class=\"cms-submit\" value='Toevoegen' name='toevoegen' class='cmsbutton'>" . " </input> </form>";
+
+            //Bij het aanklikken van de 'toevoegen' knop ontstaat de volgende vragenlijst
+            if (isset($_POST['toevoegen'])) { ?>
+                <form method= 'POST' action= 'admin/partners.php'>
+                    <tr><td></td>
+                        <td><input type= 'file' name= 'foto' placeholder= 'Foto'></td>
+                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
+                        <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
+                        <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
+                        <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'Tfinalize' class= 'cmsbutton'></td>
+                        </tr>
+                </form>
+                </table>
+                <?php
+            } else {
+
+                echo "</table>";
+
+            }
+
+            //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
+            if(isset($_POST['Tfinalize']) && !empty($_POST['foto']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
+                echo ("Weet u zeker dat u deze partner wilt toevoegen?");
+                ?>
+
+
+                <form method="POST" action="admin/partners.php">
+                    <input type="submit" name="option" value="Ja toevoegen" class="cmsbutton">
+                    <input type="submit" name="option" value="Nee toevoegen" class="cmsbutton">
+                    <input type="hidden" name="foto" value="<?= $_POST['foto'] ?>">
+                    <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
+                    <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
+                    <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">
+
+                    <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
+                </form>
+            <?php } else {
+                if (isset($_POST['Tfinalize'])) {
+                    echo ("Vul de verplichte gegevens in.");
+                }
+            }
+
+            if(isset($_POST['option']) && $_POST['option'] == "Ja toevoegen") {
+                $sql = $dbh->prepare("INSERT INTO partners (foto,partnernaam,link,beschrijving) VALUES (:foto, :partnernaam, :link, :beschrijving)");
+                $sql->bindValue(':foto', $_POST['foto']);
+                $sql->bindValue(':partnernaam', $_POST['partnernaam']);
+                $sql->bindValue(':link', $_POST['link']);
+                $sql->bindValue(':beschrijving', $_POST['beschrijving']);
+                $sql->execute();
+                ?>
+                <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
+                exit();
+            }
+
+            if (isset($_POST['optie']) && ($_POST['optie'] == "Nee toevoegen")) {
+                echo 'Toevoegen gecancelled.';
+            }
+
             ?>
+
+
+
+
 
         </div>
 

@@ -1,15 +1,5 @@
 <?php
 
-//wanneer iets is ingevuld, maar een bepaalde veld is niet ingevuld
-//terwijl die wel verplicht was, zet deze het ingevulde veld gewoon terug.
-function check_fill($input) {
-    if (isset($_POST[$input]) && !empty($_POST[$input])) {
-        return $_POST[$input];
-    }
-    return false;
-}
-
-
 //kijken of een veld verplicht is. Zo wel, en niet ingevuld, word de naam rood.
 function required($input) {
     if (!isset($_POST[$input]) || empty($_POST[$input])) {
@@ -31,7 +21,7 @@ function required($input) {
                         
                         <table>
                             <tr>
-                                <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" class="form-control" name="voornaam" value= "<?php print(check_fill("voornaam")) ?>"></td>
+                                <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" class="form-control" name="voornaam" value= "<?php print($_POST["voornaam"]) ?>"></td>
                             </tr>
                             <tr>
                                 <td>Tussenvoegsel:</td>

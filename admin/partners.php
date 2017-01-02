@@ -223,7 +223,7 @@ include_once($base_path . '/includes/menu.php');
             if (isset($_POST['toevoegen'])) { ?>
                 <form method= 'POST' action= 'admin/partners.php'>
                     <tr><td></td>
-                        <td><input type= 'file' name= 'foto' placeholder= 'Foto'></td>
+                        <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
                         <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
                         <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
                         <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
@@ -232,10 +232,27 @@ include_once($base_path . '/includes/menu.php');
                 </form>
                 </table>
                 <?php
+
             } else {
 
                 echo "</table>";
 
+            }
+
+            $target_dir = "img/";
+            $target_file = $target_dir . basename($_FILES["foto"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+            // Check if image file is a actual image or fake image
+            if(isset($_POST["Tfinalize"])) {
+                $check = getimagesize($_FILES["foto"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
             }
 
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.

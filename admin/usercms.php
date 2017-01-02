@@ -150,7 +150,10 @@ if (isset($_POST['wijzig'])) { ?>
         <input type= 'text' name= 'anaam' placeholder= 'Achternaam'>
         <input type= 'text' name= 'email' placeholder= 'E-mail'>
         <input type= 'text' name= 'rolid' placeholder= 'Rol-ID'>
-        <input type= 'text' name= 'actief' placeholder= 'actief'>
+        <select name= 'actief'>
+            <option value='0'>0</option>
+            <option value='1'>1</option>
+        </select>
         <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'>
         <input type= 'hidden' name= 'userid' value=" <?= $_POST['userid'] ?>">
     </form> <?php ;

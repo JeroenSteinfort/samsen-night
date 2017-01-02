@@ -151,8 +151,8 @@ if (isset($_POST['wijzig'])) { ?>
         <input type= 'text' name= 'email' placeholder= 'E-mail'>
         <input type= 'text' name= 'rolid' placeholder= 'Rol-ID'>
         <select name= 'actief'>
-            <option value='0'>0</option>
-            <option value='1'>1</option>
+            <option value='0'>Non-actief</option>
+            <option value='1'>Actief</option>
         </select>
         <input type= 'submit' value= 'Verzend' name= 'finalize' class= 'cmsbutton'>
         <input type= 'hidden' name= 'userid' value=" <?= $_POST['userid'] ?>">

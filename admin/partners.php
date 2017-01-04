@@ -221,7 +221,7 @@ include_once($base_path . '/includes/menu.php');
 
             //Bij het aanklikken van de 'toevoegen' knop ontstaat de volgende vragenlijst
             if (isset($_POST['toevoegen'])) { ?>
-                <form method= 'POST' action= 'admin/partners.php'>
+                <form method= 'POST' action= 'admin/partners.php' enctype='multipart/form-data'>
                     <tr><td></td>
                         <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
                         <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
@@ -239,22 +239,40 @@ include_once($base_path . '/includes/menu.php');
 
             }
 
+
             $target_dir = "img/";
-            $target_file = $target_dir . basename($_FILES["foto"]["name"]);
+            $target_file = $target_dir .basename($_FILES["foto"]["name"]);
             $uploadOk = 1;
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-            // Check if image file is a actual image or fake image
+            // Checken of het bestand ook echt een foto is
             if(isset($_POST["Tfinalize"])) {
                 $check = getimagesize($_FILES["foto"]["tmp_name"]);
                 if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
+                    echo "Bestand is een foto - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    echo "Bestand is geen foto.";
                     $uploadOk = 0;
                 }
             }
 
+            // Checken of het bestand al bestaat
+            if (file_exists($target_file)) {
+                echo "Sorry, dit bestand bestaat al.";
+                $uploadOk = 0;
+            }
+
+            // Checken of $uploadOk naar 0 is veranderd door een error
+            if ($uploadOk == 0) {
+                echo "Sorry, uw bestand is niet geüpload.";
+                // Als alles goed is, bestand uploaden
+            } else {
+                if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+                    echo "Het bestand ". basename( $_FILES["foto"]["name"]). " is geüpload.";
+                } else {
+                    echo "Sorry, er was een error tijdens het uploaden.";
+                }
+            }
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
             if(isset($_POST['Tfinalize']) && !empty($_POST['foto']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
                 echo ("Weet u zeker dat u deze partner wilt toevoegen?");

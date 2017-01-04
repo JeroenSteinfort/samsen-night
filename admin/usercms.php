@@ -149,7 +149,12 @@ if (isset($_POST['wijzig'])) { ?>
         <input type= 'text' name= 'tv' placeholder= 'Tussenvoegsel'>
         <input type= 'text' name= 'anaam' placeholder= 'Achternaam'>
         <input type= 'text' name= 'email' placeholder= 'E-mail'>
-        <input type= 'text' name= 'rolid' placeholder= 'Rol-ID'>
+        <select name= 'rolid'>
+            <option value='0'>Gebruiker</option>
+            <option value='1'>Superadmin</option>
+            <option value='2'>Contentbeheerder</option>
+            <option value='3'>Userbeheerder</option>
+        </select>
         <select name= 'actief'>
             <option value='0'>Non-actief</option>
             <option value='1'>Actief</option>

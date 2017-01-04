@@ -1,5 +1,5 @@
 <?php
-
+//Captcha is geïmplementeerd door Ethan, de rest is allemaal gemaakt door Mathijs.
 //kijken of een veld verplicht is. Zo wel, en niet ingevuld, word de naam rood.
 function required($input) {
     if (!isset($_POST[$input]) || empty($_POST[$input])) {
@@ -11,14 +11,29 @@ function required($input) {
 
 
 ?>
+<html lang="en">
+<head>
+    <script src='https://www.google.com/recaptcha/api.js?hl=nl'></script>
+    <!--js-->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
 <!--                            wanneer er op verzennden is gedrukt, en een van de verplichte velden is nog niet ingevuld, dan springt hij naar deze pagina, en laat hij de verplichte velden, wat niet is ingevuld, als rood zien
                                 maar het gene wat wel is ingevuld, neemt hij wel mee van het vorige formulier. -->
-                        <?php if(isset($_POST["verzenden"]) 
-                                && 
-                                (empty($_POST['voornaam']) || 
-                                empty($_POST['achternaam']) || empty($_POST['onderwerp']) || empty($_POST['email']) || empty($_POST['bericht']))) {?>
+                        <?php
+                        $error4=""; echo $error4;
+                        if(isset($_POST["verzenden"])
+                                &&
+                                (empty($_POST['voornaam']) ||
+                                empty($_POST['achternaam']) || empty($_POST['onderwerp']) || empty($_POST['email']) || empty($_POST['bericht']) || !($_POST['g-recaptcha-response']&&$_POST['g-recaptcha-response']))) {
+    $secret = "6Ld2cQ8UAAAAAFiJ3Nr7cJMb0bpDbkX4F8K-EtJH";
+$ip = $_SERVER['REMOTE_ADDR'];
+$captcha = $_POST['g-recaptcha-response'];
+$rsp = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
+$arr = json_decode($rsp, TRUE);
+
+                        ?>
                     <form method="post" action="index.php?p=Contact" id="contactpagina">
-                        
+
                         <table>
                             <tr>
                                 <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" class="form-control" name="voornaam" value= "<?php print($_POST["voornaam"]) ?>"></td>
@@ -49,9 +64,10 @@ function required($input) {
                         </table>
                         
                         <textarea  id="contactpagina" form="contactpagina"  class="form-control" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"><?php print($_POST["bericht"]) ?></textarea><br>
+                        <div class="g-recaptcha" data-sitekey="6Ld2cQ8UAAAAAP1Tg9tRgFhkU14XDHW77r0Hzx9H"></div>
                         <input type="submit"  name="verzenden" value="verzenden">
                         <br>
-                        <h3 style="color: red; text-align: center;">rode velden zijn verplicht</h3>
+                        <h3 style="color: red; text-align: center;">rode velden en captcha zijn verplicht</h3>
                     </form>
 
 
@@ -90,6 +106,7 @@ function required($input) {
                         </table>
                         Bericht: <br>
                         <textarea id="contactpagina" class="form-control" name="bericht" rows="15" ' style="width:100%;"' wrap="soft"></textarea><br>
+                        <div class="g-recaptcha" data-sitekey="6Ld2cQ8UAAAAAP1Tg9tRgFhkU14XDHW77r0Hzx9H"></div>
                         <input type="submit" class="cms-submit" name="verzenden" value="verzenden">
 
                         

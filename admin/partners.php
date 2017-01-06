@@ -278,7 +278,7 @@ include_once($base_path . '/includes/menu.php');
                 <form method="POST" action="admin/partners.php">
                     <input type="submit" name="option" value="Ja toevoegen" class="cmsbutton">
                     <input type="submit" name="option" value="Nee toevoegen" class="cmsbutton">
-                    <input type="hidden" name="foto" value="<?= '/img/' . $_FILES["foto"]["name"] ?>">
+                    <input type="hidden" name="foto" value="<?= 'img/' . $_FILES["foto"]["name"] ?>">
                     <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
                     <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
                     <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">

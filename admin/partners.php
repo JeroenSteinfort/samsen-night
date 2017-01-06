@@ -240,7 +240,6 @@ include_once($base_path . '/includes/menu.php');
             }
 
 
-
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
             if(isset($_POST['Tfinalize']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
                 echo ("Weet u zeker dat u deze partner wilt toevoegen?");

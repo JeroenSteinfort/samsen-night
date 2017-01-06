@@ -289,12 +289,6 @@ include_once($base_path . '/includes/menu.php');
                     }
                 }
 
-                // Checken of het bestand al bestaat
-                if (file_exists($target_file)) {
-                    echo "Sorry, dit bestand bestaat al.";
-                    $uploadOk = 0;
-                }
-
                 // Checken of $uploadOk naar 0 is veranderd door een error
                 if ($uploadOk == 0) {
                     echo "Sorry, uw bestand is niet geüpload.";

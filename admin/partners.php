@@ -240,7 +240,7 @@ include_once($base_path . '/includes/menu.php');
             }
 
 
-            $target_dir = "/img/";
+            $target_dir = "../img/";
             $target_file = $target_dir .basename($_FILES["foto"]["name"]);
             $uploadOk = 1;
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);

@@ -1,7 +1,7 @@
 <?php
-
+// Onderstaand document is door Ethan gemaakt.
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
-
+// Errors worden gegenereerd door situaties in dit document. Ze worden dan ingevuld en staan zichtbaar bovenaan de pagina.
 $error = "";
 $error1 = "";
 $error2= "";
@@ -10,14 +10,14 @@ $error4 = "";
 
 include $base_path . '/includes/dbh.php';
 include $base_path . '/includes/password.php';
-// voegt het wachtwoord en db bestanden.
+// voegt het wachtwoord en db bestanden toe.
 if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptcha-response'])  {
     $secret = "6Ld2cQ8UAAAAAFiJ3Nr7cJMb0bpDbkX4F8K-EtJH";
     $ip = $_SERVER['REMOTE_ADDR'];
     $captcha = $_POST['g-recaptcha-response'];
     $rsp = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip$ip");
     $arr = json_decode($rsp, TRUE);
-
+// Kijkt of de form gesubmit is en daarna of er een captcha response is.
     //kijkt of er een form gepost is
     $username = $_POST['username'];
     $voornaam = $_POST['voornaam'];
@@ -25,20 +25,17 @@ if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptc
     $achternaam = $_POST['achternaam'];
     $password2 = $_POST["password2"];
     $password = $_POST["password"];
-    $special = preg_match("#[\\~\\`\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\-\\+\\=\\{\\}\\[\\]\\|\\:\\;\\&lt;\\&gt;\\.\\?\\/\\\\\\\\]+#", $password);
-
-    if ($password != $password2) {
+    $special = preg_match("#[\\~\\`\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\-\\+\\=\\{\\}\\[\\]\\|\\:\\;\\&lt;\\&gt;\\.\\?\\/\\\\\\\\]+#", $password); // kijkt of er een special teken voorkomt in de special in de password.
+    if ($password != $password2) { // Wachtwoorden zijn niet hetzelfde.
         $error3 = "De wachtwoord velden zijn niet gelijk aan elkaar.";
     } else {
-        if ( !$special || strlen($password) < 8) {
+        if ( !$special || strlen($password) < 8) { //Als de wachtwoord niet langer is dan 8 tekens of geen speciaal teken bevat zal de wachtwoord niet worden geaccepteerd.
             $error2 = "Wachtwoord voldoet niet aan de eisen.";
 
-            //Wachtwoord word eerst gecontroleerd op hoofdletters, kleine letters en een lengte van 8 en een cijfer en een speciaal teken. Hiernaast zegt hij of dat de wachtwoord niet aan eisen voldoet of dat de wachtwoord goed is, wat betekent dat de reeks verder gaat en dat de password geencrypt word.
-        } else {
-            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                  } else {
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT); //hashed het wachtwoord.
             $email = $_POST['email'];
             $sql = "SELECT userid FROM user where username = :username OR email = :email limit 1";
-
             $sql = $dbh->prepare($sql);
             $sql->bindParam(":username", $username);
             $sql->bindParam(":email", $email);
@@ -67,7 +64,7 @@ if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptc
                     $sql->bindParam(":email", $email);
 
                     $sql->execute();
-
+                    //Indien alle gegevens correct zijn, alle verplichte velden zijn ingevuld en er geen dubbele naam of mail voorkomt
 
                     $userid = $dbh->lastInsertId();
 
@@ -79,7 +76,7 @@ if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptc
                     $sql = $dbh->prepare($sql);
                     $sql->bindParam(":userid", $userid);
                     $sql->execute();
-
+                    // Bovenste gedeelte is van mathijs, dit voegt een paar gegevens toe aan het login table.
 
 
                     header("Location: index.php");
@@ -91,7 +88,7 @@ if (isset($_POST['submit']) && $_POST['g-recaptcha-response']&&$_POST['g-recaptc
         }
     }
 } elseif (isset($_POST['submit']) && !$_POST['g-recaptcha-response'] || $_POST['g-recaptcha-response'])  {
-    $error4= "U heeft geen captcha ingevuld";
+    $error4= "U heeft geen captcha ingevuld"; // Geen captcha response of niet ingevuld.
 }
 
 ?>
@@ -141,7 +138,7 @@ require_once('includes\dbh.php');
             ?>
             <h1>Samsen Night</h1>
             <br> <br> <br> <br> <br> <br> <br>
-            <?php if(isset($_POST["submit"])
+            <?php if(isset($_POST["submit"]) // Indien er een form is ingevuld en deze niet door de check heen komt krijg je gegevens terug. Dit zie je dus als er een empty veld is die wel verplicht.
             &&
             (empty($_POST['gebruikersnaam']) ||
                 empty($_POST['voornaam']) || empty($_POST['achternaam']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password2']))) {?>

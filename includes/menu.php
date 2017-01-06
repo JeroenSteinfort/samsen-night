@@ -1,5 +1,7 @@
 <?php
 
+// gemaakt door Jeroen S en Ethan.
+
 $sql = '
 #sql
 SELECT paginaid, naam
@@ -72,7 +74,7 @@ $menuresults = $sql->fetchAll();
                         ?>
                         <span class="glyphicon glyphicon-user">  </span> </a>
                         <ul class="dropdown-menu">
-                        <?php
+                        <?php // Ethan - bovenstaande laat de dropdown menu zien en het icoontje in de hoek.
                             if(isset($_SESSION['logged_in'])) {
 
 
@@ -115,7 +117,7 @@ $menuresults = $sql->fetchAll();
                             <li role="separator" class="divider"></li>
                             <li><a href="includes/loguit.php">Log uit</a></li>
                             <?php }
-
+                            // Ethan - Hieronder bevind de inlog form. Ook vind je hier de knoppen om te registren of wanneer jij je wachtwoord vergeten bent.
                         else { ?>
                         <form action="index.php" method="POST">
                             <input id="name" name="username" placeholder="username" type="text">

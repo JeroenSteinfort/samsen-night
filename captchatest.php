@@ -5,7 +5,7 @@
  * Date: 22/12/2016
  * Time: 09:43
  */
-
+// Dit is een code die los als bestand niet word aangeroepen. Het werd echter wel als template gebruikt voor 2 formulieren.
 ?>
 
 <!DOCTYPE html>

@@ -121,9 +121,9 @@ include_once($base_path . '/includes/menu.php');
         $userquery->execute();
 
         $results = $userquery->fetchAll();
-        // Bovenste gedeeltje maakt link met CSS en de database connectie
+        // Ethan - Bovenste gedeeltje maakt link met CSS en de database connectie
 
-    // bovenste gedeelte zijn headers voor tabel
+    // Ethan - bovenste gedeelte zijn headers voor tabel
 foreach ($results as $row) {
     echo "<tr> <td>" .  $row['userid']  . " " . "</td>";
     echo "<td>" .  $row['username']  . " " . "</td>";
@@ -136,13 +136,13 @@ foreach ($results as $row) {
     echo "<td>" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Wijzig'  name='wijzig' class='cmsbutton'>" .  " </input </td> </form>";
     echo "<td>" . "<form action='admin/usercms.php' method='POST'><input type='text' value='" .  $row['userid']  . "' name='userid' style='display:none;'> <input type='submit' class=\"cms-submit\" value='Delete' name='delete' class='cmsbutton'>" . " </input>  </td> </form> ";
     echo "</tr>";
-    //Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van de user id. Een input waarde word niet geshowed maar word wel gebruikt.
+    // Ethan Hier worden resultaten van de $results geshowed per regel. De delete en wijzig knop krijgen de waarde van de user id. Een input waarde word niet geshowed maar word wel gebruikt. Isset delete en wijzig komen hier vandaan.
 }
 ?>
 </table>
 <?php
 
-//Bij het aanklikken van de 'wijzig' knop ontstaat de volgende vragenlijst
+// Bij het aanklikken van de 'wijzig' knop ontstaat de volgende vragenlijst
 if (isset($_POST['wijzig'])) { ?>
     <form method= 'POST' action= 'admin/usercms.php'>
         <input type= 'text' name= 'vnaam' placeholder= 'Voornaam'>
@@ -210,7 +210,7 @@ if(isset($_POST['option']) && $_POST['option'] == "Ja") {
     exit();
 }
 
-//testan
+// Ethan - Delete module is door Ethan gemaakt.
 
 if(isset($_POST['delete'])) {
     Echo "Weet u zeker dat u de user met ID = " .  $_POST['userid']  . " wilt deleten?";
@@ -221,11 +221,12 @@ if(isset($_POST['delete'])) {
         <input type="hidden" name="userid" value="<?= $_POST['userid'] ?>">
     </form>
     <?php
-    // form hierboven kiest optie 1 of 2 and stuurt de user id door naaar de inhoud van de forms.
+    // Ethan - form hierboven kiest optie 1 of 2 and stuurt de user id door naaar de inhoud van de forms.
 }
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
-    //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
+    //Ethan - als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
+    //Ethan - Delete 2 is gemaakt door Mathijs dit is om ook de records uit het inlog tabel te verwijderen.
     $delete2 = $dbh->prepare("DELETE FROM login WHERE userid = :userid");
     $delete2->bindParam('userid', $_POST['userid']);
     $delete2->execute();
@@ -237,13 +238,13 @@ if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
 
     <a href="http://localhost:8080/samsen-night/admin/usercms.php">Refresh de pagina</a> <?php
     exit();
-    //na dat de query klaar is moet de pagina ververst worden.;
+    //Ethan - na dat de query klaar is moet de pagina ververst worden.
 }
 
 if (isset($_POST['optie']) && ($_POST['optie'] == "Nee")) {
     echo 'Deleten gecancelled.';
 }
-
+// Indien bij wilt u de user deleten op nee klikt krijg je deleten gecancelled.
     ?>
             </div>
         </div>

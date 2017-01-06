@@ -134,14 +134,25 @@ include_once($base_path . '/includes/menu.php');
             <?php
 
             //Bij het aanklikken van de 'wijzigen' knop ontstaat de volgende vragenlijst
-            if (isset($_POST['wijzig'])) { ?>
+            if (isset($_POST['wijzig'])) {
+
+            $userquery = $dbh->prepare("SELECT foto, partnernaam, link, beschrijving FROM partners WHERE partnerid = :partnerid");
+            $userquery->execute();
+
+            $results = $userquery->fetchAll();
+
+            foreach ($results as $row)
+
+
+            ?>
                 <form method= 'POST' action= 'admin/partners.php' enctype='multipart/form-data'>
-                    <tr><td></td>
+                    <tr><td><?php echo $_POST['partnerid']?></td>
                         <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
                         <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
                         <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
                         <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
                         <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'Wfinalize' class= 'cmsbutton'></td>
+                        <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
                     </tr>
                 </form>
             </table>

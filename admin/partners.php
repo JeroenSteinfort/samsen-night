@@ -243,37 +243,8 @@ include_once($base_path . '/includes/menu.php');
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
             if(isset($_POST['Tfinalize']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
                 echo ("Weet u zeker dat u deze partner wilt toevoegen?");
-                ?>
 
-
-                <form method="POST" action="admin/partners.php">
-                    <input type="submit" name="option" value="Ja toevoegen" class="cmsbutton">
-                    <input type="submit" name="option" value="Nee toevoegen" class="cmsbutton">
-                    <input type="hidden" name="foto" value="<?= '/img/' . $_FILES["foto"]["name"] ?>">
-                    <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
-                    <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
-                    <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">
-
-                    <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
-                </form>
-            <?php } else {
-                if (isset($_POST['Tfinalize'])) {
-                    echo ("Vul de verplichte gegevens in.");
-                }
-            }
-
-            if(isset($_POST['option']) && $_POST['option'] == "Ja toevoegen") {
-                $sql = $dbh->prepare("INSERT INTO partners (foto,partnernaam,link,beschrijving) VALUES (:foto, :partnernaam, :link, :beschrijving)");
-                $sql->bindValue(':foto', $_POST['foto']);
-                $sql->bindValue(':partnernaam', $_POST['partnernaam']);
-                $sql->bindValue(':link', $_POST['link']);
-                $sql->bindValue(':beschrijving', $_POST['beschrijving']);
-                $sql->execute();
-                ?>
-                <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
-                exit();
-
-                $target_dir = "/img/";
+                $target_dir = "../img/";
                 $target_file = $target_dir .basename($_FILES["foto"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -300,6 +271,37 @@ include_once($base_path . '/includes/menu.php');
                         echo "Sorry, er was een error tijdens het uploaden.";
                     }
                 }
+
+                ?>
+
+
+                <form method="POST" action="admin/partners.php">
+                    <input type="submit" name="option" value="Ja toevoegen" class="cmsbutton">
+                    <input type="submit" name="option" value="Nee toevoegen" class="cmsbutton">
+                    <input type="hidden" name="foto" value="<?= '/img/' . $_FILES["foto"]["name"] ?>">
+                    <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
+                    <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
+                    <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">
+
+                    <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
+                </form>
+            <?php } else {
+                if (isset($_POST['Tfinalize'])) {
+                    echo ("Vul de verplichte gegevens in.");
+                }
+            }
+
+            if(isset($_POST['option']) && $_POST['option'] == "Ja toevoegen") {
+                $sql = $dbh->prepare("INSERT INTO partners (foto,partnernaam,link,beschrijving) VALUES (:foto, :partnernaam, :link, :beschrijving)");
+                $sql->bindValue(':foto', $_POST['foto']);
+                $sql->bindValue(':partnernaam', $_POST['partnernaam']);
+                $sql->bindValue(':link', $_POST['link']);
+                $sql->bindValue(':beschrijving', $_POST['beschrijving']);
+                $sql->execute();
+
+                ?>
+                <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
+                exit();
             }
 
             if (isset($_POST['optie']) && ($_POST['optie'] == "Nee toevoegen")) {

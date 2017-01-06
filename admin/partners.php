@@ -134,21 +134,23 @@ include_once($base_path . '/includes/menu.php');
             <?php
 
             //Bij het aanklikken van de 'wijzigen' knop ontstaat de volgende vragenlijst
-            if (isset($_POST['wijzig'])) {
+            if (isset($_POST['wijzig'])) { ?>
 
-            $userquery = $dbh->prepare("SELECT foto, partnernaam, link, beschrijving FROM partners WHERE partnerid = :partnerid");
-            $userquery->execute();
+            <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
 
-            $results = $userquery->fetchAll();
+            <?php
+            $query = $dbh->prepare("SELECT partnernaam, link, beschrijving FROM partners WHERE partnerid = :partnerid");
+            $sql->bindValue(':partnerid', $_POST['partnerid']);
+            $query->execute();
 
-            foreach ($results as $row)
+            $result = $query->fetch();
 
 
             ?>
                 <form method= 'POST' action= 'admin/partners.php' enctype='multipart/form-data'>
                     <tr><td><?php echo $_POST['partnerid']?></td>
                         <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
-                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
+                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam' value="<?php echo $result['partnernaam'] ?>"></td>
                         <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
                         <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
                         <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'Wfinalize' class= 'cmsbutton'></td>

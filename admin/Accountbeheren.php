@@ -5,7 +5,13 @@
  * Date: 02/12/2016
  * Time: 11:02
  */
+function required($input) {
+    if (!isset($_POST[$input]) || empty($_POST[$input])) {
 
+        return ' style="color:red;"';
+
+    }
+}
 //Inlcudes en define base_path
 $base_path = $_SERVER['DOCUMENT_ROOT'] . "/samsen-night";
 require_once($base_path . '\includes\password.php');
@@ -49,21 +55,12 @@ and open the template in the editor.
     <body>
 
         <?php
-        
-         $sql = ' #sql
-                                    SELECT username, voornaam, tussenvoegsel, achternaam, wachtwoord, email
-                                    FROM user
-                                    WHERE userid = :userid
-                                ';
-                    $sql = $dbh->prepare($sql);
-                    $sql->bindParam(':userid', $_SESSION['userid']);
-                    $sql->execute();
-                    $result = $sql->fetchAll();
 
             include_once($base_path . '/includes/menu.php');
 
         ?>
-
+        
+ 
         <div class="container container-custom">
 
             <div class="row">
@@ -82,34 +79,59 @@ and open the template in the editor.
 
                     </p>
 
-                    <form method="post" action="accountbeheren.php">
-                    <form method="post" action="index.php">
-                        <?php if(isset($_POST["opslaan"])) {?>
-                        Voornaam:  <input type="text" name="voornaam"  value= "<?php print($_POST["voornaam"]) ?>"> <br>
-                        Achternaam: <input type="text" name="achternaam" value="<?php print($_POST["achternaam"]) ?>"><br>
-                        Gebruikersnaam: <input type="text" name="username" value="<?php print ($_POST["username"]) ?>"> <br>
-                        Wachtwoord: <input type="text" name="Wachtwoord" value="<?php print ($_POST["wachtwoord"]) ?>"><br>
-                        Email: <input type="text" name="email" value="<?php print ($_POST["email"]) ?>"><br>
-                        
-
-                    </form>
-                    <?php }else{ ?>
-
-                    <form method="post" action="accountbeheren.php">
-                        <table>
-                            <tr><td>Gebruikersnaam:</td> <td><input type="text" name="Username"></td> </tr>    
-                            <tr><td>Wachtwoord:</td> <td><input type="text" name="Wachtwoord"></td></tr>
-                        <tr><td> Voornaam:</td>  <td><input type="text" name="voornaam"></td> </tr>
-                        <tr><td>Tussenvoegsel:</td> <td> <input type="text" name="tussenvoegsel"></td> </tr> 
-                        <tr><td>Achternaam:</td> <td><input type="text" name="achternaam"> </td> </tr>
-                        <tr><td>bedrijfsnaam:</td> <td> <input type="text" name="bedrijfsnaam"> </td> </tr>
-                        <tr><td>Email:</td> <td> <input type="text" name ="email"></td> </tr>
-                        </table>
-                        
-                        <input type="submit" name="Opslaan" value="Opslaan">
-                    </form>
-                    <?php } ?>
+                  
+                         <?php
+        $sql = '#sql
+        SELECT *
+        FROM user
+        WHERE userid = :userid';
+        $sql = $dbh->prepare($sql);
+                    $sql->bindParam(':userid', $_SESSION['user_id']);
+                    $sql->execute();
+                    $result = $sql->fetch();
                     
+                    if(!isset($_POST["verzenden"])) {
+                                //&& 
+                             //   (empty($result['voornaam']) || 
+                               // empty($result['achternaam'])|| empty($result['email'] || empty($result['username']  )))){?> 
+        
+        <form method="result" action="accountbeheren.php"> 
+         <table>
+                            <tr>
+                                <td <?php print(required("voornaam")) ?>>Voornaam:</td> <td><input type="text" class="form-control" name="voornaam" value= "<?php print($result["voornaam"]) ?>" ></td>
+                            </tr>
+                            <tr>
+                                <td>Tussenvoegsel:</td>
+                                <td><input type="text" name="tussen" class="form-control" value= ></td>
+                            </tr>
+                            <tr>
+                                <td <?php print(required("achternaam")) ?>>Achternaam:</td>
+                                <td><input type="text" name="achternaam" class="form-control" value= "<?php print($result["achternaam"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>bedrijfsnaam:</td>
+                                <td><input type="text" name="bedrijfsnaam" class="form-control" value= ></td>
+                            </tr>
+                            <tr>
+                                <td <?php print(required("email")) ?>>Email: </td>
+                                <td><input type="text" name="email" class="form-control" value= "<?php print($result["email"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td<?php print (required("Username")) ?>>Username: </td>
+                                <td><input type="text" name="Username" class="form-control" value="<?php print ($result["username"]) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td<?php print(required("Wachtwoord")) ?>>Wachtwoord:</td>
+                                <td><input type="text" name="wachtwoord" class="form-control" value =></td>
+                            </tr>
+                        </table>
+            <input type="submit" class="cms-submit" name="verzenden" value="verzenden">
+        </form>
+                    <?php }
+        ?>
+ 
+                    
+                        
 
 
 
@@ -135,5 +157,4 @@ and open the template in the editor.
 
                     
     </body>
-</html>
 </html>

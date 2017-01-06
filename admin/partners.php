@@ -133,61 +133,97 @@ include_once($base_path . '/includes/menu.php');
                 ?>
             <?php
 
-            //Bij het aanklikken van de 'wijzig' knop ontstaat de volgende vragenlijst
+            //Bij het aanklikken van de 'wijzigen' knop ontstaat de volgende vragenlijst
             if (isset($_POST['wijzig'])) { ?>
-            <form method= 'POST' action= 'admin/partners.php'>
-                <tr><td><?php echo $_POST['partnerid']?></td>
-                <td><input type= 'file' name= 'foto' placeholder= 'Foto'></td>
-                <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
-                <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
-                <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
-                <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'finalize' class= 'cmsbutton'></td>
-                    <td><input type= 'hidden' name= 'partnerid' value=" <?= $_POST['partnerid'] ?>"></td></tr>
-            </form>
+                <form method= 'POST' action= 'admin/partners.php' enctype='multipart/form-data'>
+                    <tr><td></td>
+                        <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
+                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'></td>
+                        <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
+                        <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
+                        <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'Wfinalize' class= 'cmsbutton'></td>
+                    </tr>
+                </form>
             </table>
             <?php
+
             } else {
 
                 echo "</table>";
 
             }
 
+
             //Hier wordt gevraagd om een bevestiging van je keuze. De meeste velden zijn verborgen en bestaan voor de overbrugging met de volgende SQL statement.
-            if(isset($_POST['finalize']) && !empty($_POST['foto']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
-            echo ("Weet u zeker dat u deze wijzigingen over ID" . $_POST['partnerid'] ." wilt toepassen?");
-            ?>
+            if(isset($_POST['Wfinalize']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
+                echo ("Weet u zeker dat u deze partner wilt wijzigen?");
+
+                $target_dir = "../img/";
+                $target_file = $target_dir .basename($_FILES["foto"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                // Checken of het bestand ook echt een foto is
+                if(isset($_POST["Wfinalize"])) {
+                    $check = getimagesize($_FILES["foto"]["tmp_name"]);
+                    if($check !== false) {
+                        echo "Bestand is een foto - " . $check["mime"] . ".";
+                        $uploadOk = 1;
+                    } else {
+                        echo "Bestand is geen foto.";
+                        $uploadOk = 0;
+                    }
+                }
+
+                // Checken of $uploadOk naar 0 is veranderd door een error
+                if ($uploadOk == 0) {
+                    echo "Sorry, uw bestand is niet geüpload.";
+                    // Als alles goed is, bestand uploaden
+                } else {
+                    if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+                        echo "Het bestand ". basename( $_FILES["foto"]["name"]). " is geüpload.";
+                    } else {
+                        echo "Sorry, er was een error tijdens het uploaden.";
+                    }
+                }
+
+                ?>
 
 
-            <form method="POST" action="admin/partners.php">
-                <input type="submit" name="option" value="Ja" class="cmsbutton">
-                <input type="submit" name="option" value="Nee" class="cmsbutton">
-                <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
-                <input type="hidden" name="foto" value="<?= $_POST['foto'] ?>">
-                <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
-                <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
-                <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">
+                <form method="POST" action="admin/partners.php">
+                    <input type="submit" name="option" value="Ja toevoegen" class="cmsbutton">
+                    <input type="submit" name="option" value="Nee toevoegen" class="cmsbutton">
+                    <input type="hidden" name="foto" value="<?= 'img/' . $_FILES["foto"]["name"] ?>">
+                    <input type="hidden" name="partnernaam" value="<?= $_POST['partnernaam'] ?>">
+                    <input type="hidden" name="link" value="<?= $_POST['link'] ?>">
+                    <input type="hidden" name="beschrijving" value="<?= $_POST['beschrijving'] ?>">
 
-                <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
-            </form>
+                    <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
+                </form>
             <?php } else {
-                if (isset($_POST['finalize'])) {
+                if (isset($_POST['Wfinalize'])) {
                     echo ("Vul de verplichte gegevens in.");
                 }
             }
 
-            if(isset($_POST['option']) && $_POST['option'] == "Ja") {
-                $update = $dbh->prepare("UPDATE partners SET foto = :foto, partnernaam = :partnernaam, link = :link, beschrijving = :beschrijving WHERE partnerid = :partnerid");
-                $update->bindParam(':partnerid', $_POST['partnerid']);
-                $update->bindValue(':foto', $_POST['foto']);
-                $update->bindValue(':partnernaam', $_POST['partnernaam']);
-                $update->bindValue(':link', $_POST['link']);
-                $update->bindValue(':beschrijving', $_POST['beschrijving']);
-                $update->execute();
+            if(isset($_POST['option']) && $_POST['option'] == "Ja toevoegen") {
+                $sql = $dbh->prepare("UPDATE partners SET foto = :foto, partnernaam = :partnernaam, link = :link, beschrijving = :beschrijving WHERE partnerid = :partnerid");
+                $sql->bindValue(':foto', $_POST['foto']);
+                $sql->bindValue(':partnernaam', $_POST['partnernaam']);
+                $sql->bindValue(':link', $_POST['link']);
+                $sql->bindValue(':beschrijving', $_POST['beschrijving']);
+                $sql->bindValue(':partnerid', $_POST['partnerid']);
+                $sql->execute();
+
                 ?>
                 <a href="http://localhost:8080/samsen-night/admin/partners.php">Refresh de pagina</a> <?php
                 exit();
             }
 
+            if (isset($_POST['optie']) && ($_POST['optie'] == "Nee toevoegen")) {
+                echo 'Wijzigen gecancelled.';
+            }
+
+            // Deleten
             if(isset($_POST['delete'])) {
                 Echo "Weet u zeker dat u de user met ID = " .  $_POST['partnerid']  . " wilt deleten?";
                 ?>
@@ -197,7 +233,7 @@ include_once($base_path . '/includes/menu.php');
                     <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
                 </form>
                 <?php
-                // form hierboven kiest optie 1 of 2 and stuurt de user id door naaar de inhoud van de forms.
+                // form hierboven kiest optie 1 of 2 and stuurt de user id door naar de inhoud van de forms.
             }
 
             if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {

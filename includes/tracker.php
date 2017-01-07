@@ -3,6 +3,7 @@
 //Een nieuwe bezoeker aanmaken in database (aangeroepen voor elke pagina die geladen wordt)
 function newVisitor($dbh, $page){
 
+    //User id meenemen als die is ingelogd
     if(isset($_SESSION['user_id'])){
 
         $userid = $_SESSION['user_id'];
@@ -15,6 +16,7 @@ function newVisitor($dbh, $page){
 
     $ipadres = $_SERVER['REMOTE_ADDR'];
 
+    //Opslaan in database
     $sql = '
     #sql
     INSERT INTO `bezoeker`
@@ -33,6 +35,7 @@ function newVisitor($dbh, $page){
 //Alle bezoekers uit de database halen
 function getAllVisitors($dbh){
 
+    //LEFT JOIN zodat de bezoekers die niet ingelogd waren ook mee worden genomen
     $sql = '
     #sql
     SELECT    ipadres, pagina, DATE_FORMAT(tijddatum, "%d-%c-%Y %T") AS datetime, u.username AS username
@@ -46,6 +49,7 @@ function getAllVisitors($dbh){
 
     $results = $sql->fetchAll();
 
+    //Table genereren
     echo '<table class="tracker-table"><tr><th>ipadres:</th><th>pagina:</th><th>Datum en Tijd:</th><th>Username:</th></tr>';
 
     foreach($results as $row){
@@ -67,6 +71,7 @@ function getAllVisitors($dbh){
 //Alle bezoeker tussen bepaalde datums uit database halen
 function getAllVisitorsByDate($dbh, $begindate, $enddate){
 
+    //LEFT JOIN zodat de bezoekers die niet ingelogd waren ook mee worden genomen
     $sql = '
     #sql
     SELECT    ipadres, pagina, DATE_FORMAT(tijddatum, "%d-%c-%Y") AS datetime, u.username AS username, COUNT(*) AS aantal
@@ -104,9 +109,10 @@ function getAllVisitorsByDate($dbh, $begindate, $enddate){
 
 }
 
-//Alle bezoeker tussen bepaalde datums uit database halen
+//Alle bezoeker van bepaalde pagina's uit database halen
 function getAllVisitorsByPage($dbh, $page){
 
+    //Bezoekers per dag, per pagina ophalen uit database
     $sql = '
     #sql
     SELECT    ipadres, pagina, DATE_FORMAT(tijddatum, "%d-%c-%Y %T") AS datetime, u.username AS username
@@ -136,6 +142,7 @@ function getAllVisitorsByPage($dbh, $page){
 
     }
 
+    //Totaal aantal bezoekers van geselecteerde pagina ophalen uit database
     $sql = '
     #sql
     SELECT COUNT(bezoekerid) AS Totaal
@@ -157,6 +164,7 @@ function getAllVisitorsByPage($dbh, $page){
 
 }
 
+//Dropdown menu maken van alle pagina's
 function getAllPagesDropdown($dbh, $page){
 
     $sql = '

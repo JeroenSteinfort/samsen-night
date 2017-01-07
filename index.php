@@ -20,6 +20,7 @@ if(isset($_GET['p'])){
 
 }
 
+//Haal content op op basis van paginanaam
 $sql = "
 #sql
 SELECT content, naam
@@ -36,11 +37,14 @@ $contentresult = $sql->fetch();
 
 $error = "";
 
+//Login Check
 if(isset($_POST['login'])) {
 
+    //Geposte username en wachtwoord
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    //Haal gebruiker, wachtwoord en rol van de gebruiker op uit database
     $query = "
         #sql
             SELECT rol.rolid as rolid, u.userid as userid, u.wachtwoord as wachtwoord
@@ -54,13 +58,14 @@ if(isset($_POST['login'])) {
 
         ";
 
-
     $query = $dbh->prepare($query);
     $query->bindParam(":username", $username);
     $query->execute();
     $result = $query->fetch();
 
     if ($result > 0) {
+
+        //Er is een user gevonden, check of het account nog actief is
         $query = '
         #sql
         SELECT active, attempts 
@@ -76,7 +81,7 @@ if(isset($_POST['login'])) {
         $query->execute();
         $resultaat = $query->fetch();
 
-
+        //Account is wel actief maar heeft het aantal pogingen overschreden
         if($resultaat['attempts'] >= 4 ){
             $query = '
                 #sql
@@ -84,6 +89,7 @@ if(isset($_POST['login'])) {
             SET active = 0, attempts = 0
             WHERE userid = :userid';
 
+            //Mail sturen naar beheerder
             $query = $dbh->prepare($query);
             $query->bindParam(":userid", $result['userid']);
             $query->execute();
@@ -93,6 +99,7 @@ if(isset($_POST['login'])) {
             $van = "From: noreply@samsennight.com";
             mail($to, $onderwerp, $bericht, $van);
 
+            //Mail sturen naar account houder
             $query =  "
             #sql
             SELECT email 
@@ -111,11 +118,10 @@ if(isset($_POST['login'])) {
         }
 
 
-        //User is found
+        //Gebruiker is gevonden, actief en het wachtwoord klopt
         if (password_verify($password, $result['wachtwoord']) && $resultaat['active'] == 1) {
 
             //Password is correct && admin recht is gedefinieerd
-
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id']   = $result['userid'];
             $_SESSION['rolid']     = $result['rolid'];

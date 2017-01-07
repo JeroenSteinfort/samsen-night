@@ -7,16 +7,16 @@ require_once($base_path . '\includes\dbh.php');
 
 session_start();
 
-
+//Rechten en rollen bepalen van gebruiker
 $sql = ' #sql
-                                    SELECT r.recht as recht
-                                    FROM recht as r
-                                    JOIN heeft_recht as hr
-                                    ON hr.rechten = r.rechtid
-                                    JOIN rol
-                                    ON rol.rolid = hr.rolid
-                                    WHERE hr.rolid = :rolid 
-                                ';
+    SELECT r.recht as recht
+    FROM recht as r
+    JOIN heeft_recht as hr
+    ON hr.rechten = r.rechtid
+    JOIN rol
+    ON rol.rolid = hr.rolid
+    WHERE hr.rolid = :rolid 
+';
 $sql = $dbh->prepare($sql);
 $sql->bindParam(':rolid', $_SESSION['rolid']);
 $sql->execute();
@@ -48,7 +48,7 @@ foreach($result as $row) {
 }
 
 
-
+//Als de user niet ingelogd is of de rechten niet heeft terugsturen naar index.php
 if(!isset($_SESSION['logged_in']) || $contentbeheren==false) {
 
     header("Location: ../index.php");
@@ -58,11 +58,13 @@ if(!isset($_SESSION['logged_in']) || $contentbeheren==false) {
 
 $error = "";
 
+//Deze code wordt uitgevoerd als een pagina gewijzigd is
 if(isset($_POST['editpage'])){
 
     $content   = $_POST['editor1'];
     $paginaid  = $_GET['p'];
 
+    //Update de pagina in database
     $sql = "
     #sql
     UPDATE pagina
@@ -76,10 +78,12 @@ if(isset($_POST['editpage'])){
 
 }
 
+//Als er een pagina wordt toegevoegd
 if(isset($_POST['addpage'])){
 
     $naam = $_POST['paginanaam'];
 
+    //Pagina toevoegen
     $sql = "
     #sql
     INSERT INTO pagina  (naam)
@@ -129,8 +133,7 @@ include_once($base_path . '/includes/menu.php');
 
                 <?php
 
-
-
+                //Alle pagina's ophalen uit database
                 $sql = "
                 #sql
                 SELECT paginaid, naam
@@ -141,19 +144,18 @@ include_once($base_path . '/includes/menu.php');
 
                 $paginaresults = $sql->fetchAll();
 
-                //echo '<ul class="cms-page-list">';
-
+                //Alle pagina namen in een tabel zetten
+                //Met een wijzig en verwijder optie
                 echo '<table class="cms-page-list">
                         ';
 
                 foreach ($paginaresults as $row){
 
-                    //echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a><a href=""><span class="glyphicon glyphicon-minus"></span></a></li>';
-
                     echo '<tr><td>' . $row['naam'] . '</td><td><a href="admin/pages.php?p=' . $row['paginaid'] . '"><span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="includes/deletepage.php?p=' . $row['paginaid'] . '"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
 
                 }
 
+                //Code om nieuwe pagina te maken
                 echo '<tr><td>Nieuwe pagina maken:<br />
                       <form method="POST" action="admin/pages.php">
                       <input type="text" name="paginanaam" />
@@ -162,25 +164,12 @@ include_once($base_path . '/includes/menu.php');
 
                 echo '</table>';
 
-                //foreach ($paginaresults as $row){
-
-                    //echo '<li><a href="admin/pages.php?p=' . $row['paginaid'] . '">' . $row['naam'] . '</a><a href=""><span class="glyphicon glyphicon-minus"></span></a></li>';
-
-                //}
-
-                //echo '<li>Nieuwe pagina maken:
-                //    <form method="POST" action="admin/pages.php">
-                //    <input type="text" name="paginanaam" />
-                //    <button name="addpage" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
-                //    </form>
-                 //   </li>';
-
-                echo '</ul>';
-
+                //Deze code wordt uitgevoerd als er een pagina gewijzigd moet worden
                 if(isset($_GET['p'])){
 
                     $paginaid = $_GET['p'];
 
+                    //Haal content en naam op uit database
                     $sql = '
                     #sql
                     SELECT paginaid, naam, content

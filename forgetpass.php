@@ -117,7 +117,7 @@ if (isset($_POST['finalize'])) {
                 <img src="img/rename.png" alt="Samsen Night Logo" class="img-responsive img-logo">
 
             </div>
-            <h1>Samsen Nights</h1>
+            <h1>Samsen Night</h1>
             <br> <br> <br>
             <?php echo $hoofd; ?> <br> <br>
             <?php echo $error2; ?> <br><br>

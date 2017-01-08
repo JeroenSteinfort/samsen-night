@@ -135,22 +135,10 @@ include_once($base_path . '/includes/menu.php');
 
             //Bij het aanklikken van de 'wijzigen' knop ontstaat de volgende vragenlijst
             if (isset($_POST['wijzig'])) { ?>
-
-            <input type="hidden" name="partnerid" value="<?= $_POST['partnerid'] ?>">
-
-            <?php
-            $query = $dbh->prepare("SELECT partnernaam, link, beschrijving FROM partners WHERE partnerid = :partnerid");
-            $sql->bindValue(':partnerid', $_POST['partnerid']);
-            $query->execute();
-
-            $result = $query->fetch();
-
-
-            ?>
                 <form method= 'POST' action= 'admin/partners.php' enctype='multipart/form-data'>
                     <tr><td><?php echo $_POST['partnerid']?></td>
                         <td><input type= 'file' name= 'foto' id='foto' placeholder= 'Foto'></td>
-                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam' value="<?php echo $result['partnernaam'] ?>"></td>
+                        <td><input type= 'text' name= 'partnernaam' placeholder= 'Partnernaam'</td>
                         <td><input type= 'text' name= 'link' placeholder= 'Link'></td>
                         <td><input type= 'text' name= 'beschrijving' placeholder= 'Beschrijving'></td>
                         <td><input type= 'submit' class=\"cms-submit\" value= 'Verzend' name= 'Wfinalize' class= 'cmsbutton'></td>
@@ -171,6 +159,7 @@ include_once($base_path . '/includes/menu.php');
             if(isset($_POST['Wfinalize']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
                 echo ("Weet u zeker dat u deze partner wilt wijzigen?");
 
+                // Hier wordt de foto geüpload
                 $target_dir = "../img/";
                 $target_file = $target_dir .basename($_FILES["foto"]["name"]);
                 $uploadOk = 1;
@@ -250,7 +239,7 @@ include_once($base_path . '/includes/menu.php');
             }
 
             if (isset($_POST['optie']) && ($_POST['optie'] == "Ja")) {
-                //als er op delete word geklikt en optie ja wordt gekozen word de onderste query gedraait.
+                //als er op delete wordt geklikt en optie ja wordt gekozen word de onderste query gedraait.
 
                 $delete = $dbh->prepare("DELETE from partners where partnerid = :partnerid");
                 $delete->bindParam(':partnerid', $_POST['partnerid']);
@@ -293,6 +282,7 @@ include_once($base_path . '/includes/menu.php');
             if(isset($_POST['Tfinalize']) && !empty($_POST['partnernaam']) && !empty($_POST['beschrijving'])) {
                 echo ("Weet u zeker dat u deze partner wilt toevoegen?");
 
+                // Hier wordt de foto geüpload
                 $target_dir = "../img/";
                 $target_file = $target_dir .basename($_FILES["foto"]["name"]);
                 $uploadOk = 1;

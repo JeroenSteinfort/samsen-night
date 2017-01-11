@@ -40,7 +40,7 @@ if (isset($_POST['verstuur'])) {
         $error2 = "Als dit adres in het systeem is gevonden is er een e-mail naartoe verstuurd. Volg in dit geval de instructies.";
     } else {
         $passkey = random_str(12);
-        $error2 = "Er is een mail gestuurd naar het opgegeven e-mail adres. Volg de instructies in deze mail.";
+        $error2 = "Als dit adres in het systeem is gevonden is er een e-mail naartoe verstuurd. Volg in dit geval de instructies.";
 
         $sql = "UPDATE user SET passkey = :passkey WHERE email = :email;";
         $sql = $dbh->prepare($sql);
